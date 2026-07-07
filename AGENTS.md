@@ -57,3 +57,6 @@ Route work accordingly:
 - One bounded concern per PR. Open PRs following the repo's guidelines.
 - Do not merge until the automated code reviewers on the PR have approved.
 - Merging to main deploys staging only. Production deploys are always human-in-the-loop.
+- **End every task report with the save level**, so I always know where the work lives:
+  `Status: edited only` / `committed (local)` / `pushed` / `PR: <link>`. Never say "done"
+  without it.
