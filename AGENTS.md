@@ -52,6 +52,12 @@ Route work accordingly:
 
 ## Git, GitHub, and PRs
 
+**CURRENT MODE: prototype.** No PRs for now — commit and push every completed change
+straight to main automatically, with small clear commit messages. When the user says the
+site is live, delete this line and switch to the shipped-mode rules below.
+
+Shipped-mode rules (dormant until launch):
+
 - Work in git worktrees for anything parallel or risky; never experiment on the main checkout.
 - For multi-PR efforts: write the plan to `TODO.md`, check items off and commit it as you go.
 - One bounded concern per PR. Open PRs following the repo's guidelines.
