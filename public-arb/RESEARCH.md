@@ -14,7 +14,7 @@
 | Anything genuinely edge-positive? | **Yes, four things** — see §5. All are *slow, capacity-limited relative-value* trades, not arbitrage in the HFT sense. |
 | Can this be a business? | **No.** "The Public Individual API is for your own personal, non-commercial use." Running it for others breaks the ToS. |
 | Can an agent pick LIT vs smart vs wholesale per order? | **No** — route selection is a UI-only, per-order control; the API place-order body has no route field (§3a). Workaround: one brokerage account per route, agent picks the account. |
-| Are Public's own AI Agents a substitute for the API? | **No** — best documented cadence is 5 minutes vs the API's 10 req/s. They're a risk harness, not a trading loop (§6). |
+| Are Public's own AI Agents a substitute for the API? | **For the edges, no.** They're a real rules engine (indicators, multi-leg, shorting, event-chains) but have **no routing control, no self-set account caps, no paper trading, and a written disclaimer covering any trade that "fails to be triggered."** Great for cash sweeps and covered-call lifecycles; unusable for thin-margin edges (§6). |
 
 **The honest reframe:** you cannot build an HFT desk on Public. You *can* build a systematic relative-value desk that harvests structural inefficiencies too small and slow for real firms to bother with. That is where a solo operator with good agents actually wins.
 
@@ -215,26 +215,51 @@ The single most important design decision: **Public's API is an OMS, not a marke
 
 ### On Public's own no-code AI Agents *(expanded 2026-08-22)*
 
-Re-researched properly, because the first pass under-specified them. What they actually are:
+**Correction to this document's first two passes.** I called Agents "retail intent automation" and then "a 5-minute scheduler." **Both were wrong.** The "check every 5 minutes" line on `/ai-agents/how-it-works` is an *example of a throttle a user imposes*, not the platform's evaluation ceiling — Public's own copy says Agents "monitor conditions continuously." Shipped **2026-03-31**; Public brands itself the first Agentic Brokerage. Corrected picture below.
+
+#### What they actually do
 
 | Dimension | Reality |
 |---|---|
-| Authoring | Plain-language prompt → the AI **interrogates you for missing parameters** (asset, % threshold, account, capital, timing) → emits a workflow you review parameter-by-parameter. Vague prompts are refused, not guessed. |
-| Approval | **Nothing runs until you sign off.** After activation you can edit, re-allocate capital, pause, or kill. |
-| Controllable knobs | Capital allocation (`invest exactly $5,000`), per-asset risk (`stop out if AAPL drops >10%`), **evaluation cadence and trade-count caps** (`check every 5 minutes, max 2 buys/day`). |
-| Scope | Stocks, ETFs, options (incl. multi-leg), crypto, bonds, cash sweeps, stop-losses, hedges — five portfolio areas. |
-| Infrastructure | Runs **inside Public** on their real-time data. **No API keys**, no third-party connection, full Activity Feed of everything evaluated *and* not acted on. |
-| Routing control | **None documented** — not on `/ai-agents`, not on `/ai-agents/how-it-works`, not in the changelog. Same hole as §3a. |
-| Legal framing | Public calls it "self-directed recurring transaction instructions," explicitly *not* advice; suitability is entirely yours. |
+| Assets | Equities, ETFs, options, crypto, bonds, cash |
+| Order types | **Market and limit**, single-leg and **multi-leg options**, and **shorting** |
+| Signals | **EMA, SMA, RSI, MACD, Bollinger Bands, ATR** — a real indicator library, not just price triggers |
+| Control flow | **Event-chained sequences**: "if my NVDA covered call executes, immediately write the next month's"; "if I'm assigned on the short put, sell a covered call at 5% OTM"; "if SPY drops 3% and I buy $2,000, place a stop 7% below entry" |
+| Lifecycle logic | Roll rules, assignment/expiration risk handling, moneyness + days-to-expiry conditions |
+| Cash | Moves between brokerage, bond, and linked bank balances |
+| Authoring | Plain-language prompt → the AI **interrogates you for missing parameters** → workflow you review parameter-by-parameter. Vague prompts are refused, not guessed. |
+| Approval | Once, upfront. **After that it runs unattended — no advance alert per transaction.** |
+| Infrastructure | Runs **inside Public**, no API keys, nothing exposed to the open internet. Full Activity Feed. |
+| Access | **Waitlist, rolling rollout** — not generally available |
+| Still "coming soon" | **Bonds and tax lots as agent capabilities**, plus financials/earnings-call/dividend data sources |
 
-**The two things that actually matter for this document.**
+That is a legitimate rules engine. Roll-and-reassign chains alone are more than most retail traders would ever code correctly, and the covered-call lifecycle automation is genuinely good product.
 
-1. **Cadence is the real ceiling, and it's worse than the API's.** The best documented evaluation interval is **every 5 minutes**. The API gives you 10 req/s. That is a ~3,000× difference in observation frequency. Every §5 strategy that reacts to a quote — overnight proxy divergence (§5.3) especially — is dead on Agents and alive on the API. Agents are a *scheduler*, not a trading loop.
-2. **The knob set is a risk harness, not an execution engine.** Capital cap, stop level, max trades/day, cadence — that is exactly the RISK box in the diagram above and nothing else. It has no preflight, no PUT-replace order chasing, no route, no tax-lot selection.
+#### The five things that decide it for this document
 
-**Verdict, sharpened:** the honest split is **Agents for the RISK layer's boring, low-frequency, high-consequence jobs** (cash sweep into the 3.3% account, portfolio-level stop-losses, scheduled hedges) — where a 5-minute cadence is irrelevant and Public's own guardrails plus Activity Feed are genuinely better than code you'd write yourself. **Everything with an edge in it stays on the raw API.** They passed eight Series 7 exams; that is a knowledge benchmark, not an execution-quality one, and none of the four edges in §5 is limited by knowledge.
+1. **No routing control.** Not on `/ai-agents`, not in `/how-it-works`, not in the changelog, not in the agreement. Same hole as §3a, and Agents can't even use the multi-account workaround cleanly.
+2. **No execution guarantee, in writing.** Agreement §B.4: *"While we will attempt to carry out your instructions for your Agent, we cannot guarantee execution of a Transaction at any specific time or price. Once executed, Transactions cannot be cancelled or reversed."*
+3. **⚠️ The trigger data is disclaimed.** §B.5 — Public *"shall bear no legal responsibility to you for any loss or damages arising from the delay, interruption, error, inaccuracy, or omission of any Third-Party Data, **including any Transaction that is triggered, fails to be triggered, or improperly executed on the basis of such data.**"* Read that twice. **There is no SLA on your agent firing.** Every §5 edge is a thin-margin trade where a missed or spurious trigger is the whole P&L. This single sentence is why an edge strategy cannot live here.
+4. **No account-level guardrails and no paper trading.** Webull lets you cap single-order dollar value, cap share quantity, and whitelist tickers; **Public has no caps you can set yourself** — limits exist only as instructions *inside* an agent's own prompt, i.e. enforced by the same LLM that might misread the prompt. And there's no paper mode to rehearse in. Combined with unattended execution and no per-trade alert, the blast radius of one misinterpreted instruction is your account.
+5. **Agents run indefinitely until paused**, and §B.4 puts the *"obligation to take immediate action to limit any losses"* on you. An unattended agent with no external cap is a position you are always short optionality on.
 
-**The one thing Agents can do that your API stack cannot:** run when your machine is off, inside the broker, with no key material to leak. For a §5.4 tax-lot or cash-sweep job that must not miss a day, that is not a small advantage.
+#### Verdict
+
+**Agents are a better product than the API for everything that isn't an edge, and unusable for everything that is.**
+
+| Job | Where it goes | Why |
+|---|---|---|
+| Cash sweep into the 3.3% account | **Agents** | Cadence irrelevant, runs with your laptop shut, no keys to leak |
+| Covered-call writing + rolls + assignment handling | **Agents** | Their lifecycle logic beats what you'd write; consequence of a miss is small |
+| Portfolio stop-losses, scheduled hedges | **Agents** | Simple, high-consequence, better inside the broker |
+| §5.1 box-spread rate arb | **API** | Needs multi-leg *quote* math and a fee model; no agent prices a box's implied rate |
+| §5.2 bond relative value | **API** | Bonds aren't even an agent capability yet, and the edge is document comprehension |
+| §5.3 overnight convergence | **API** | Needs re-posting, order chasing, and displayed liquidity — none available |
+| §5.4 tax-lot harvesting | **API today, Agents later** | Tax lots are "coming soon" for agents. When they land, revisit — this is the one §5 job whose profile actually fits Agents |
+
+**The one real advantage they hold over your own stack:** running inside the broker, with no key material and no machine of yours online. For a job that must not miss a day and isn't racing anyone, that beats a cron on your Mac. **The one real disadvantage:** you cannot cap it from outside, and Public disclaims the trigger.
+
+They passed eight Series 7 exams; that's a knowledge benchmark, not an execution-quality one — and none of the four edges in §5 is limited by knowledge.
 
 ---
 
@@ -280,4 +305,8 @@ Re-researched properly, because the first pass under-specified them. What they a
 - [Public fee schedule (PDF)](https://public.com/disclosures/fee-schedule) — routing table + exclusions quoted verbatim, eff. 2026-07-16
 - [Place order endpoint schema](https://public.com/api/docs/resources/order-placement/place-order) — full field list, no route field
 - [Public AI Agents — how it works / prompting guide](https://public.com/ai-agents/how-it-works) — capital caps, per-asset stops, "check every 5 minutes… up to 2 purchases a day"
+- [Agentic Brokerage Agreement (PDF)](https://public.com/disclosures/agenticterms) — §B.4 no-execution-guarantee and §B.5 third-party-data disclaimer quoted verbatim; also [Agentic Brokerage Disclosure](https://public.com/disclosures/agenticdisclosures)
+- [Public AI Agents — strategy templates](https://public.com/ai-agents/trading-strategies) — indicator list, event-chained sequences, bonds/tax-lots marked coming soon
+- [Public becomes the first brokerage to introduce AI Agents (PR, 2026-03-31)](https://www.prnewswire.com/news-releases/public-becomes-the-first-brokerage-to-introduce-ai-agents-for-your-portfolio-302729050.html) — launch date, waitlist rollout, EMA/SMA/RSI/MACD/Bollinger/ATR, shorting
+- [Best brokers for AI trading agents — MCP tested (StockBrokers.com)](https://www.stockbrokers.com/guides/ai-agent-brokers) — "no caps you can set yourself," no paper trading, unattended execution vs Webull/Robinhood
 - [Public 606 order-routing disclosure](https://public.com/disclosures/606-report) — quarterly venue stats; Rule 606(b) gives you your own 6-month routing history on request (**the free way to verify where API orders actually went**)
