@@ -1,0 +1,282 @@
+[
+ {
+  "slug": "commission",
+  "world": "The Commission",
+  "blurb": "oil painting, a studio at the handover",
+  "n": 1,
+  "seed": 7301,
+  "raw": "raw/commission/commission-01.png",
+  "treated": "treated/commission-01--treated.png",
+  "medium": "oil painting on linen, thick impasto,"
+ },
+ {
+  "slug": "commission",
+  "world": "The Commission",
+  "blurb": "oil painting, a studio at the handover",
+  "n": 2,
+  "seed": 7302,
+  "raw": "raw/commission/commission-02.png",
+  "treated": "treated/commission-02--treated.png",
+  "medium": "oil painting on linen, thick impasto,"
+ },
+ {
+  "slug": "commission",
+  "world": "The Commission",
+  "blurb": "oil painting, a studio at the handover",
+  "n": 3,
+  "seed": 7303,
+  "raw": "raw/commission/commission-03.png",
+  "treated": "treated/commission-03--treated.png",
+  "medium": "oil painting on linen, thick impasto,"
+ },
+ {
+  "slug": "commission",
+  "world": "The Commission",
+  "blurb": "oil painting, a studio at the handover",
+  "n": 4,
+  "seed": 7304,
+  "raw": "raw/commission/commission-04.png",
+  "treated": "treated/commission-04--treated.png",
+  "medium": "oil painting on linen, thick impasto,"
+ },
+ {
+  "slug": "commission",
+  "world": "The Commission",
+  "blurb": "oil painting, a studio at the handover",
+  "n": 5,
+  "seed": 7305,
+  "raw": "raw/commission/commission-05.png",
+  "treated": "treated/commission-05--treated.png",
+  "medium": "oil painting on linen, thick impasto,"
+ },
+ {
+  "slug": "deadman",
+  "world": "Deadman's Switch",
+  "blurb": "1970s industrial control room",
+  "n": 1,
+  "seed": 7311,
+  "raw": "raw/deadman/deadman-01.png",
+  "treated": "treated/deadman-01--treated.png",
+  "medium": "photograph of a 1970s industrial control"
+ },
+ {
+  "slug": "deadman",
+  "world": "Deadman's Switch",
+  "blurb": "1970s industrial control room",
+  "n": 2,
+  "seed": 7312,
+  "raw": "raw/deadman/deadman-02.png",
+  "treated": "treated/deadman-02--treated.png",
+  "medium": "photograph of a 1970s industrial control"
+ },
+ {
+  "slug": "deadman",
+  "world": "Deadman's Switch",
+  "blurb": "1970s industrial control room",
+  "n": 3,
+  "seed": 7313,
+  "raw": "raw/deadman/deadman-03.png",
+  "treated": "treated/deadman-03--treated.png",
+  "medium": "photograph of a 1970s industrial control"
+ },
+ {
+  "slug": "deadman",
+  "world": "Deadman's Switch",
+  "blurb": "1970s industrial control room",
+  "n": 4,
+  "seed": 7314,
+  "raw": "raw/deadman/deadman-04.png",
+  "treated": "treated/deadman-04--treated.png",
+  "medium": "photograph of a 1970s industrial control"
+ },
+ {
+  "slug": "deadman",
+  "world": "Deadman's Switch",
+  "blurb": "1970s industrial control room",
+  "n": 5,
+  "seed": 7315,
+  "raw": "raw/deadman/deadman-05.png",
+  "treated": "treated/deadman-05--treated.png",
+  "medium": "photograph of a 1970s industrial control"
+ },
+ {
+  "slug": "ordnance",
+  "world": "Ordnance Survey",
+  "blurb": "hand-drawn cartography \u2014 the light one",
+  "n": 1,
+  "seed": 7321,
+  "raw": "raw/ordnance/ordnance-01.png",
+  "treated": "treated/ordnance-01--treated.png",
+  "medium": "hand-drawn survey chart on aged paper,"
+ },
+ {
+  "slug": "ordnance",
+  "world": "Ordnance Survey",
+  "blurb": "hand-drawn cartography \u2014 the light one",
+  "n": 2,
+  "seed": 7322,
+  "raw": "raw/ordnance/ordnance-02.png",
+  "treated": "treated/ordnance-02--treated.png",
+  "medium": "hand-drawn survey chart on aged paper,"
+ },
+ {
+  "slug": "ordnance",
+  "world": "Ordnance Survey",
+  "blurb": "hand-drawn cartography \u2014 the light one",
+  "n": 3,
+  "seed": 7323,
+  "raw": "raw/ordnance/ordnance-03.png",
+  "treated": "treated/ordnance-03--treated.png",
+  "medium": "hand-drawn survey chart on aged paper,"
+ },
+ {
+  "slug": "ordnance",
+  "world": "Ordnance Survey",
+  "blurb": "hand-drawn cartography \u2014 the light one",
+  "n": 4,
+  "seed": 7324,
+  "raw": "raw/ordnance/ordnance-04.png",
+  "treated": "treated/ordnance-04--treated.png",
+  "medium": "hand-drawn survey chart on aged paper,"
+ },
+ {
+  "slug": "ordnance",
+  "world": "Ordnance Survey",
+  "blurb": "hand-drawn cartography \u2014 the light one",
+  "n": 5,
+  "seed": 7325,
+  "raw": "raw/ordnance/ordnance-05.png",
+  "treated": "treated/ordnance-05--treated.png",
+  "medium": "hand-drawn survey chart on aged paper,"
+ },
+ {
+  "slug": "ordnance",
+  "world": "Ordnance Survey",
+  "blurb": "hand-drawn cartography \u2014 the light one",
+  "n": 6,
+  "seed": 7326,
+  "raw": "raw/ordnance/ordnance-06.png",
+  "treated": "treated/ordnance-06--treated.png",
+  "medium": "hand-drawn survey chart on aged paper,"
+ },
+ {
+  "slug": "coldroom",
+  "world": "Cold Room",
+  "blurb": "deep sea at 900 m, instrument-lit",
+  "n": 1,
+  "seed": 7331,
+  "raw": "raw/coldroom/coldroom-01.png",
+  "treated": "treated/coldroom-01--treated.png",
+  "medium": "deep ocean photography at 900 metres,"
+ },
+ {
+  "slug": "coldroom",
+  "world": "Cold Room",
+  "blurb": "deep sea at 900 m, instrument-lit",
+  "n": 2,
+  "seed": 7332,
+  "raw": "raw/coldroom/coldroom-02.png",
+  "treated": "treated/coldroom-02--treated.png",
+  "medium": "deep ocean photography at 900 metres,"
+ },
+ {
+  "slug": "coldroom",
+  "world": "Cold Room",
+  "blurb": "deep sea at 900 m, instrument-lit",
+  "n": 3,
+  "seed": 7333,
+  "raw": "raw/coldroom/coldroom-03.png",
+  "treated": "treated/coldroom-03--treated.png",
+  "medium": "deep ocean photography at 900 metres,"
+ },
+ {
+  "slug": "coldroom",
+  "world": "Cold Room",
+  "blurb": "deep sea at 900 m, instrument-lit",
+  "n": 4,
+  "seed": 7334,
+  "raw": "raw/coldroom/coldroom-04.png",
+  "treated": "treated/coldroom-04--treated.png",
+  "medium": "deep ocean photography at 900 metres,"
+ },
+ {
+  "slug": "coldroom",
+  "world": "Cold Room",
+  "blurb": "deep sea at 900 m, instrument-lit",
+  "n": 5,
+  "seed": 7335,
+  "raw": "raw/coldroom/coldroom-05.png",
+  "treated": "treated/coldroom-05--treated.png",
+  "medium": "deep ocean photography at 900 metres,"
+ },
+ {
+  "slug": "exchange",
+  "world": "The Exchange",
+  "blurb": "1930s telephone switchboard",
+  "n": 1,
+  "seed": 7341,
+  "raw": "raw/exchange/exchange-01.png",
+  "treated": "treated/exchange-01--treated.png",
+  "medium": "1930s telephone switchboard, brass jacks and"
+ },
+ {
+  "slug": "exchange",
+  "world": "The Exchange",
+  "blurb": "1930s telephone switchboard",
+  "n": 2,
+  "seed": 7342,
+  "raw": "raw/exchange/exchange-02.png",
+  "treated": "treated/exchange-02--treated.png",
+  "medium": "1930s telephone switchboard, brass jacks and"
+ },
+ {
+  "slug": "exchange",
+  "world": "The Exchange",
+  "blurb": "1930s telephone switchboard",
+  "n": 3,
+  "seed": 7343,
+  "raw": "raw/exchange/exchange-03.png",
+  "treated": "treated/exchange-03--treated.png",
+  "medium": "1930s telephone switchboard, brass jacks and"
+ },
+ {
+  "slug": "exchange",
+  "world": "The Exchange",
+  "blurb": "1930s telephone switchboard",
+  "n": 4,
+  "seed": 7344,
+  "raw": "raw/exchange/exchange-04.png",
+  "treated": "treated/exchange-04--treated.png",
+  "medium": "1930s telephone switchboard, brass jacks and"
+ },
+ {
+  "slug": "exchange",
+  "world": "The Exchange",
+  "blurb": "1930s telephone switchboard",
+  "n": 5,
+  "seed": 7345,
+  "raw": "raw/exchange/exchange-05.png",
+  "treated": "treated/exchange-05--treated.png",
+  "medium": "1930s telephone switchboard, brass jacks and"
+ },
+ {
+  "slug": "exchange",
+  "world": "The Exchange",
+  "blurb": "1930s telephone switchboard",
+  "n": 6,
+  "seed": 7346,
+  "raw": "raw/exchange/exchange-06.png",
+  "treated": "treated/exchange-06--treated.png",
+  "medium": "1930s telephone switchboard, brass jacks and"
+ },
+ {
+  "slug": "exchange",
+  "world": "The Exchange",
+  "blurb": "1930s telephone switchboard",
+  "n": 7,
+  "seed": 7347,
+  "raw": "raw/exchange/exchange-07.png",
+  "treated": "treated/exchange-07--treated.png",
+  "medium": "1930s telephone switchboard, brass jacks and"
+ }
+]

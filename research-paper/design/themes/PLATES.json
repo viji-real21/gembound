@@ -8,21 +8,71 @@
     "harbour": {
       "style": "photograph at night, long exposure, deep navy-black working harbour, a single warm amber sodium lamp as the only light source, wet stone quay and cold steel, dense atmospheric haze, heavy film grain, shallow depth of field, near-monochrome blue-black with one amber highlight, no people, no text, no lettering, no writing, no numbers, no labels, no signage, unmarked",
       "plates": [
-        { "subject": "moored hulls at rest along a quay, seen from the water", "seed": 3191 },
-        { "subject": "a row of iron mooring bollards on a wet stone quay", "seed": 3192 },
-        { "subject": "heavy rope coiled around a dock cleat, one lamp above", "seed": 3193 },
-        { "subject": "tall mast antennae silhouetted against a starless sky", "seed": 3194 },
-        { "subject": "sparks drifting up over black water beside a hull", "seed": 3195 },
-        { "subject": "an empty gangway leading down into darkness", "seed": 3196 }
+        {
+          "subject": "moored hulls at rest along a quay, seen from the water",
+          "seed": 3191
+        },
+        {
+          "subject": "a row of iron mooring bollards on a wet stone quay",
+          "seed": 3192
+        },
+        {
+          "subject": "heavy rope coiled around a dock cleat, one lamp above",
+          "seed": 3193
+        },
+        {
+          "subject": "tall mast antennae silhouetted against a starless sky",
+          "seed": 3194
+        },
+        {
+          "subject": "sparks drifting up over black water beside a hull",
+          "seed": 3195
+        },
+        {
+          "subject": "an empty gangway leading down into darkness",
+          "seed": 3196
+        }
       ]
     },
     "dreamscape": {
       "style": "digital matte painting, painterly gouache and oil brushwork with visible soft strokes, moody twilight long after sunset, DARK low-key value scale, deep indigo and dark violet night sky dense with stars, only a narrow band of muted dusty rose left low on the horizon, tall cream-grey cumulus clouds catching the last cold light against the dark sky, near-black slate blue mountains layered in cold mist, deep dark cool sea, wide cinematic composition, desaturated, cold colour temperature, atmospheric, concept art, dark and dim overall, no people, no text, no lettering, no writing, no numbers, no labels, no signage, unmarked",
       "plates": [
-        { "subject": "a lone small sailboat far out on a dark cool sea beneath enormous moonlit cumulus and a deep violet starfield", "seed": 5101 },
-        { "subject": "a dark grassy foreshore giving onto a black bay, near-black snow-touched mountains behind, a scatter of distant birds", "seed": 5102 },
-        { "subject": "tall cream-grey cumulus rising over near-black layered mountain ridges under a starfield", "seed": 5103 },
-        { "subject": "a wide dark lake mirroring a deep indigo sky, near-black mountains receding into cold mist", "seed": 5105 }
+        {
+          "subject": "a lone small sailboat far out on a dark cool sea beneath enormous moonlit cumulus and a deep violet starfield",
+          "seed": 5101
+        },
+        {
+          "subject": "a dark grassy foreshore giving onto a black bay, near-black snow-touched mountains behind, a scatter of distant birds",
+          "seed": 5102
+        },
+        {
+          "subject": "tall cream-grey cumulus rising over near-black layered mountain ridges under a starfield",
+          "seed": 5103
+        },
+        {
+          "subject": "a wide dark lake mirroring a deep indigo sky, near-black mountains receding into cold mist",
+          "seed": 5105
+        }
+      ]
+    },
+    "mascot": {
+      "width": 768,
+      "height": 768,
+      "steps": 4,
+      "style": "flat vector character illustration, bold simple readable silhouette, soft two-tone cel shading with a single warm rim light from the left, limited palette of deep navy-black and warm ember amber with one pale cream highlight, friendly but not cute, calm and competent, no mouth, expressive eyes only, centred full-body character on a plain flat deep navy background, generous empty margin around the character, clean edges, no outline sketch, no gradient mesh, no photorealism, no text, no letters, no logo, no watermark, no signature",
+      "plates": [
+        {
+          "subject": "a lean dark cormorant seabird standing tall and alert, wings folded, one small lantern clipped to its chest",
+          "seed": 4101
+        },
+        {
+          "subject": "a tall narrow harbour beacon creature, its body a slender brass lantern housing with a glowing amber light rising inside like a level gauge, two small dark eyes set high on the housing, thin straight legs, serious and watchful, not cute, not round",
+          "seed": 4204
+        },
+        {
+          "subject": "a dark squid seen head-on, a compact rounded mantle above and eight long slender tentacles fanning downward and outward at uneven lengths, two calm amber eyes, tentacles are the dominant feature",
+          "seed": 4205
+        }
       ]
     }
   }

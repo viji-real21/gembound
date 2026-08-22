@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>launch design — flintted</title>
+
+<!-- The real library over HTTP. Nothing below restates a token value. -->
+<link rel="stylesheet" href="lib/tokens.css">
+<link rel="stylesheet" href="lib/motion.css">
+<link rel="stylesheet" href="lib/components.css">
+
+<style>
+  /* The page wears the SAME ink and paper the plates were treated with. It is not a
+     palette choice — it is the output of the treatment stage, so the surface and the
+     imagery are one material by construction. That is the entire argument of this page. */
+  :root { --ink: #08c4ea; --paper: #010202; --accent: var(--ink); }
+
+  body { margin: 0; background: var(--paper); color: #cfe9f2;
+         padding: 0 0 var(--space-16); font-family: var(--font-sans); }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--space-8); }
+  a { color: var(--ink); }
+
+  header { padding: var(--space-16) 0 var(--space-12); }
+  .eyebrow { font-size: var(--text-micro); letter-spacing: .16em; text-transform: uppercase;
+             color: var(--ink); margin: 0 0 var(--space-3); }
+  h1 { font-size: 3.2rem; line-height: 1.02; letter-spacing: var(--track-h1);
+       margin: 0 0 var(--space-4); max-width: 20ch; color: #eaf7fb; }
+  h1 em { font-style: normal; color: var(--ink); }
+  .lede { font-size: 1.1rem; line-height: var(--lh-body-rule); color: #8fb4c0;
+          max-width: 66ch; margin: 0; }
+
+  hr.rule { height: 1px; background: #12303a; border: 0; margin: var(--space-12) 0; }
+  h2 { font-size: 1.55rem; line-height: 1.1; margin: 0 0 var(--space-2); color: #eaf7fb; }
+  .sub { color: #8fb4c0; font-size: .95rem; line-height: 1.55; max-width: 72ch;
+         margin: 0 0 var(--space-8); }
+  .sub strong { color: #cfe9f2; }
+
+  /* Verbatim terminal output. Presented as evidence, so it is not restyled or trimmed. */
+  pre.term { background: #050c0f; border: 1px solid #12303a; border-radius: var(--r-md);
+             padding: var(--space-4); overflow-x: auto; font-size: .82rem; line-height: 1.65;
+             margin: 0 0 var(--space-4); }
+  pre.term b { color: var(--ink); font-weight: 400; }
+  pre.term u { color: #ff8a5c; text-decoration: none; }
+  .caption { font-size: var(--text-micro); color: #6d94a1; margin: 0; }
+
+  /* Five worlds, five media — deliberately shown at one size so only the medium varies. */
+  .worlds { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-2); }
+  .worlds figure { margin: 0; }
+  .worlds img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block;
+                border-radius: var(--r-xs); }
+  .worlds figcaption { font-size: var(--text-micro); line-height: 1.5; color: #6d94a1;
+                       padding-top: var(--space-2); }
+  .worlds b { display: block; color: #cfe9f2; font-weight: 500; }
+  .medium { color: #ff8a5c; }
+
+  /* Before / after, stacked so the eye compares straight down one column. */
+  .ba { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+  .ba figure { margin: 0; }
+  .ba img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;
+            border-radius: var(--r-xs); }
+  .ba img + img { margin-top: 6px; }
+  .ba figcaption { font-size: var(--text-micro); color: #6d94a1; padding-top: var(--space-2); }
+
+  #gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+             gap: var(--space-3); }
+  #gallery figure { margin: 0; }
+  #gallery img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block;
+                 border-radius: var(--r-xs); }
+  /* Provenance printed, not hidden — the Nous mechanic recorded in flintted PRIOR-ART. */
+  #gallery figcaption { font-size: 10px; letter-spacing: .08em; color: #4d707c;
+                        padding-top: 6px; font-variant-numeric: tabular-nums; }
+
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+  th, td { text-align: left; padding: var(--space-2) var(--space-3);
+           border-bottom: 1px solid #12303a; vertical-align: top; }
+  th { color: #6d94a1; font-weight: 500; font-size: var(--text-micro);
+       letter-spacing: .1em; text-transform: uppercase; }
+  td b { color: var(--ink); font-weight: 500; }
+
+  ol.todo { margin: 0; padding-left: 1.2em; color: #8fb4c0; font-size: .92rem;
+            line-height: 1.7; max-width: 74ch; }
+  ol.todo b { color: #cfe9f2; font-weight: 500; }
+
+  @media (max-width: 900px) {
+    .worlds, .ba { grid-template-columns: 1fr 1fr; }
+    h1 { font-size: 2.1rem; }
+    .wrap { padding: 0 var(--space-4); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">design pipeline · capability check · 2026-08-22</p>
+  <h1>If you said <em>launch design for flintted</em>, this is what you would get.</h1>
+  <p class="lede">Twelve of thirteen stages already gate green, and that is exactly the
+     problem: the gates check that a file <em>exists</em>, never that the artwork
+     <em>coheres</em>. Below is the real command output, the failure it did not catch, and
+     the stage that was missing — now built and run over all 28 plates.</p>
+</header>
+
+<hr class="rule">
+
+<h2>1 · What the command actually prints</h2>
+<p class="sub">Verbatim from
+   <code>design-pipeline.py status /Users/vedhith/Developer/flintted</code>. Not a summary.</p>
+<pre class="term">/Users/vedhith/Developer/flintted   theme=(none declared)
+<b>GATE PASS</b>  S0 Skeleton green  (1 artifact(s))
+<b>GATE PASS</b>  S1 Identity brief  (1 artifact(s))
+<b>GATE PASS</b>  S2 Reference sheet  (1 artifact(s))
+<b>GATE PASS</b>  S3 Theme briefs  (1 artifact(s))
+<b>GATE PASS</b>  S4 Plates  (29 artifact(s))
+<b>GATE PASS</b>  S5 Theme locked  (1 artifact(s))
+<b>GATE PASS</b>  S5c Character  (3 artifact(s))
+<b>GATE PASS</b>  S6 Wireframe  (1 artifact(s))
+<b>GATE PASS</b>  S6i Interaction map  (1 artifact(s))
+<b>GATE PASS</b>  S7 Themed pages  (5 artifact(s))
+<b>GATE PASS</b>  S8 Shot critic  (15 artifact(s))
+<b>GATE PASS</b>  S9 Picker  (1 artifact(s))
+<u>GATE FAIL</u>  S10 Applied + gated
+  - design/GATES.md: 0/1 file(s) present at &gt;= 400 bytes
+
+NEXT: S10 Applied + gated</pre>
+<p class="caption">So the machine answer is “you are on S10.” The machine answer was wrong.</p>
+
+<hr class="rule">
+
+<h2>2 · What those green gates shipped</h2>
+<p class="sub">S3 and S4 both passed. Here is one plate from each of the five worlds they
+   produced, at one size so that only the <strong>medium</strong> varies. Two of the five
+   style blocks ask for a <strong>photograph</strong> in writing. A site cannot cohere while
+   its own prompt file requests an oil painting for one section and deep-ocean photography
+   for another — and no existence gate can see that.</p>
+<div class="worlds">
+  <figure><img src="raw/commission/commission-01.png" alt="An oil-painted studio interior at the moment of handover">
+    <figcaption><b>The Commission</b><span class="medium">oil painting on linen</span></figcaption></figure>
+  <figure><img src="raw/deadman/deadman-01.png" alt="A dim 1970s industrial control panel in brushed steel and bakelite">
+    <figcaption><b>Deadman’s Switch</b><span class="medium">photograph of a 1970s…</span></figcaption></figure>
+  <figure><img src="raw/ordnance/ordnance-01.png" alt="Brass dividers and a rule resting on an aged hand-drawn survey chart">
+    <figcaption><b>Ordnance Survey</b><span class="medium">hand-drawn survey chart</span></figcaption></figure>
+  <figure><img src="raw/coldroom/coldroom-02.png" alt="A lit instrument suspended in absolute darkness at 900 metres">
+    <figcaption><b>Cold Room</b><span class="medium">deep ocean photography</span></figcaption></figure>
+  <figure><img src="raw/exchange/exchange-01.png" alt="Brass jacks and cloth patch cords sweeping across a 1930s switchboard">
+    <figcaption><b>The Exchange</b><span class="medium">1930s telephone switchboard</span></figcaption></figure>
+</div>
+<p class="caption" style="padding-top:var(--space-4)">Five lightings, five focal lengths, five
+   depths of field. Your words: <em>“a bunch of real photos that don’t make sense… the site
+   just doesn’t fit together.”</em></p>
+
+<hr class="rule">
+
+<h2>3 · The stage that was missing — S4.5, treatment</h2>
+<p class="sub"><code>flintted/design/PRIOR-ART.md</code> already diagnosed this and named the
+   fix; nothing had built it. Two findings from that file decide the design.
+   <strong>“At 4 steps, schnell renders the subject and treats style adjectives as
+   decoration — you cannot prompt your way to a painting.”</strong> And:
+   <strong>“Nothing was applied to the images after they were generated… every reference has
+   that stage. It is the whole trick.”</strong> So coherence is bought after the render, by
+   destroying every plate identically: coarse ordered halftone, scanline bias, 1-bit
+   posterise, colorised to one ink on one paper. Mechanic taken method-only from
+   <a href="https://nousresearch.com/">Nous Research</a>.</p>
+<div class="ba">
+  <figure>
+    <img src="raw/commission/commission-01.png" alt="The oil-painted studio before treatment">
+    <img src="treated/commission-01--treated.png" alt="The same studio plate reduced to cyan halftone on black">
+    <figcaption>Oil painting → one material. The photographic hand and the model’s fake
+      signature “Mtilrans” are eaten by the dither before they can be read.</figcaption>
+  </figure>
+  <figure>
+    <img src="raw/ordnance/ordnance-01.png" alt="The pale survey chart before treatment">
+    <img src="treated/ordnance-01--treated.png" alt="The same chart as cyan halftone on black">
+    <figcaption>The one <em>light</em> world. Its paper is now the same paper as the deep-sea
+      plate’s — which is the test a palette could never pass.</figcaption>
+  </figure>
+  <figure>
+    <img src="raw/coldroom/coldroom-02.png" alt="The deep-sea instrument before treatment">
+    <img src="treated/coldroom-02--treated.png" alt="The same instrument as cyan halftone on black">
+    <figcaption>Near-black at 900 m and a bright studio survive the same grid at the same dot
+      size, so neither betrays which world it came from.</figcaption>
+  </figure>
+</div>
+
+<hr class="rule">
+
+<h2>4 · All twenty-eight, one material</h2>
+<p class="sub">Every plate flintted has, through one call, one ink, one paper. Each is
+   captioned with its <strong>real render seed</strong> from
+   <code>themes/PLATES.json</code> — machine origin printed rather than hidden, the third
+   mechanic taken from Nous. Flintted stored every seed and had never shown one.</p>
+<div id="gallery"></div>
+
+<hr class="rule">
+
+<h2>5 · What the stage bought, measured</h2>
+<table>
+  <tr><th>Before</th><th>After</th><th>Why it matters</th></tr>
+  <tr><td>5 extracted palettes</td><td><b>1 ink + 1 paper</b></td>
+      <td>The unifier is a process every image passes through, not a colour scheme. Five
+          separately-lit worlds provably does not cohere.</td></tr>
+  <tr><td>36.0 MB of source PNGs</td><td><b>1.4 MB</b></td>
+      <td>26× smaller. This closes the one open item in <code>PERF.md</code>, which required
+          resizing and AVIF/WebP before ship. 1-bit halftone compresses instead.</td></tr>
+  <tr><td>Hands, faces, invented signatures</td><td><b>eaten by the dither</b></td>
+      <td>The model’s tells stop being a prompt request that already failed once, and become
+          unreadable at the treatment’s dot depth.</td></tr>
+  <tr><td>S5 extracts a palette from the plates</td><td><b>palette is locked upstream</b></td>
+      <td>S4.5 inverts S5. Once the ink and paper are chosen, extraction has nothing left
+          to discover — this is a real change to the stage order, not a new script.</td></tr>
+  <tr><td>“Render a beautiful scene”</td><td><b>“render a legible silhouette”</b></td>
+      <td>The generator’s job shrinks and the treatment supplies all the style —
+          deterministic instead of a dice roll.</td></tr>
+</table>
+
+<hr class="rule">
+
+<h2>6 · What is still not built — named, not hidden</h2>
+<ol class="todo">
+  <li><b>S4.5 is not in <code>PIPELINE.md</code> yet.</b> The script exists and has run; the
+      stage block and its gate do not, so nothing forces it. Until that lands, this is a tool
+      rather than a stage.</li>
+  <li><b>The ink was chosen, not derived.</b> <code>#08c4ea</code> is Cold Room’s extracted
+      accent, reused. Which ink flintted ships is your pick, and it is a one-word answer that
+      re-renders all 28 in about a minute.</li>
+  <li><b>No Mobbin or Figma call in this session.</b> Your research-then-pipeline rule says a
+      new surface must be sourced to a gold-standard product with the MCP wired. The
+      references here came from <code>PRIOR-ART.md</code>, which did do that work — but I did
+      not add to it.</li>
+  <li><b>Railway’s alternative is untested.</b> PRIOR-ART names two ways to cohere — Nous’s
+      one-ink treatment, and Railway’s one continuous painted world with real UI inlaid on
+      top. Only the first is built. The second is the one that keeps the live terminal.</li>
+  <li><b>The mascot is unresolved.</b> S5c gates green on the parametric SVG rig you rejected.
+      The Duolingo/Rive row in prior art is the right method; the craft inside it is not
+      there yet, and PNGs out of the plate tool were the wrong answer.</li>
+</ol>
+
+</div>
+
+<script>
+  // The gallery is built from plates.json so every caption carries the seed that actually
+  // rendered that file, rather than a number typed into the markup.
+  fetch('plates.json').then(r => r.json()).then((plates) => {
+    const g = document.getElementById('gallery');
+    g.innerHTML = plates.map((p, i) => `
+      <figure>
+        <img src="${p.treated}" alt="${p.world}, plate ${p.n}, as cyan halftone on black" loading="lazy">
+        <figcaption>OUTPUT ${String(i + 1).padStart(2, '0')} / ${p.world.toUpperCase()} / SEED: ${p.seed}</figcaption>
+      </figure>`).join('');
+  });
+</script>
+</body>
+</html>

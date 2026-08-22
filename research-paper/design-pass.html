@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fleet — design pass, identity round</title>
+
+<!-- The real library, imported over HTTP from design/lib (a symlink to
+     vedhith-workflow-os/design/lib). Nothing below restates a token value; that was the
+     defect in the first mascot picker and it is the whole point of having a library. -->
+<link rel="stylesheet" href="design/lib/tokens.css">
+<link rel="stylesheet" href="design/lib/motion.css">
+<link rel="stylesheet" href="design/lib/components.css">
+<link rel="stylesheet" href="design/lib/hover.css">
+<link rel="stylesheet" href="design/lib/interactions.css">
+
+<style>
+  /* Page-specific layout only. Every colour and duration comes from the library above. */
+  body { margin: 0; padding: 0 0 var(--space-16); }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 var(--space-8); }
+
+  header { padding: var(--space-16) 0 var(--space-12); }
+  .eyebrow { font-size: var(--text-micro); line-height: var(--lh-micro);
+             letter-spacing: .14em; text-transform: uppercase; color: var(--fg-muted);
+             margin: 0 0 var(--space-3); }
+  h1 { font-size: 3.4rem; line-height: 1.02; letter-spacing: var(--track-h1);
+       margin: 0 0 var(--space-4); max-width: 18ch; }
+  h1 span { color: var(--fg-muted); }
+  .lede { font-size: 1.15rem; line-height: var(--lh-body-rule); color: var(--fg-muted);
+          max-width: 62ch; margin: 0; }
+
+  .rule { height: 1px; background: var(--border); border: 0; margin: var(--space-12) 0; }
+  h2 { font-size: 1.6rem; line-height: 1.1; margin: 0 0 var(--space-2); }
+  .sub { color: var(--fg-muted); font-size: .95rem; line-height: 1.5;
+         max-width: 68ch; margin: 0 0 var(--space-8); }
+
+  /* Unequal columns, unequal heights — an even 3-up is what the sameness gate scores against. */
+  .options { display: grid; grid-template-columns: 1.12fr 1fr 1.24fr; gap: var(--space-6);
+             align-items: start; }
+  .opt { background: var(--surface); border-radius: var(--r-md); overflow: hidden;
+         display: flex; flex-direction: column; text-align: left; width: 100%;
+         border: 1px solid transparent; padding: 0; cursor: pointer; color: inherit;
+         font: inherit; transition: border-color var(--dur-colour) var(--ease-plain); }
+  .opt:nth-child(2) { margin-top: var(--space-8); }
+  .opt:nth-child(3) { margin-top: var(--space-3); }
+  .opt[aria-pressed="true"] { border-color: var(--accent); }
+  .opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .shot { position: relative; aspect-ratio: 1; background: #16203a; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .badge { position: absolute; top: var(--space-3); left: var(--space-3);
+           width: 24px; height: 24px; border-radius: var(--r-xs);
+           background: var(--accent); color: #fff; display: grid; place-items: center;
+           font-size: .8rem; }
+  .opt-body { padding: var(--space-6) var(--space-4) var(--space-4); }
+  .opt h3 { font-size: 1.35rem; line-height: 1.1; margin: 0 0 var(--space-1); }
+  .role { font-size: var(--text-micro); line-height: var(--lh-micro); letter-spacing: .12em;
+          text-transform: uppercase; color: var(--accent); margin: 0 0 var(--space-3); }
+  .opt p { font-size: .88rem; line-height: 1.55; color: var(--fg-muted); margin: 0 0 var(--space-3); }
+  .flag { font-size: .82rem; line-height: 1.5; color: var(--warning); margin: 0; }
+
+  /* The favicon row — the test that actually decides a mark. */
+  .favrow { display: flex; align-items: center; gap: var(--space-6); flex-wrap: wrap; }
+  .fav { text-align: center; }
+  .fav img { width: 32px; height: 32px; border-radius: 6px; display: block; margin: 0 auto var(--space-2); object-fit: cover; }
+  .fav img.tiny { width: 16px; height: 16px; }
+  .fav span { font-size: var(--text-micro); color: var(--fg-muted); }
+
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+           gap: var(--space-6); }
+  .step { border-left: 2px solid var(--border); padding-left: var(--space-4); }
+  .step b { display: block; font-size: .95rem; margin-bottom: var(--space-1); }
+  .step span { font-size: .85rem; line-height: 1.55; color: var(--fg-muted); }
+  .step code { font-size: .8rem; color: var(--fg); }
+
+  @media (max-width: 900px) {
+    .options, .steps { grid-template-columns: 1fr; }
+    .opt, .opt:nth-child(2), .opt:nth-child(3) { margin-top: 0; }
+    h1 { font-size: 2.3rem; }
+    .wrap { padding: 0 var(--space-4); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Agent Fleet · design pass · identity round</p>
+  <h1>What a design pass <span>actually produces.</span></h1>
+  <p class="lede">Three mascot directions, generated through the pipeline — not drawn by
+     hand and not a geometric stand-in. One locked style block, three different characters,
+     so what you are comparing is the <em>idea</em>, not the rendering. The page you are
+     reading imports <code>design/lib</code> directly, so every colour and duration here is
+     the library's, not a copy.</p>
+</header>
+
+<hr class="rule">
+
+<h2>The three directions</h2>
+<p class="sub">Same style block, same palette, same 768×768 frame, seeds 4101 / 4204 / 4205.
+   Click one to mark it.</p>
+
+<div class="options">
+
+  <button class="opt" aria-pressed="false" data-pick="cormorant">
+    <div class="shot"><span class="badge">1</span>
+      <img src="design/assets/mascot/mascot-01.png" alt="A lean dark cormorant standing alert, an amber lantern clipped to its chest" loading="eager">
+    </div>
+    <div class="opt-body">
+      <h3>The Cormorant</h3>
+      <p class="role">the watcher</p>
+      <p>A harbour bird that goes out and comes back. It is the only one of the three that
+         reads as <em>dispatched</em> — which is literally what a fleet of agents does.</p>
+      <p class="flag">Risk: still an animal. Invites “what is it?”</p>
+    </div>
+  </button>
+
+  <button class="opt" aria-pressed="false" data-pick="beacon">
+    <div class="shot"><span class="badge">2</span>
+      <img src="design/assets/mascot/mascot-02.png" alt="A tall brass beacon creature whose glowing amber housing reads as a level gauge" loading="eager">
+    </div>
+    <div class="opt-body">
+      <h3>The Beacon</h3>
+      <p class="role">the reading</p>
+      <p>Its body <em>is</em> the gauge. The mascot tells you something true about the
+         product — how full it is — instead of just standing next to it. The most original
+         of the three, and the only one that can carry live state.</p>
+      <p class="flag">Risk: an object, not a creature. Harder to make warm.</p>
+    </div>
+  </button>
+
+  <button class="opt" aria-pressed="false" data-pick="squid">
+    <div class="shot"><span class="badge">3</span>
+      <img src="design/assets/mascot/mascot-03.png" alt="A dark squid seen head-on with eight ember tentacles of uneven length and calm amber eyes" loading="eager">
+    </div>
+    <div class="opt-body">
+      <h3>The Squid</h3>
+      <p class="role">many arms, one head</p>
+      <p>The best-looking mark of the three by some distance, and the idea is exact: many
+         limbs working at once, unequal lengths, one calm centre.</p>
+      <p class="flag">Flag: inkbox.ai — your gold standard — ships a purple octopus in this
+         same category. This is close enough to read as derivative. Say so if that kills it.</p>
+    </div>
+  </button>
+
+</div>
+
+<hr class="rule">
+
+<h2>The favicon test</h2>
+<p class="sub">A mark that dies at 16px is not a mark. This is the same three files, scaled
+   down — nothing redrawn.</p>
+<div class="favrow">
+  <div class="fav"><img src="design/assets/mascot/mascot-01.png" alt=""><span>cormorant 32</span></div>
+  <div class="fav"><img class="tiny" src="design/assets/mascot/mascot-01.png" alt=""><span>16</span></div>
+  <div class="fav"><img src="design/assets/mascot/mascot-02.png" alt=""><span>beacon 32</span></div>
+  <div class="fav"><img class="tiny" src="design/assets/mascot/mascot-02.png" alt=""><span>16</span></div>
+  <div class="fav"><img src="design/assets/mascot/mascot-03.png" alt=""><span>squid 32</span></div>
+  <div class="fav"><img class="tiny" src="design/assets/mascot/mascot-03.png" alt=""><span>16</span></div>
+</div>
+
+<hr class="rule">
+
+<h2>What the pipeline actually did</h2>
+<p class="sub">This is the pass itself, step by step — so you can see where it holds and
+   where it needed correcting.</p>
+<div class="steps">
+  <div class="step"><b>1 · Reference, read live</b><span>
+    <code>entries/illustrated-ground-and-mascot.md</code> — inkbox.ai read live, not
+    screenshotted: one hue ramp, one warm accent, one creature at three sizes.</span></div>
+  <div class="step"><b>2 · Locked style block</b><span>
+    One style string in <code>PLATES.json</code>, composed as <code>subject, style</code>
+    for every plate. Per-plate prompt drift is how a series stops looking like one hand.</span></div>
+  <div class="step"><b>3 · Local render</b><span>
+    <code>design-plates.py</code> → mflux / Flux schnell, 768×768. No API, no cost. Each
+    plate must exist, clear a size floor and pass a not-flat check or it re-renders.</span></div>
+  <div class="step"><b>4 · Correction in the subject</b><span>
+    First cut of 2 came back <em>cute</em> and 3 came back a <em>snail</em>. Fixed in the
+    subject line, not with a heavier style block — same lesson as the dreamscape plate.</span></div>
+  <div class="step"><b>5 · Gates</b><span>
+    <code>design-sameness.py</code> for the generic tells, <code>design-shot-critic.py</code>
+    to render it at three sizes with reduced-motion forced.</span></div>
+  <div class="step"><b>6 · Your call</b><span>
+    One word back. Then three refinements of that one, and the app icon comes out of the
+    same mark — which is why the site goes first.</span></div>
+</div>
+
+</div>
+
+<script>
+  const opts = [...document.querySelectorAll('.opt')];
+  const mark = (el) => {
+    opts.forEach((o) => o.setAttribute('aria-pressed', String(o === el)));
+  };
+  opts.forEach((o) => o.addEventListener('click', () => mark(o)));
+  addEventListener('keydown', (e) => {
+    const i = ['1', '2', '3'].indexOf(e.key);
+    if (i >= 0) mark(opts[i]);
+  });
+</script>
+</body>
+</html>
