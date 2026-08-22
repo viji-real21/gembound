@@ -15,6 +15,15 @@
         { "subject": "sparks drifting up over black water beside a hull", "seed": 3195 },
         { "subject": "an empty gangway leading down into darkness", "seed": 3196 }
       ]
+    },
+    "dreamscape": {
+      "style": "digital matte painting, painterly gouache and oil brushwork with visible soft strokes, moody twilight long after sunset, DARK low-key value scale, deep indigo and dark violet night sky dense with stars, only a narrow band of muted dusty rose left low on the horizon, tall cream-grey cumulus clouds catching the last cold light against the dark sky, near-black slate blue mountains layered in cold mist, deep dark cool sea, wide cinematic composition, desaturated, cold colour temperature, atmospheric, concept art, dark and dim overall, no people, no text, no lettering, no writing, no numbers, no labels, no signage, unmarked",
+      "plates": [
+        { "subject": "a lone small sailboat far out on a dark cool sea beneath enormous moonlit cumulus and a deep violet starfield", "seed": 5101 },
+        { "subject": "a dark grassy foreshore giving onto a black bay, near-black snow-touched mountains behind, a scatter of distant birds", "seed": 5102 },
+        { "subject": "tall cream-grey cumulus rising over near-black layered mountain ridges under a starfield", "seed": 5103 },
+        { "subject": "a wide dark lake mirroring a deep indigo sky, near-black mountains receding into cold mist", "seed": 5105 }
+      ]
     }
   }
 }

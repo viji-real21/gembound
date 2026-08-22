@@ -1,0 +1,707 @@
+<!doctype html>
+<!--
+  THE $319 AGENT FLEET — variant B, "dreamscape".
+
+  Aesthetic:  painterly matte-painting ground, dusty mauve and violet starfield,
+              cream cumulus, Outfit geometric display, one dusty-coral accent,
+              translucent hairline cards floating over the painting.
+  Reference:  the three frames he sent 2026-08-22 — a matte-painting seascape used
+              full-bleed, a small letterspaced coral micro-label above a centred
+              heavy geometric headline, and a row of translucent cards that bleeds
+              off the right edge. Match FEEL, not content.
+  Intent:     the same promise as variant A, told calmly — the fleet sails through
+              the night while you sleep, and nothing here is shouting.
+  Guardrails: no backdrop-filter (the cards are honest translucency, not glass),
+              no icon-grid feature row, no single global radius, no colour-change
+              hover, no bare-verb CTA, no price without its anchor.
+
+  Content parity: every element of research-paper/fleet-pitch.html is present —
+  claim box, honesty caveat, lane table (5 rows + Terminal-Bench), the 5 scheduler
+  rules, the 4-row stack table, the sim caveat, "what it costs to be honest", footer.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The $319 Agent Fleet — 24/7 coding coverage, proven by simulation</title>
+<meta name="description" content="A pool of subscription coding agents, scheduled by arithmetic instead of hope, covers 100% of around-the-clock development demand at $319/month — where the same money spent as two plain subscriptions covers 63%.">
+<link rel="canonical" href="fleet-dreamscape.html">
+<meta name="theme-color" content="#221F33">
+<meta property="og:title" content="The $319 Agent Fleet">
+<meta property="og:description" content="100% of 24/7 development demand at $319/mo, where $300 covers 63%. The gap is not model quality. It is scheduling.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23221F33'/%3E%3Cellipse cx='32' cy='31' rx='23' ry='19' fill='%23F4F1F7'/%3E%3Ccircle cx='23' cy='31' r='6.5' fill='%23221F33'/%3E%3Ccircle cx='41' cy='31' r='6.5' fill='%23221F33'/%3E%3Crect x='16' y='16' width='13' height='3' rx='1.5' fill='%23E89A8C' transform='rotate(7 22 17)'/%3E%3Crect x='35' y='16' width='13' height='3' rx='1.5' fill='%23E89A8C' transform='rotate(-7 41 17)'/%3E%3C/svg%3E">
+
+<style>
+/* ─────────────── identity: geometric display, humanist body, mono numerals ─────────────── */
+@font-face{font-family:Outfit;src:url("fonts/Outfit-Bold.ttf") format("truetype");font-weight:700;font-display:swap}
+@font-face{font-family:Outfit;src:url("fonts/Outfit-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:WorkSans;src:url("fonts/WorkSans-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:GeistMono;src:url("fonts/GeistMono-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+
+:root{
+  /* three colours, pulled off the painting itself: the violet it sits in,
+     the cream its clouds are lit with, and the one dusty coral in the sky. */
+  --bg:      oklch(0.208 0.048 287);   /* the plate's own night indigo */
+  --ink:     oklch(0.972 0.005 292);   /* cloud cream-white      */
+  --accent:  oklch(0.762 0.100 32);    /* dusty coral            */
+
+  --ground-1: oklch(0.252 0.044 287);
+  --ground-2: oklch(0.300 0.040 287);
+  --veil:     oklch(0.972 0.005 292 / 0.055);  /* the card fill  */
+  --edge:     oklch(0.972 0.005 292 / 0.145);  /* the card edge  */
+  --ink-dim:  oklch(0.760 0.012 292);
+  --ink-mute: oklch(0.605 0.014 292);
+
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
+  --s7:48px; --s8:64px; --s9:96px; --s10:128px;
+
+  --r-xs:.5rem; --r-sm:.875rem; --r-card:1.375rem; --r-pill:100px;
+
+  --d-xs:55ms; --d-s:150ms; --d-m:225ms; --d-l:375ms;
+  --e-std:cubic-bezier(.4,0,.2,1);
+  --e-enter:cubic-bezier(0,0,.2,1);
+
+  --shell:1120px;
+  --gutter:max(var(--s5), calc((100vw - var(--shell)) / 2));
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:WorkSans,ui-sans-serif,system-ui,sans-serif;
+  font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+/* the painting is brushwork, so the page gets canvas tooth rather than film grain */
+body::after{
+  content:"";position:fixed;inset:0;z-index:60;pointer-events:none;
+  opacity:.03;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ─────────────── type: six literal roles ─────────────── */
+h1,h2,h3{font-family:Outfit,ui-sans-serif,sans-serif;font-weight:700;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.6rem, 1.2rem + 5.4vw, 4.75rem);line-height:1.02;letter-spacing:-.028em}
+h2{font-size:clamp(1.9rem, 1.2rem + 2.6vw, 2.85rem);line-height:1.08;letter-spacing:-.024em}
+h3{font-size:1.25rem;line-height:1.25;letter-spacing:-.012em}
+p{margin:0 0 var(--s4);max-width:64ch;text-wrap:pretty}
+small,.small{font-size:0.8125rem;line-height:1.5}
+.dim{color:var(--ink-dim)}
+.num{font-family:GeistMono,ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+/* the coral eyebrow — light, widely letterspaced, always above a headline */
+.eyebrow{
+  font-family:Outfit,sans-serif;font-weight:400;font-size:11px;
+  letter-spacing:.42em;text-transform:uppercase;color:var(--accent);
+  margin:0 0 var(--s5);
+}
+a{color:var(--ink);text-underline-offset:.22em;text-decoration-color:var(--edge)}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+
+/* one hover mechanism site-wide: a second copy of the label rolls in */
+.roll{display:inline-block;position:relative;overflow:hidden;height:1.25em;vertical-align:bottom}
+.roll>span{display:block;transition:transform var(--d-m) var(--e-std)}
+.roll>span::after{content:attr(data-t);display:block}
+a:hover .roll>span,a:focus-visible .roll>span{transform:translateY(-1.25em)}
+
+/* ─────────────── shell ─────────────── */
+.wrap{max-width:var(--shell);margin:0 auto;padding:0 var(--s5)}
+section{padding:var(--s10) 0;position:relative}
+.centered{text-align:center}
+.centered p{margin-left:auto;margin-right:auto}
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:70;transition:width var(--d-xs) linear}
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--accent);color:#221F33;padding:var(--s3) var(--s4);font-weight:700;border-radius:0 0 var(--r-xs) 0}
+.skip:focus{left:0}
+
+/* ─────────────── nav ─────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;gap:var(--s5);padding:var(--s4) var(--s5);
+  background:transparent;
+  transition:transform var(--d-m) var(--e-std),background var(--d-m) var(--e-std);
+}
+nav.hidden{transform:translateY(-100%)}
+nav.stuck{background:var(--bg)}
+.lockup{display:flex;align-items:center;gap:var(--s2);font-family:Outfit,sans-serif;font-weight:700;font-size:1.0625rem;letter-spacing:-.02em;text-decoration:none}
+.lockup svg{width:26px;height:26px;display:block}
+.navlinks{display:flex;gap:var(--s5);margin-left:auto;font-size:0.875rem}
+.navlinks a{text-decoration:none;color:var(--ink-dim);padding-block:var(--s1)}
+.navlinks a:hover,.navlinks a[aria-current=true]{color:var(--ink)}
+.nav-cta{margin-left:var(--s5);white-space:nowrap}
+.nav-cta .short{display:none}
+@media (max-width:820px){
+  .navlinks{display:none}
+  .nav-cta{margin-left:auto}
+  .nav-cta .long{display:none}
+  .nav-cta .short{display:inline}
+}
+
+/* ─────────────── buttons ─────────────── */
+.btn{
+  --btn-bg:transparent;--btn-ink:var(--ink);--btn-line:var(--edge);
+  display:inline-flex;align-items:center;gap:var(--s2);
+  padding:var(--s3) var(--s5);min-height:46px;
+  font-family:WorkSans,sans-serif;font-size:0.9375rem;font-weight:400;
+  color:var(--btn-ink);background:var(--btn-bg);
+  border:1px solid var(--btn-line);border-radius:var(--r-pill);
+  cursor:pointer;text-decoration:none;
+  transition:background var(--d-m) var(--e-std),border-color var(--d-m) var(--e-std);
+}
+.btn--primary{--btn-bg:var(--ink);--btn-ink:#221F33;--btn-line:var(--ink)}
+.btn--primary:hover{--btn-bg:color-mix(in oklab,var(--ink) 84%,var(--accent))}
+.btn--secondary{--btn-bg:var(--veil)}
+.btn--secondary:hover{--btn-line:var(--ink-mute)}
+.btn--ghost{--btn-line:transparent;padding-inline:var(--s3)}
+.btn--ghost:hover{--btn-line:var(--edge)}
+.btn:active{transform:translateY(.5px)}
+.btn .dotmark{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+
+/* ─────────────── the painting ─────────────── */
+.plate{
+  position:absolute;inset:0;z-index:1;width:100%;height:100%;
+  object-fit:cover;object-position:50% 42%;pointer-events:none;
+}
+.hero{
+  position:relative;overflow:hidden;isolation:isolate;
+  min-height:min(100svh,980px);display:flex;flex-direction:column;justify-content:center;
+  padding:var(--s10) 0 var(--s9);
+}
+/* the painting is the light source, so it stays legible top-centre and
+   dies into the page at the bottom seam rather than stopping at an edge */
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    radial-gradient(88% 62% at 50% 46%, oklch(0.16 0.03 292 / .58) 0%, oklch(0.16 0.03 292 / .30) 46%, transparent 78%),
+    linear-gradient(to bottom, oklch(0.16 0.03 292 / .55) 0%, transparent 26%, transparent 58%, var(--bg) 100%);
+}
+.hero .wrap{position:relative;z-index:3}
+.hero__sub{font-size:1.1875rem;color:var(--ink-dim);max-width:54ch;margin:var(--s5) auto var(--s7)}
+.hero__cta{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;justify-content:center}
+.hero__note{font-family:GeistMono,monospace;font-size:0.8125rem;color:var(--ink-mute)}
+h1 .soft{color:oklch(0.972 0.005 292 / .48)}
+h1 .stop{color:var(--accent)}
+
+/* the mascot rides the horizon rather than standing on a quay */
+.crew{position:absolute;right:5vw;bottom:11%;z-index:3;width:min(190px,17vw);pointer-events:none}
+.crew svg{width:100%;height:auto;display:block}
+@media (max-width:920px){.crew{display:none}}
+
+/* ─────────────── trust strip: unequal, staggered, separated by tone ─────────────── */
+.strip{background:var(--ground-1);position:relative;z-index:4}
+.strip .wrap{display:grid;grid-template-columns:1.5fr 1fr 1.2fr 2fr;gap:var(--s6);padding-block:var(--s7)}
+.strip div:nth-child(2){margin-top:var(--s5)}
+.strip div:nth-child(3){margin-top:var(--s2)}
+.strip div:nth-child(4){margin-top:var(--s6)}
+.strip b{display:block;font-family:GeistMono,monospace;font-size:1.625rem;font-weight:400;letter-spacing:-.02em;line-height:1.05}
+.strip div:nth-child(1) b{color:var(--accent)}
+.strip small{color:var(--ink-mute);display:block;margin-top:var(--s2)}
+@media (max-width:780px){.strip .wrap{grid-template-columns:1fr 1fr;gap:var(--s5)}.strip div{margin-top:0 !important}}
+
+/* ─────────────── the card row that bleeds off the right edge ─────────────── */
+/* the whole section sits on a painting, so the cards are translucent over art —
+   that is the point of the reference: honest translucency, never a glass panel */
+#layers{position:relative;overflow:hidden;isolation:isolate}
+#layers .plate{object-position:50% 30%}
+#layers::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    radial-gradient(96% 70% at 50% 30%, oklch(0.14 0.035 287 / .52) 0%, oklch(0.14 0.035 287 / .30) 50%, transparent 84%),
+    linear-gradient(to bottom, var(--bg) 0%, transparent 22%, transparent 70%, var(--bg) 100%);
+}
+#layers .wrap,#layers .deck,#layers .deck-hint{position:relative;z-index:3}
+.deck{
+  display:grid;grid-auto-flow:column;grid-auto-columns:minmax(280px,336px);
+  gap:var(--s5);overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity;
+  padding:var(--s2) var(--gutter) var(--s6);
+  scrollbar-width:none;
+}
+.deck::-webkit-scrollbar{display:none}
+.card{
+  scroll-snap-align:start;
+  background:var(--veil);
+  border:1px solid var(--edge);          /* an honest edge, not a glass panel */
+  border-radius:var(--r-card);
+  padding:var(--s6);
+  display:flex;flex-direction:column;gap:var(--s3);
+  transition:background var(--d-m) var(--e-std);
+}
+.card:hover{background:oklch(0.972 0.005 292 / .085)}
+.card .idx{font-family:GeistMono,monospace;font-size:0.8125rem;color:var(--accent)}
+.card p{margin:0;color:var(--ink-dim);font-size:0.9375rem}
+.deck-hint{font-family:GeistMono,monospace;font-size:0.8125rem;color:var(--ink-mute);padding:0 var(--gutter)}
+
+/* ─────────────── callout ─────────────── */
+.callout{
+  background:var(--veil);border-left:3px solid var(--accent);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;padding:var(--s6);max-width:74ch;
+}
+.callout p:last-child{margin-bottom:0}
+
+/* ─────────────── data as graphic ─────────────── */
+.figure{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:var(--s8);align-items:center}
+@media (max-width:880px){.figure{grid-template-columns:1fr;gap:var(--s6)}}
+.isotype{width:100%;height:auto;shape-rendering:crispEdges;display:block}
+figcaption{font-size:0.8125rem;color:var(--ink-mute);margin-top:var(--s4);max-width:46ch}
+.bracket{display:flex;align-items:baseline;gap:var(--s5);font-family:GeistMono,monospace;flex-wrap:wrap}
+.bracket .amt{font-size:clamp(2.1rem,1.2rem+3.2vw,3.4rem);line-height:1;letter-spacing:-.03em}
+.bracket .was{color:var(--ink-mute)}
+.bracket .was .amt{text-decoration:line-through;text-decoration-thickness:1px}
+.bracket .now .amt{color:var(--accent)}
+.bracket em{display:block;font-style:normal;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mute);line-height:2.6}
+.delta{display:flex;align-items:center;padding:var(--s3) var(--s5);background:var(--veil);border-radius:var(--r-sm)}
+.delta b{font-family:GeistMono,monospace;font-size:1.25rem;font-weight:400;color:var(--accent)}
+
+/* ─────────────── tables: zebra tone, no rules ─────────────── */
+.tablewrap{overflow-x:auto;border-radius:var(--r-card);background:var(--veil)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:0.875rem}
+caption{text-align:left;padding:var(--s5) var(--s5) var(--s2);color:var(--ink-mute);font-size:0.8125rem}
+th,td{padding:var(--s4) var(--s5);text-align:left;vertical-align:top}
+thead th{
+  font-family:GeistMono,monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--ink-mute);font-weight:400;line-height:2.6;padding-block:var(--s2);
+}
+tbody tr:nth-child(odd){background:oklch(0.16 0.03 292 / .30)}
+tbody tr:hover{background:oklch(0.16 0.03 292 / .48)}
+tbody tr.is-winner td,tbody tr.is-winner th[scope=row]{background:color-mix(in oklab,var(--accent) 14%,transparent)}
+tbody tr.is-winner th[scope=row]{box-shadow:inset 3px 0 0 var(--accent)}
+
+.tag{
+  display:inline-block;font-family:GeistMono,monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;padding:2px 7px;border:1px solid currentColor;border-radius:var(--r-xs);
+  white-space:nowrap;line-height:1.6;
+}
+.tag--sim{color:var(--accent)}
+.tag--open{color:oklch(0.72 0.10 18)}
+.tag--proven{color:oklch(0.78 0.09 158)}
+
+/* ─────────────── cta + footer ─────────────── */
+.cta{position:relative;overflow:hidden;isolation:isolate;min-height:640px;display:flex;align-items:center}
+.cta .plate{object-position:50% 58%;transform:scaleX(-1)}
+.cta::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    radial-gradient(80% 66% at 50% 50%, oklch(0.16 0.03 292 / .62) 0%, oklch(0.16 0.03 292 / .34) 48%, transparent 82%),
+    linear-gradient(to bottom, var(--bg) 0%, transparent 20%, transparent 78%, var(--bg) 100%);
+}
+.cta .wrap{position:relative;z-index:3}
+footer{background:var(--bg);padding:var(--s8) 0 var(--s9);color:var(--ink-mute);font-size:0.8125rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:var(--s5);justify-content:space-between;align-items:baseline}
+footer a{color:var(--ink-dim)}
+#totop{position:fixed;right:var(--s5);bottom:var(--s5);z-index:55;opacity:0;pointer-events:none;transition:opacity var(--d-m) var(--e-std)}
+#totop.show{opacity:1;pointer-events:auto}
+
+/* ─────────────── motion: two motifs — drift and a slow sky breath ─────────────── */
+@keyframes drift{
+  0%  {transform:translate3d(0,0,0) scale(.7);opacity:0}
+  14% {opacity:var(--peak,.4)}
+  60% {transform:translate3d(-16px,-180px,0) scale(1)}
+  86% {opacity:calc(var(--peak,.4) * .5)}
+  100%{transform:translate3d(10px,-340px,0) scale(1.04);opacity:0}
+}
+@keyframes breath{0%,100%{transform:scale(1.035) translateY(0)}50%{transform:scale(1.055) translateY(-10px)}}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-9px) rotate(1.2deg)}}
+.motes{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.mote{position:absolute;bottom:12%;width:3px;height:3px;border-radius:50%;background:var(--ink);opacity:0}
+
+.reveal{opacity:1;transform:none}
+@media (prefers-reduced-motion:no-preference){
+  .hero .plate{animation:breath 26s var(--e-std) infinite}
+  .mote{animation:drift var(--dur,13s) linear infinite;animation-delay:var(--delay,0s)}
+  .crew{animation:bob 6.4s var(--e-std) infinite}
+  .reveal{opacity:0;transform:translateY(16px);
+          transition:opacity 1.5s var(--e-enter),transform 1.5s var(--e-enter);
+          transition-delay:var(--rd,0s)}
+  .reveal.in{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none !important;transition-duration:1ms !important}}
+@media print{nav,#totop,#progress,.plate,.motes,.crew{display:none}body{background:#fff;color:#000}}
+</style>
+</head>
+
+<body id="top">
+<div id="progress" role="presentation"></div>
+<a class="skip" href="#main">Skip to the numbers</a>
+
+<nav id="nav" aria-label="Primary">
+  <a class="lockup" href="#top">
+    <svg viewBox="0 0 200 180" aria-hidden="true"><use href="#ch-head" transform="translate(-10,-40) scale(0.58)"/></svg>
+    <span>Agent&nbsp;Fleet</span>
+  </a>
+  <div class="navlinks">
+    <a href="#layers">Scheduler</a>
+    <a href="#coverage">Coverage</a>
+    <a href="#lanes">Lanes</a>
+    <a href="#numbers">Numbers</a>
+    <a href="#honest">Honesty</a>
+  </div>
+  <a class="btn btn--secondary nav-cta" href="index.html">
+    <span class="long"><span class="roll"><span data-t="Read the evidence paper">Read the evidence paper</span></span></span>
+    <span class="short">Evidence</span>
+  </a>
+</nav>
+
+<!-- ════════════════════ HERO ════════════════════ -->
+<header class="hero">
+  <img class="plate" src="design/assets/dreamscape/dreamscape-01.avif" alt=""
+       fetchpriority="high" decoding="async" width="1600" height="915" aria-hidden="true">
+  <div class="motes" aria-hidden="true" id="motes-hero"></div>
+
+  <!-- Fleet — the same creature as variant A, one source, riding the horizon -->
+  <div class="crew" aria-hidden="true">
+    <svg viewBox="0 0 420 520">
+      <g id="ch-root">
+        <ellipse cx="210" cy="446.5" rx="61.1" ry="8.9" fill="#F4F1F7" opacity=".12"/>
+        <g fill="#E89A8C" opacity=".92"><path d="M123.97,315.74 C158.47,348.05 154.84,414.10 154.84,414.10 L133.27,418.41 C133.27,418.41 104.53,358.82 123.97,315.74 Z"/></g>
+        <g fill="#E89A8C" opacity=".92"><path d="M296.03,315.74 C315.47,358.82 286.73,418.41 286.73,418.41 L265.16,414.10 C265.16,414.10 261.53,348.05 296.03,315.74 Z"/></g>
+        <g id="ch-body">
+          <path d="M285.95,356.00L285.53,369.50L284.86,376.70L283.95,382.53L282.82,387.58L281.47,392.08L279.90,396.16L278.13,399.87L276.17,403.27L274.01,406.40L271.66,409.27L269.13,411.91L266.40,414.34L263.46,416.55L260.31,418.57L256.91,420.40L253.25,422.04L249.28,423.49L244.92,424.76L240.08,425.84L234.58,426.74L228.02,427.44L219.19,427.93L210.00,428.10L200.77,428.22L191.76,428.29L184.94,428.14L179.10,427.74L173.89,427.11L169.14,426.21L164.77,425.06L160.72,423.64L156.98,421.94L153.53,419.96L150.36,417.69L147.46,415.14L144.84,412.29L142.50,409.15L140.44,405.70L138.66,401.94L137.16,397.85L135.95,393.39L135.02,388.52L134.37,383.13L133.99,377.02L133.89,369.61L134.05,356.00L134.47,342.57L135.14,335.51L136.05,329.87L137.18,325.05L138.53,320.81L140.10,317.02L141.87,313.60L143.83,310.51L145.99,307.70L148.34,305.15L150.87,302.82L153.60,300.71L156.54,298.79L159.69,297.05L163.09,295.48L166.75,294.08L170.72,292.84L175.08,291.76L179.92,290.83L185.42,290.07L191.98,289.46L200.81,289.02L210.00,288.86L219.23,288.75L228.24,288.66L235.06,288.76L240.90,289.06L246.11,289.57L250.86,290.29L255.23,291.25L259.28,292.44L263.02,293.87L266.47,295.57L269.64,297.52L272.54,299.75L275.16,302.26L277.50,305.07L279.56,308.18L281.34,311.60L282.84,315.38L284.05,319.53L284.98,324.13L285.63,329.28L286.01,335.20L286.11,342.46L286.06,347.19Z" fill="#F4F1F7"/>
+          <ellipse cx="210" cy="367" rx="44.7" ry="42.4" fill="#221F33" opacity=".13"/>
+        </g>
+        <g fill="#E89A8C"><rect x="167.6" y="417.6" width="37.1" height="15.8" rx="7.9"/></g>
+        <g fill="#E89A8C"><rect x="215.3" y="417.6" width="37.1" height="15.8" rx="7.9"/></g>
+        <g id="ch-head">
+          <path d="M302.04,206.00L301.08,230.15L299.87,239.32L298.45,246.01L296.83,251.37L295.07,255.88L293.19,259.76L291.22,263.19L289.16,266.27L287.03,269.09L284.82,271.71L282.52,274.17L280.10,276.50L277.53,278.74L274.75,280.87L271.71,282.91L268.33,284.85L264.51,286.66L260.11,288.33L254.93,289.82L248.65,291.11L240.54,292.17L228.19,292.97L210.00,293.27L191.70,293.50L178.91,293.72L170.21,293.62L163.25,293.20L157.38,292.46L152.30,291.38L147.86,290.00L143.96,288.31L140.54,286.32L137.52,284.07L134.88,281.56L132.56,278.80L130.52,275.80L128.74,272.56L127.17,269.07L125.79,265.30L124.59,261.20L123.53,256.69L122.62,251.66L121.85,245.87L121.22,238.91L120.73,229.67L120.41,206.00L120.27,182.23L120.32,172.82L120.60,165.69L121.12,159.75L121.90,154.62L122.97,150.10L124.33,146.10L126.00,142.55L127.98,139.41L130.29,136.66L132.91,134.28L135.84,132.23L139.09,130.51L142.65,129.08L146.53,127.91L150.76,126.98L155.37,126.27L160.44,125.72L166.13,125.33L172.70,125.05L180.82,124.88L192.75,124.78L210.00,124.75L227.25,124.75L239.22,124.78L247.38,124.87L254.03,125.04L259.81,125.31L265.03,125.68L269.82,126.21L274.28,126.91L278.44,127.83L282.32,129.01L285.92,130.48L289.22,132.30L292.22,134.48L294.88,137.08L297.20,140.13L299.14,143.67L300.70,147.74L301.86,152.42L302.64,157.79L303.02,164.05L303.04,171.58L302.70,181.44Z" fill="#F4F1F7"/>
+          <ellipse cx="210" cy="204.2" rx="69.9" ry="52.6" fill="#221F33" opacity=".13"/>
+          <g><circle cx="170.8" cy="204.2" r="25.3" fill="#221F33"/><circle id="ch-pupil-l" cx="170.8" cy="204.2" r="10.4" fill="#F4F1F7"/><circle cx="166.8" cy="199.9" r="2.9" fill="#221F33" opacity=".95"/></g>
+          <g><circle cx="249.2" cy="204.2" r="25.3" fill="#221F33"/><circle id="ch-pupil-r" cx="249.2" cy="204.2" r="10.4" fill="#F4F1F7"/><circle cx="245.3" cy="199.9" r="2.9" fill="#221F33" opacity=".95"/></g>
+          <g transform="rotate(7 170.8 166.1)"><rect x="146.8" y="166.1" width="48" height="7.4" rx="3.7" fill="#E89A8C"/></g>
+          <g transform="rotate(-7 249.2 166.1)"><rect x="225.2" y="166.1" width="48" height="7.4" rx="3.7" fill="#E89A8C"/></g>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="wrap centered">
+    <p class="eyebrow reveal">The Fleet</p>
+    <h1 class="reveal" style="--rd:.12s">
+      24/7 coding coverage<br>for the price of <span class="soft">one seat</span><span class="stop">.</span>
+    </h1>
+    <p class="hero__sub reveal" style="--rd:.24s">
+      A pool of subscription coding agents, scheduled by arithmetic instead of hope.
+      The gap between 63% and 100% is not model quality — it is scheduling.
+    </p>
+    <div class="hero__cta reveal" style="--rd:.36s">
+      <a class="btn btn--primary" href="#numbers">
+        <span class="dotmark" aria-hidden="true"></span>
+        <span class="roll"><span data-t="See the coverage numbers">See the coverage numbers</span></span>
+      </a>
+      <a class="btn btn--secondary" href="#honest">
+        <span class="roll"><span data-t="Read what it gets wrong">Read what it gets wrong</span></span>
+      </a>
+    </div>
+    <p class="hero__note reveal" style="--rd:.44s;margin-top:var(--s5)">$319/mo · no per-token bill</p>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <div><b class="num">70</b><small>contract tests green</small></div>
+    <div><b class="num">45</b><small>overnight missions logged</small></div>
+    <div><b class="num">0</b><small>rate-limit hits, all night</small></div>
+    <div><b class="num">2026-08-17</b><small>running live since</small></div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ════════════════════ THE CLAIM ════════════════════ -->
+<section id="claim">
+  <div class="wrap">
+    <p class="eyebrow reveal">The claim, up front</p>
+    <div class="callout reveal" style="--rd:.1s">
+      <p>
+        A pool of subscription coding agents, scheduled by arithmetic instead of hope, covers
+        <strong>100% of around-the-clock development demand at $319/month</strong> — where the same
+        money spent as two plain subscriptions covers <strong>63%</strong>. The gap is not model
+        quality. It is scheduling.
+      </p>
+      <p class="dim small" style="margin-top:var(--s4)">
+        Framed honestly: this is <em>proven by simulation</em> — a 70-test contract suite over a
+        discrete-event backtest of demand traces — not a mathematical theorem about all futures.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ THE DECK (the reference's card row) ════════════════════ -->
+<section id="layers">
+  <img class="plate" src="design/assets/dreamscape/dreamscape-02.avif" alt=""
+       decoding="async" width="1600" height="915" aria-hidden="true">
+  <div class="wrap centered">
+    <p class="eyebrow reveal">Scheduler</p>
+    <h2 class="reveal" style="--rd:.08s">Arithmetic at every layer</h2>
+    <p class="dim reveal" style="--rd:.16s;margin-top:var(--s4);max-width:56ch">
+      Five rules stand between the queue and the bill. Each one runs before a model is ever asked
+      to think.
+    </p>
+  </div>
+
+  <div class="deck reveal" style="--rd:.24s;margin-top:var(--s7)" tabindex="0" role="region" aria-label="The five scheduler rules — scrollable">
+    <article class="card">
+      <span class="idx num">01</span>
+      <h3>Meters before model calls</h3>
+      <p>Every lane's hourly, daily and weekly burn is checked <em>before</em> work starts. A refused task costs zero tokens.</p>
+    </article>
+    <article class="card">
+      <span class="idx num">02</span>
+      <h3>Leak stops same-day</h3>
+      <p>A runaway agent — 13%/hr with no output was the first catch — is parked automatically. 2%/hour audits, 4% and 7% soft stops, 12% and 15% hard stops.</p>
+    </article>
+    <article class="card">
+      <span class="idx num">03</span>
+      <h3>Overnight unattended missions</h3>
+      <p>Headless builder plus an independent critic per phase; every morning has a report of done / evidence / blocked. 45 logged episodes, measured quality 0.87–0.92 on the free lane.</p>
+    </article>
+    <article class="card">
+      <span class="idx num">04</span>
+      <h3>Warm sessions, bounded context</h3>
+      <p>Compaction points solved from the provider's own price ratio — <span class="num">K* = b + √(2·(f/c)·(b+R)·d)</span> — cutting a measured burn by 42%.</p>
+    </article>
+    <article class="card">
+      <span class="idx num">05</span>
+      <h3>Degradation by design</h3>
+      <p>Lanes fail in a ladder: Claude → Codex + free → free + GLM → Kimi. The queue never dies; routing just gets cheaper and slower.</p>
+    </article>
+  </div>
+  <p class="deck-hint">Scroll →</p>
+</section>
+
+<!-- ════════════════════ COVERAGE ════════════════════ -->
+<section id="coverage">
+  <div class="wrap">
+    <p class="eyebrow reveal">What the extra $19 buys</p>
+    <h2 class="reveal" style="--rd:.08s">Two subscriptions lose a third of the week</h2>
+
+    <div class="figure" style="margin-top:var(--s8)">
+      <figure style="margin:0" class="reveal" style="--rd:.16s">
+        <svg class="isotype" viewBox="0 0 208 208" role="img"
+             aria-label="A grid of 100 squares: 63 pale squares are the demand a $300 two-subscription stack serves; the remaining 37 coral squares are the demand only the $319 fleet covers.">
+          <g id="iso-cells"></g>
+        </svg>
+        <figcaption>
+          Each square is one unit of arriving work at medium 24/7 demand.
+          <span style="color:var(--ink-dim)">63 pale</span> = served by $300.
+          <span style="color:var(--accent)">37 coral</span> = queued behind resets until the fleet picks them up.
+        </figcaption>
+      </figure>
+
+      <div class="reveal" style="--rd:.24s">
+        <div class="bracket">
+          <div class="was"><em>Claude Max + ChatGPT Pro</em><span class="amt num">$300</span></div>
+          <div class="now"><em>Claude + Kimi + GLM (+free)</em><span class="amt num">$319</span></div>
+          <div class="delta">
+            <div>
+              <em style="display:block;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-mute);font-style:normal">Buys</em>
+              <b class="num">+37 pts</b>
+            </div>
+          </div>
+        </div>
+        <p class="dim small" style="margin-top:var(--s5)">
+          Any single agent seat hits weekly quota ceilings, sleeps while you sleep, and burns its best
+          hours on grind. Simulated at medium 24/7 demand, Claude&nbsp;Max + ChatGPT&nbsp;Pro
+          ($300/mo) serve <span class="num" style="color:var(--ink)">63%</span> of arriving work; the
+          rest queues behind resets. The fleet keeps the same architect judgment but routes every unit
+          of work to the cheapest lane that can hold it.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ LANES ════════════════════ -->
+<section id="lanes">
+  <div class="wrap">
+    <p class="eyebrow reveal">The lanes</p>
+    <h2 class="reveal" style="--rd:.08s">Every unit of work to the cheapest lane that can hold it</h2>
+    <div class="tablewrap reveal" style="--rd:.16s;margin-top:var(--s7)">
+      <table>
+        <caption>Lane roster — benchmark column is Terminal-Bench 2.1, best harness.</caption>
+        <thead><tr><th scope="col">Lane</th><th scope="col">Role</th><th scope="col">Cost</th><th scope="col">Terminal-Bench 2.1</th></tr></thead>
+        <tbody>
+          <tr><td>Claude (Opus / Fable)</td><td class="dim">Architect, judgment, conversation</td><td class="num">$200/mo sub</td><td class="num">84.6</td></tr>
+          <tr><td>Codex (GPT-5.6)</td><td class="dim">Repo grind, implementation</td><td class="num">$100/mo sub <span class="dim">(ends Sept)</span></td><td class="num">88.8</td></tr>
+          <tr><td>Kimi K3 “Allegro”</td><td class="dim">Replaces the Codex lane at renewal</td><td class="num">$99/mo</td><td><span class="num">88.3</span> claimed <span class="tag tag--open">Unverified</span></td></tr>
+          <tr><td>GLM 5.3</td><td class="dim">Final backup when subs hard-stop</td><td class="num">$20/mo credits</td><td class="num">82.7</td></tr>
+          <tr><td>Free surge (opencode)</td><td class="dim">$0 grind, appears and vanishes</td><td class="num">$0</td><td>DeepSeek V4 Pro <span class="num">87.9</span> <span class="dim">— until the pool rotates</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════ NUMBERS ════════════════════ -->
+<section id="numbers">
+  <div class="wrap">
+    <p class="eyebrow reveal">The numbers</p>
+    <h2 class="reveal" style="--rd:.08s">Four stacks, three demand levels</h2>
+    <div class="tablewrap reveal" style="--rd:.16s;margin-top:var(--s7)">
+      <table>
+        <caption>Demand coverage by stack. The winning row is the only one that holds at heavy load.</caption>
+        <thead><tr><th scope="col">Stack</th><th scope="col">Cost</th><th scope="col">Light</th><th scope="col">Medium</th><th scope="col">Heavy</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><th scope="row" style="font-weight:400">Claude + Codex <span class="dim">(today's default)</span></th><td class="num">$300</td><td class="num">100%</td><td class="num">63%</td><td class="num">63.9%</td><td><span class="tag tag--sim">Simulated</span></td></tr>
+          <tr><th scope="row" style="font-weight:400">Codex + free <span class="dim">(Claude stopped)</span></th><td class="num">$100</td><td class="num">100%</td><td class="num">100%</td><td class="num">57.3%</td><td><span class="tag tag--sim">Simulated</span></td></tr>
+          <tr><th scope="row" style="font-weight:400">Free + GLM <span class="dim">(both subs stopped)</span></th><td class="num">$20</td><td class="num">100%</td><td class="num">100%</td><td class="num">67.9%</td><td><span class="tag tag--sim">Simulated</span></td></tr>
+          <tr class="is-winner"><th scope="row" style="font-weight:700">Claude + Kimi + GLM (+free)</th><td class="num"><strong>$319</strong></td><td class="num"><strong>100%</strong></td><td class="num"><strong>100%</strong></td><td class="num"><strong>100%</strong></td><td><span class="tag tag--sim">Simulated</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="dim small reveal" style="--rd:.24s;margin-top:var(--s5)">
+      Sim = discrete-event backtest over demand traces (<span class="num">stack_backtest.py</span>,
+      52-test suite, suite now 70 green). The free lane counts as a surge lease — excluded from
+      durable verdicts, because it can vanish, and it rotated once already.
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════ HONESTY ════════════════════ -->
+<section id="honest">
+  <div class="wrap">
+    <p class="eyebrow reveal">What it costs to be honest</p>
+    <h2 class="reveal" style="--rd:.08s">The 100% is a simulation result</h2>
+    <div class="callout reveal" style="--rd:.16s;margin-top:var(--s7);border-left-color:var(--ink-mute)">
+      <p>
+        The 100% figure is a simulation result under modeled demand, re-run as a contract test on
+        every change. Heavy real-world weeks can still starve a lane; the scheduler's promise is that
+        starvation, when it happens, is <em>visible and priced</em>, not silent.
+      </p>
+      <p style="margin-bottom:0"><strong>No claim on this page is dressed up as more than its evidence tag.</strong></p>
+    </div>
+    <div class="reveal" style="--rd:.24s;display:flex;gap:var(--s5);flex-wrap:wrap;margin-top:var(--s6);align-items:center">
+      <span class="tag tag--proven">Proven</span><span class="dim small">exact math, CI-enforced</span>
+      <span class="tag tag--sim">Simulated</span><span class="dim small">discrete-event backtest</span>
+      <span class="tag tag--open">Unverified</span><span class="dim small">stated honestly, experiment pending</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ════════════════════ CTA — the hero reversed ════════════════════ -->
+<section class="cta">
+  <img class="plate" src="design/assets/dreamscape/dreamscape-03.avif" alt=""
+       decoding="async" width="1600" height="915" aria-hidden="true">
+  <div class="motes" aria-hidden="true" id="motes-cta"></div>
+  <div class="wrap centered">
+    <p class="eyebrow reveal">Next</p>
+    <h2 class="reveal" style="--rd:.08s">Read the paper the numbers came from</h2>
+    <p class="dim reveal" style="--rd:.16s;margin-top:var(--s4);max-width:52ch">
+      Every figure here regenerates from tests, not by hand. The companion evidence paper shows the
+      proofs, the tags, and the rows that are still open.
+    </p>
+    <div class="hero__cta reveal" style="--rd:.24s;margin-top:var(--s7)">
+      <a class="btn btn--primary" href="index.html">
+        <span class="dotmark" aria-hidden="true"></span>
+        <span class="roll"><span data-t="Open the evidence paper">Open the evidence paper</span></span>
+      </a>
+      <a class="btn btn--ghost" href="fleet.html">
+        <span class="roll"><span data-t="See the harbour variant">See the harbour variant</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      vedhith-workflow-os + langgraph-shadow · live since 2026-08-17<br>
+      <span style="color:var(--ink-mute)">Numbers regenerate from tests, not by hand.</span>
+    </div>
+    <div>
+      <a href="index.html">Evidence paper</a> ·
+      <a href="fleet.html">Harbour variant</a> ·
+      <a href="fleet-pitch.html">Plain text</a> ·
+      <a href="#top">Back to top</a>
+    </div>
+  </div>
+</footer>
+
+<a class="btn btn--secondary" id="totop" href="#top" aria-label="Back to top">↑</a>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var g = document.getElementById("iso-cells");
+  if (g) {
+    var SERVED = 63, cell = 16, gap = 4, ns = "http://www.w3.org/2000/svg";
+    for (var i = 0; i < 100; i++) {
+      var r = document.createElementNS(ns, "rect");
+      r.setAttribute("x", (i % 10) * (cell + gap));
+      r.setAttribute("y", Math.floor(i / 10) * (cell + gap));
+      r.setAttribute("width", cell); r.setAttribute("height", cell);
+      r.setAttribute("rx", 2);
+      if (i < SERVED) { r.setAttribute("fill", "#F4F1F7"); r.setAttribute("opacity", ".24"); }
+      else            { r.setAttribute("fill", "#E89A8C"); r.setAttribute("opacity", ".94"); }
+      g.appendChild(r);
+    }
+  }
+
+  /* motes: deterministic, never Math.random, so the sky is stable across reloads */
+  function seed(host, n){
+    if (!host || reduced) return;
+    var f = document.createDocumentFragment();
+    for (var i = 0; i < n; i++) {
+      var s = ((i * 2654435761) % 1000) / 1000;
+      var e = document.createElement("span");
+      e.className = "mote";
+      e.style.left = (3 + s * 94).toFixed(2) + "%";
+      e.style.setProperty("--dur",   (11 + s * 9).toFixed(2) + "s");
+      e.style.setProperty("--delay", (-s * 18).toFixed(2) + "s");
+      e.style.setProperty("--peak",  (0.16 + s * 0.3).toFixed(2));
+      e.style.width = e.style.height = (2 + Math.round(s * 2)) + "px";
+      f.appendChild(e);
+    }
+    host.appendChild(f);
+  }
+  seed(document.getElementById("motes-hero"), 24);
+  seed(document.getElementById("motes-cta"), 14);
+
+  var items = [].slice.call(document.querySelectorAll(".reveal"));
+  function showAll(){ items.forEach(function(el){ el.classList.add("in"); }); }
+  if (reduced || !("IntersectionObserver" in window)) { showAll(); }
+  else {
+    var io = new IntersectionObserver(function(en){
+      en.forEach(function(x){ if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    items.forEach(function(el){ io.observe(el); });
+    setTimeout(showAll, 2500);   /* failsafe: the page never stays blank */
+  }
+
+  var nav = document.getElementById("nav"), bar = document.getElementById("progress"),
+      top = document.getElementById("totop"), last = 0;
+  function onScroll(){
+    var y = window.scrollY || 0;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
+    nav.classList.toggle("stuck", y > 24);
+    nav.classList.toggle("hidden", y > 340 && y > last);
+    top.classList.toggle("show", y > 900);
+    last = y;
+    var best = null;
+    document.querySelectorAll("main section").forEach(function(s){
+      if (s.getBoundingClientRect().top <= 140) best = s.id;
+    });
+    document.querySelectorAll(".navlinks a").forEach(function(a){
+      a.setAttribute("aria-current", a.getAttribute("href") === "#" + best ? "true" : "false");
+    });
+  }
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  var pl = document.getElementById("ch-pupil-l"), pr = document.getElementById("ch-pupil-r");
+  if (pl && pr && !reduced && matchMedia("(pointer:fine)").matches) {
+    addEventListener("pointermove", function(ev){
+      var dx = (ev.clientX / innerWidth  - 0.82) * 8;
+      var dy = (ev.clientY / innerHeight - 0.55) * 6;
+      pl.setAttribute("cx", 170.8 + dx); pl.setAttribute("cy", 204.2 + dy);
+      pr.setAttribute("cx", 249.2 + dx); pr.setAttribute("cy", 204.2 + dy);
+    }, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>
