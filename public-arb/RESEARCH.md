@@ -13,6 +13,8 @@
 | Options rebate harvesting? | **Explicitly prohibited.** Rebate T&C §2(e): Public can claw back rebates if "your trading was expressly intended to harvest the rebate." |
 | Anything genuinely edge-positive? | **Yes, four things** — see §5. All are *slow, capacity-limited relative-value* trades, not arbitrage in the HFT sense. |
 | Can this be a business? | **No.** "The Public Individual API is for your own personal, non-commercial use." Running it for others breaks the ToS. |
+| Can an agent pick LIT vs smart vs wholesale per order? | **No** — route selection is a UI-only, per-order control; the API place-order body has no route field (§3a). Workaround: one brokerage account per route, agent picks the account. |
+| Are Public's own AI Agents a substitute for the API? | **No** — best documented cadence is 5 minutes vs the API's 10 req/s. They're a risk harness, not a trading loop (§6). |
 
 **The honest reframe:** you cannot build an HFT desk on Public. You *can* build a systematic relative-value desk that harvests structural inefficiencies too small and slow for real firms to bother with. That is where a solo operator with good agents actually wins.
 
@@ -63,7 +65,23 @@ Source: `public.com/api/docs/changelog`. Annotations = what each change does or 
 |---|---|---|
 | **Wholesale** (default) | $0 | Internalizers (Citadel/Virtu-type). Best for small marketable orders — price improvement usually exceeds 0.3¢/share. |
 | **Smart** | **$0.003/share** | Exchanges + ATS + single-dealer platforms, venue-scored routing. |
-| **LIT** | **$0.003/share** | NYSE/Nasdaq only, full pre-trade transparency. |
+| **LIT** | **$0.003/share** | Major stock exchanges only, full pre-trade transparency. |
+
+Verbatim, [fee schedule](https://public.com/disclosures/fee-schedule) (eff. 2026-07-16, re-verified 2026-08-22): *"Customers placing an equity order through their **self-directed Public Investing brokerage account** can select how their order is routed. Certain route elections may incur an execution fee."* — Wholesale $0, Smart Order $0.003/share, **Lit Exchanges Only $0.003/share (live, no longer "coming soon")**. Public keeps PFOF on wholesale only; on Smart/LIT it takes no PFOF but may keep exchange/venue rebates.
+
+**Excluded from route selection entirely:** OTC securities, Investment Plans, Direct Index accounts, Generated Assets accounts — *"Public Investing will select the appropriate route for such orders."*
+
+> ### ⚠️ 3a. The routing hole — route selection is NOT in the API *(added 2026-08-22)*
+>
+> The documented [place-order](https://public.com/api/docs/resources/order-placement/place-order) request body is: `orderId`, `instrument`, `orderSide`, `orderType`, `expiration`, `quantity`, `amount`, `limitPrice`, `stopPrice`, `equityMarketSession`, `openCloseIndicator`, `useMargin`, `taxLotMatchingInstructions`. **There is no `route` / `venue` / `routing` field, and no routing endpoint anywhere in the API surface.** The changelog has never once mentioned routing.
+>
+> So the route is a **UI-layer, per-order** control on a human-placed order. An API order — and therefore *any* agent order — takes whatever the account default is. **You cannot programmatically switch to LIT for the passive leg and back to wholesale for the marketable leg.** That was the single most useful piece of execution control in §3 and it is unavailable to the exact operator this document is written for.
+>
+> **What this breaks:** §3's "passive resting limit orders → LIT" advice is *unbuildable* through the API today. A resting limit order sent to a wholesaler is not displayed, so the whole idea of earning the spread instead of paying it dies unless the account default is LIT — in which case you pay 0.3¢ on **every** order including the marketable ones, where wholesale price improvement usually beats it.
+>
+> **The workaround, and it is a real one — multi-account (2026-05-20).** Route selection sits on the *account*, and one user may hold several brokerage accounts. So: **Account A defaulted to wholesale = the taking account; Account B defaulted to LIT = the providing account.** Route becomes a routing *decision at the account level* rather than the order level, which is 90% of the value: your agent picks the account, not the venue. It also doubles the 10 req/s budget. Confirm the default is settable per account, and that it persists for API-originated orders, **before** modelling any strategy that depends on displayed liquidity.
+>
+> **First call to make:** ask Public support two questions in writing — (1) which route do API-placed equity orders take, and is it the account's UI setting? (2) can the default differ per brokerage account under one user? Every §5 cost model that assumes displayed passive fills is unverified until those answers land.
 
 **Which to use, per strategy:**
 - Small marketable orders (< ~500 sh) → **wholesale**. Free, and internalizer price improvement typically beats the 0.3¢ you'd pay elsewhere.
@@ -146,6 +164,8 @@ Public is one of very few places holding **24/7 crypto and 24/5 equities in one 
 
 **Constraints:** Blue Ocean accepts limit day orders only, and they do not carry to the next session — your agent must re-post nightly. Fills are unreliable; assume 20–40% fill rates.
 
+**§3a downgrade:** this strategy is *entirely* passive resting limit orders, so it is the one most damaged by the routing hole. If API orders default to wholesale, your overnight limit is never displayed and the 20–40% fill assumption is optimistic fiction. Resolve the route question (§3a) **before** this strategy, not after — it may be the thing that kills it.
+
 ### 5.4 Programmatic tax-lot alpha (not arbitrage, but the most reliable money here)
 The tax-lot endpoints (2026-07-20) let an agent see every unrealized lot and choose which to sell. Systematic loss harvesting at the lot level is worth a well-documented **~0.5–1.5%/yr after-tax** on a taxable account, and unlike everything above, its return does not depend on beating anyone.
 
@@ -193,8 +213,28 @@ The single most important design decision: **Public's API is an OMS, not a marke
 
 **Where they must never be:** in the order path, in pricing, in position sizing, in risk limits.
 
-### On Public's own no-code AI Agents
-They're the wrong tool for this. They're built for *retail intent automation* — "sell 10 shares if it drops 5%", "roll my covered calls", "sweep cash monthly". Every workflow requires explicit human pre-approval, evaluation cadence is undisclosed, and they see only Public's own data. Public says the tech passed eight Series 7 exams; that's a knowledge benchmark, not an execution-quality one. **Use the raw API + your own stack. Use their Agents only as a UI for the boring recurring parts.**
+### On Public's own no-code AI Agents *(expanded 2026-08-22)*
+
+Re-researched properly, because the first pass under-specified them. What they actually are:
+
+| Dimension | Reality |
+|---|---|
+| Authoring | Plain-language prompt → the AI **interrogates you for missing parameters** (asset, % threshold, account, capital, timing) → emits a workflow you review parameter-by-parameter. Vague prompts are refused, not guessed. |
+| Approval | **Nothing runs until you sign off.** After activation you can edit, re-allocate capital, pause, or kill. |
+| Controllable knobs | Capital allocation (`invest exactly $5,000`), per-asset risk (`stop out if AAPL drops >10%`), **evaluation cadence and trade-count caps** (`check every 5 minutes, max 2 buys/day`). |
+| Scope | Stocks, ETFs, options (incl. multi-leg), crypto, bonds, cash sweeps, stop-losses, hedges — five portfolio areas. |
+| Infrastructure | Runs **inside Public** on their real-time data. **No API keys**, no third-party connection, full Activity Feed of everything evaluated *and* not acted on. |
+| Routing control | **None documented** — not on `/ai-agents`, not on `/ai-agents/how-it-works`, not in the changelog. Same hole as §3a. |
+| Legal framing | Public calls it "self-directed recurring transaction instructions," explicitly *not* advice; suitability is entirely yours. |
+
+**The two things that actually matter for this document.**
+
+1. **Cadence is the real ceiling, and it's worse than the API's.** The best documented evaluation interval is **every 5 minutes**. The API gives you 10 req/s. That is a ~3,000× difference in observation frequency. Every §5 strategy that reacts to a quote — overnight proxy divergence (§5.3) especially — is dead on Agents and alive on the API. Agents are a *scheduler*, not a trading loop.
+2. **The knob set is a risk harness, not an execution engine.** Capital cap, stop level, max trades/day, cadence — that is exactly the RISK box in the diagram above and nothing else. It has no preflight, no PUT-replace order chasing, no route, no tax-lot selection.
+
+**Verdict, sharpened:** the honest split is **Agents for the RISK layer's boring, low-frequency, high-consequence jobs** (cash sweep into the 3.3% account, portfolio-level stop-losses, scheduled hedges) — where a 5-minute cadence is irrelevant and Public's own guardrails plus Activity Feed are genuinely better than code you'd write yourself. **Everything with an edge in it stays on the raw API.** They passed eight Series 7 exams; that is a knowledge benchmark, not an execution-quality one, and none of the four edges in §5 is limited by knowledge.
+
+**The one thing Agents can do that your API stack cannot:** run when your machine is off, inside the broker, with no key material to leak. For a §5.4 tax-lot or cash-sweep job that must not miss a day, that is not a small advantage.
 
 ---
 
@@ -212,6 +252,7 @@ They're the wrong tool for this. They're built for *retail intent automation* �
 
 ## 8. Recommended sequence
 
+0. **Day 1, one email:** the two §3a routing questions to Public support. Zero cost, and the answer re-ranks everything below it — §5.3 in particular is unmodellable until it lands.
 1. **Week 1, zero capital:** run the §5.1 box-rate falsification test. Poll SPX box quotes daily, model full fees, compare to sweep + T-bill. Binary go/no-go on the best candidate.
 2. **In parallel, zero capital:** dump the full bond universe from the new search endpoint, fit issuer curves, count how many >50bps outliers exist. If the count is near zero, §5.2 dies cheaply.
 3. **If you have a funded taxable account:** build §5.4 regardless of 1 and 2. It's the only item whose return doesn't require being right about anything.
@@ -234,3 +275,9 @@ They're the wrong tool for this. They're built for *retail intent automation* �
 - [How do I transfer crypto? (Public FAQ)](https://help.public.com/en/articles/8900850-how-do-i-transfer-crypto)
 - [Public.com review — cash sweep 3.3% APY (Finder)](https://www.finder.com/stock-trading/public-review) · [Margin](https://public.com/invest/margin)
 - [SEC Rule 605/606 execution-quality disclosure](https://www.sec.gov/rules/final/34-43590.htm)
+
+*Added 2026-08-22 for §3a and the Agents rewrite:*
+- [Public fee schedule (PDF)](https://public.com/disclosures/fee-schedule) — routing table + exclusions quoted verbatim, eff. 2026-07-16
+- [Place order endpoint schema](https://public.com/api/docs/resources/order-placement/place-order) — full field list, no route field
+- [Public AI Agents — how it works / prompting guide](https://public.com/ai-agents/how-it-works) — capital caps, per-asset stops, "check every 5 minutes… up to 2 purchases a day"
+- [Public 606 order-routing disclosure](https://public.com/disclosures/606-report) — quarterly venue stats; Rule 606(b) gives you your own 6-month routing history on request (**the free way to verify where API orders actually went**)
