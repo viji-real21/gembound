@@ -1,0 +1,20 @@
+{
+  "model": "madroid/flux.1-schnell-mflux-4bit",
+  "base_model": "schnell",
+  "width": 1344,
+  "height": 768,
+  "steps": 4,
+  "themes": {
+    "harbour": {
+      "style": "photograph at night, long exposure, deep navy-black working harbour, a single warm amber sodium lamp as the only light source, wet stone quay and cold steel, dense atmospheric haze, heavy film grain, shallow depth of field, near-monochrome blue-black with one amber highlight, no people, no text, no lettering, no writing, no numbers, no labels, no signage, unmarked",
+      "plates": [
+        { "subject": "moored hulls at rest along a quay, seen from the water", "seed": 3191 },
+        { "subject": "a row of iron mooring bollards on a wet stone quay", "seed": 3192 },
+        { "subject": "heavy rope coiled around a dock cleat, one lamp above", "seed": 3193 },
+        { "subject": "tall mast antennae silhouetted against a starless sky", "seed": 3194 },
+        { "subject": "sparks drifting up over black water beside a hull", "seed": 3195 },
+        { "subject": "an empty gangway leading down into darkness", "seed": 3196 }
+      ]
+    }
+  }
+}

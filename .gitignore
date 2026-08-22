@@ -3,3 +3,6 @@
 .szn/
 -private-tmp/
 -private-tmp-am/
+
+# design pipeline render artefacts (regenerate: design-shot-critic.py --render-only)
+.shots/

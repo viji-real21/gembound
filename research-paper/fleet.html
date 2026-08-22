@@ -1,0 +1,823 @@
+<!doctype html>
+<!--
+  THE $319 AGENT FLEET — designed landing page.
+
+  Aesthetic:  night harbour, instrument panel, Tektur machine display, ember accent,
+              near-monochrome navy, film grain, isotype unit grid.
+  Reference:  inkbox.ai (full-bleed illustrated ground + sway/rise motion + two-tone
+              headline + a mascot that peeks in); teenage.engineering (spec-sheet
+              numerals as ornament).
+  Intent:     make a reader believe the night shift is covered — and that every number
+              on the page carries its own evidence tag.
+  Guardrails: no purple gradient wash, no icon-grid feature row, no Inter, no single
+              global radius, no colour-change hover, no bare-verb CTA, no price shown
+              without its anchor.
+
+  Content parity: every element of research-paper/fleet-pitch.html is present here —
+  claim box, honesty caveat, lane table (5 rows + Terminal-Bench), the 5 scheduler
+  rules, the 4-row stack table, the sim caveat, "what it costs to be honest", footer.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The $319 Agent Fleet — 24/7 coding coverage, proven by simulation</title>
+<meta name="description" content="A pool of subscription coding agents, scheduled by arithmetic instead of hope, covers 100% of around-the-clock development demand at $319/month — where the same money spent as two plain subscriptions covers 63%.">
+<link rel="canonical" href="fleet.html">
+<meta name="theme-color" content="#0B1017">
+<meta property="og:title" content="The $319 Agent Fleet">
+<meta property="og:description" content="100% of 24/7 development demand at $319/mo, where $300 covers 63%. The gap is not model quality. It is scheduling.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1017'/%3E%3Cellipse cx='32' cy='31' rx='23' ry='19' fill='%23EDE8DF'/%3E%3Ccircle cx='23' cy='31' r='6.5' fill='%230B1017'/%3E%3Ccircle cx='41' cy='31' r='6.5' fill='%230B1017'/%3E%3Crect x='16' y='16' width='13' height='3' rx='1.5' fill='%23F2A03D' transform='rotate(7 22 17)'/%3E%3Crect x='35' y='16' width='13' height='3' rx='1.5' fill='%23F2A03D' transform='rotate(-7 41 17)'/%3E%3C/svg%3E">
+
+<style>
+/* ───────────────────────── identity: 3 fonts, 3 colours ───────────────────────── */
+@font-face{font-family:Tektur;src:url("fonts/Tektur-Medium.ttf") format("truetype");font-weight:500;font-display:swap}
+@font-face{font-family:InstrumentSans;src:url("fonts/InstrumentSans-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:InstrumentSans;src:url("fonts/InstrumentSans-Bold.ttf") format("truetype");font-weight:700;font-display:swap}
+@font-face{font-family:GeistMono;src:url("fonts/GeistMono-Regular.ttf") format("truetype");font-weight:400;font-display:swap}
+
+:root{
+  /* three colours. neutrals carry the accent's hue at low chroma — never #888. */
+  --bg:      oklch(0.178 0.024 250);   /* harbour night          */
+  --ink:     oklch(0.945 0.014 78);    /* warm off-white         */
+  --accent:  oklch(0.780 0.152 62);    /* ember                  */
+
+  --ground-1: oklch(0.222 0.026 250);
+  --ground-2: oklch(0.268 0.028 250);  /* card                   */
+  --hair:     oklch(0.345 0.024 250);  /* hairline               */
+  --ink-dim:  oklch(0.700 0.018 72);   /* de-emphasised copy     */
+  --ink-mute: oklch(0.560 0.016 72);   /* micro-labels           */
+
+  /* type — one ratio 1.333, base 16, six sizes, no more */
+  --fs-micro: 9.5px;
+  --fs-sm:    0.8rem;
+  --fs-body:  1rem;
+  --fs-lg:    1.333rem;
+  --fs-h2:    clamp(1.75rem, 1.15rem + 2.4vw, 2.37rem);
+  --fs-disp:  clamp(2.55rem, 1.1rem + 5.8vw, 5.05rem);
+
+  /* 4-pt grid */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
+  --s7:48px; --s8:64px; --s9:96px; --s10:128px;
+
+  /* radius by role — never one global value */
+  --r-xs:.5rem; --r-sm:.83rem; --r-md:1.25rem; --r-pill:100px;
+
+  /* motion */
+  --d-xs:55ms; --d-s:150ms; --d-m:225ms; --d-l:375ms;
+  --e-std:cubic-bezier(.4,0,.2,1);
+  --e-enter:cubic-bezier(0,0,.2,1);
+  --e-leave:cubic-bezier(.4,0,1,1);
+
+  --measure:66ch;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:InstrumentSans,ui-sans-serif,system-ui,sans-serif;
+  font-size:var(--fs-body); line-height:1.55; letter-spacing:0;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* film grain — one 180px tile, ~500 B, over the whole page */
+body::after{
+  content:""; position:fixed; inset:0; z-index:60; pointer-events:none;
+  opacity:.038; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ───────────────────────── type ───────────────────────── */
+/* six roles, six literal sizes — display / head / sub / body / small / label */
+h1,h2,h3{font-family:Tektur,ui-sans-serif,sans-serif;font-weight:500;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.55rem, 1.1rem + 5.8vw, 5.05rem);line-height:.98;letter-spacing:-.03em}
+h2{font-size:clamp(1.75rem, 1.15rem + 2.4vw, 2.37rem);line-height:1.08;letter-spacing:-.022em}
+h3{font-size:1.333rem;line-height:1.2;letter-spacing:-.015em}
+p{margin:0 0 var(--s4);max-width:var(--measure);text-wrap:pretty}
+small,.small{font-size:0.8rem;line-height:1.45;letter-spacing:.01em}
+.dim{color:var(--ink-dim)}
+.num{font-family:GeistMono,ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+.micro{
+  font-family:GeistMono,ui-monospace,monospace; font-size:9.5px;
+  letter-spacing:.2em; line-height:2.4; text-transform:uppercase; color:var(--ink-mute);
+  margin:0 0 var(--s3);
+}
+a{color:var(--ink);text-underline-offset:.22em;text-decoration-color:var(--hair)}
+a:hover{text-decoration-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* the one site-wide hover mechanism: a second copy of the label rolls in.
+   never a colour change, never a translateY lift, never a shadow bloom. */
+.roll{display:inline-block;position:relative;overflow:hidden;height:1.25em;vertical-align:bottom}
+.roll>span{display:block;transition:transform var(--d-m) var(--e-std)}
+.roll>span::after{content:attr(data-t);display:block}
+a:hover .roll>span,button:hover .roll>span,
+a:focus-visible .roll>span,button:focus-visible .roll>span{transform:translateY(-1.25em)}
+
+/* ───────────────────────── shell ───────────────────────── */
+.wrap{max-width:1080px;margin:0 auto;padding:0 var(--s5)}
+/* sections separate by TONE and SPACE. there is not one decorative rule on this page. */
+section{padding:var(--s9) 0}
+section:nth-of-type(even){background:var(--ground-1)}
+section>.wrap>.micro:first-child{margin-bottom:var(--s4)}
+
+/* scroll progress — the third motion cue, tied to the ember */
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:70;transition:width var(--d-xs) linear}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:100;background:var(--accent);color:#0B1017;padding:var(--s3) var(--s4);border-radius:0 0 var(--r-xs) 0;font-weight:700}
+.skip:focus{left:0}
+
+/* ───────────────────────── nav ───────────────────────── */
+/* an opaque plate in the brand's own colour — never a blurred glass panel */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;align-items:center;gap:var(--s5);
+  padding:var(--s3) var(--s5);
+  background:transparent;
+  transition:transform var(--d-m) var(--e-std),background var(--d-m) var(--e-std),box-shadow var(--d-m) var(--e-std);
+}
+nav.hidden{transform:translateY(-100%)}
+nav.stuck{background:var(--bg);box-shadow:0 8px 24px -18px #000}
+.lockup{display:flex;align-items:center;gap:var(--s2);font-family:Tektur,sans-serif;font-size:1.05rem;letter-spacing:-.02em;text-decoration:none}
+.lockup svg{width:26px;height:26px;display:block}
+.navlinks{display:flex;gap:var(--s5);margin-left:auto;font-size:var(--fs-sm);letter-spacing:.01em}
+.navlinks a{text-decoration:none;color:var(--ink-dim);padding-block:var(--s1)}
+.navlinks a:hover,.navlinks a[aria-current=true]{color:var(--ink)}
+.navlinks a[aria-current=true]{box-shadow:inset 0 -1px 0 var(--accent)}
+.nav-cta{margin-left:var(--s5);white-space:nowrap}
+.nav-cta .long{display:inline}
+.nav-cta .short{display:none}
+@media (max-width:760px){
+  .navlinks{display:none}
+  .nav-cta{margin-left:auto}
+  .nav-cta .long{display:none}
+  .nav-cta .short{display:inline}
+}
+
+/* ───────────────────────── buttons: 4 kinds, 7 states from one definition ─────── */
+.btn{
+  --btn-bg:transparent; --btn-ink:var(--ink); --btn-line:var(--hair);
+  display:inline-flex;align-items:center;gap:var(--s2);
+  padding:var(--s3) var(--s5);           /* horizontal = 2× vertical */
+  min-height:44px;                        /* hit area */
+  font:inherit;font-size:var(--fs-sm);font-weight:700;letter-spacing:.02em;
+  color:var(--btn-ink);background:var(--btn-bg);
+  border:1px solid var(--btn-line);border-radius:var(--r-pill);
+  cursor:pointer;text-decoration:none;
+  transition:background var(--d-m) var(--e-std),border-color var(--d-m) var(--e-std),opacity var(--d-s) var(--e-leave);
+}
+.btn--primary{--btn-bg:var(--accent);--btn-ink:#0B1017;--btn-line:var(--accent)}
+.btn--primary:hover{--btn-bg:color-mix(in oklab,var(--accent) 88%,var(--ink))}
+.btn--secondary{--btn-bg:var(--ground-2);--btn-line:var(--hair)}
+.btn--secondary:hover{--btn-line:var(--ink-mute)}
+.btn--ghost{--btn-line:transparent;padding-inline:var(--s3)}
+.btn--ghost:hover{--btn-line:var(--hair)}
+.btn:active{transform:translateY(.5px)}
+.btn[disabled],.btn[aria-disabled=true]{opacity:.42;pointer-events:none}
+.btn .tick{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.55}
+
+/* ───────────────────────── hero ───────────────────────── */
+.hero{position:relative;overflow:hidden;padding:calc(var(--s10) + var(--s7)) 0 var(--s9);min-height:min(100svh,940px);display:flex;flex-direction:column;justify-content:center;isolation:isolate}
+.hero .wrap{position:relative;z-index:3}
+.hero__eyebrow{display:inline-flex;align-items:center;gap:var(--s2);border:1px solid var(--hair);border-radius:var(--r-pill);padding:var(--s1) var(--s3) var(--s1) var(--s2);margin-bottom:var(--s5)}
+.hero__eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px color-mix(in oklab,var(--accent) 22%,transparent)}
+.hero__eyebrow span{font-family:GeistMono,monospace;font-size:var(--fs-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim)}
+h1 .soft{color:color-mix(in oklab,var(--ink) 42%,transparent)}
+h1 .dot{color:var(--accent)}
+.hero__sub{font-size:var(--fs-lg);color:var(--ink-dim);max-width:52ch;margin:var(--s5) 0 var(--s7)}
+.hero__cta{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center}
+.hero__note{font-family:GeistMono,monospace;font-size:var(--fs-sm);color:var(--ink-mute);margin-left:var(--s2)}
+
+/* the ground: the real plate, full-bleed, mirrored so the hull sits right */
+.plate{
+  position:absolute;inset:0;z-index:1;width:100%;height:100%;
+  object-fit:cover;object-position:50% 62%;
+  transform:scaleX(-1);
+  pointer-events:none;
+}
+/* scrim to P95 luminance on the type side, plus a vignette so the plate
+   dies into the page instead of ending at a hard edge */
+.hero::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    linear-gradient(100deg, var(--bg) 4%, color-mix(in oklab,var(--bg) 88%,transparent) 34%, color-mix(in oklab,var(--bg) 30%,transparent) 62%, transparent 84%),
+    linear-gradient(to bottom, var(--bg) 0%, transparent 22%, transparent 62%, var(--bg) 100%);
+}
+.embers{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.ember{position:absolute;bottom:8%;width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:0}
+
+/* the mascot — one creature, generated by bin/design-character.py (blob, seed 3190) */
+.crew{position:absolute;right:2vw;bottom:0;z-index:3;width:min(300px,26vw);pointer-events:none}
+.crew svg{width:100%;height:auto;display:block}
+.crew__workers{position:absolute;right:calc(2vw + min(300px,26vw) - var(--s6));bottom:9%;z-index:2;display:flex;gap:var(--s5);align-items:flex-end;opacity:.62}
+.crew__workers svg{width:58px;height:58px}
+.crew__workers svg:nth-child(1){width:44px;height:44px;opacity:.6}
+.crew__workers svg:nth-child(2){width:50px;height:50px;opacity:.75}
+.crew__workers svg:nth-child(4){width:64px;height:64px}
+@media (max-width:900px){.crew,.crew__workers{display:none}}
+
+/* ───────────────────────── trust strip ───────────────────────── */
+/* separated by tone and stagger, never by rules. columns are deliberately unequal
+   and each sits at a different height so the eye travels instead of scanning a row. */
+.strip{background:var(--ground-1);position:relative;z-index:4}
+.strip .wrap{display:grid;grid-template-columns:1.6fr 1fr 1.15fr 2.1fr;gap:var(--s6);padding-block:var(--s7)}
+.strip div{padding:0}
+.strip div:nth-child(2){margin-top:var(--s5)}
+.strip div:nth-child(3){margin-top:var(--s2)}
+.strip div:nth-child(4){margin-top:var(--s6)}
+.strip b{display:block;font-family:GeistMono,monospace;font-size:1.75rem;font-weight:400;letter-spacing:-.02em;line-height:1.05}
+.strip div:nth-child(1) b{color:var(--accent)}
+.strip small{color:var(--ink-mute);display:block;margin-top:var(--s2)}
+@media (max-width:760px){
+  .strip .wrap{grid-template-columns:1fr 1fr;gap:var(--s5)}
+  .strip div{margin-top:0 !important}
+}
+
+/* ───────────────────────── callout / claim ───────────────────────── */
+.callout{
+  position:relative;background:var(--ground-2);
+  border-left:3px solid var(--accent);border-radius:0 var(--r-sm) var(--r-sm) 0;
+  padding:var(--s6);max-width:74ch;
+}
+.callout p:last-child{margin-bottom:0}
+.callout strong{color:var(--ink)}
+
+/* ───────────────────────── data as graphic ───────────────────────── */
+.figure{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:var(--s8);align-items:center}
+@media (max-width:860px){.figure{grid-template-columns:1fr;gap:var(--s6)}}
+.isotype{width:100%;height:auto;shape-rendering:crispEdges;display:block}
+.isotype rect{transition:opacity var(--d-m) var(--e-std)}
+figcaption{font-size:var(--fs-sm);color:var(--ink-mute);margin-top:var(--s3);max-width:44ch}
+
+/* the numerals ARE the chart — shared baseline, hairline connector */
+.bracket{display:flex;align-items:baseline;gap:var(--s5);font-family:GeistMono,monospace;flex-wrap:wrap}
+.bracket .amt{font-size:clamp(2.2rem,1.2rem+3.4vw,3.6rem);line-height:1;letter-spacing:-.03em}
+.bracket .was{color:var(--ink-mute)}
+.bracket .was .amt{text-decoration:line-through;text-decoration-thickness:1px;text-decoration-color:var(--hair)}
+.bracket .now{color:var(--ink)}
+.bracket .now .amt{color:var(--accent)}
+.bracket em{display:block;font-style:normal;font-size:var(--fs-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);line-height:2.4}
+.delta{display:flex;align-items:center;gap:var(--s2);padding:var(--s3) var(--s5);background:var(--ground-2);border-radius:var(--r-xs);align-self:stretch}
+.delta b{font-family:GeistMono,monospace;font-size:var(--fs-lg);font-weight:400;color:var(--accent)}
+
+/* ───────────────────────── tables ───────────────────────── */
+/* rows separate by zebra TONE, not by rules */
+.tablewrap{overflow-x:auto;border-radius:var(--r-sm);background:var(--ground-2)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:0.875rem}
+caption{text-align:left;padding:var(--s4) var(--s5) var(--s2);color:var(--ink-mute);font-size:0.8rem}
+th,td{padding:var(--s4) var(--s5);text-align:left;vertical-align:top}
+thead th{
+  font-family:GeistMono,monospace;font-size:9.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--ink-mute);font-weight:400;line-height:2.4;
+  padding-block:var(--s2);
+}
+tbody tr{transition:background var(--d-m) var(--e-std)}
+tbody tr:nth-child(odd){background:color-mix(in oklab,var(--bg) 46%,transparent)}
+tbody tr:hover{background:color-mix(in oklab,var(--bg) 76%,transparent)}
+tbody tr.is-winner td,tbody tr.is-winner th[scope=row]{background:color-mix(in oklab,var(--accent) 11%,transparent)}
+tbody tr.is-winner th[scope=row]{box-shadow:inset 3px 0 0 var(--accent)}
+td .num{color:var(--ink)}
+
+/* evidence tags — the page's honesty device, carried through from the plain paper */
+.tag{
+  display:inline-block;font-family:GeistMono,monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;padding:2px 7px;border:1px solid currentColor;border-radius:var(--r-xs);
+  white-space:nowrap;line-height:1.5;
+}
+.tag--sim{color:var(--accent)}
+.tag--open{color:oklch(0.70 0.115 28)}
+.tag--proven{color:oklch(0.76 0.105 155)}
+
+/* ───────────────────────── the ladder (scheduler rules) ───────────────────────── */
+/* the numeral and the indent do the separating — no rules, and each rung steps
+   further right so the list reads as a descent, not a stack of equal boxes */
+.ladder{list-style:none;counter-reset:step;padding:0;margin:0;display:grid;gap:var(--s6)}
+.ladder li{
+  counter-increment:step;
+  display:grid;grid-template-columns:72px minmax(0,1fr);gap:var(--s5);align-items:start;
+}
+.ladder li:nth-child(2){margin-left:var(--s5)}
+.ladder li:nth-child(3){margin-left:calc(var(--s5) * 2)}
+.ladder li:nth-child(4){margin-left:calc(var(--s5) * 3)}
+.ladder li:nth-child(5){margin-left:calc(var(--s5) * 4)}
+.ladder li::before{
+  content:counter(step,decimal-leading-zero);
+  grid-column:1;grid-row:1 / span 2;
+  font-family:GeistMono,monospace;font-size:1.75rem;color:var(--ink-mute);line-height:1;
+}
+.ladder li:last-child::before{color:var(--accent)}
+.ladder h3{grid-column:2;grid-row:1;margin-bottom:var(--s2)}
+.ladder p{grid-column:2;grid-row:2;margin:0;color:var(--ink-dim);font-size:0.9375rem;max-width:56ch}
+@media (max-width:700px){.ladder li{margin-left:0 !important;grid-template-columns:44px minmax(0,1fr);gap:var(--s4)}}
+@media (max-width:600px){.ladder li{grid-template-columns:40px minmax(0,1fr);gap:var(--s4)}}
+
+/* ───────────────────────── cta (hero, reversed) ───────────────────────── */
+/* the CTA is the hero reversed: same plate family, same two motifs, mirrored
+   the other way so the page closes where it opened */
+.cta{
+  position:relative;overflow:hidden;background:var(--bg);isolation:isolate;
+  min-height:600px;display:flex;align-items:center;
+}
+/* mirrored like the hero, but framed on the sparks rather than the hull —
+   same plate family, reversed composition: the page closes where it opened */
+.cta .plate{transform:scaleX(-1);object-position:78% 56%;filter:brightness(1.45) saturate(1.1)}
+/* scrim to P95 luminance across the whole type column — the plate only starts
+   showing past the measure, so nothing ever sits on a bright spark field */
+.cta::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    linear-gradient(96deg, var(--bg) 4%, var(--bg) 46%, color-mix(in oklab,var(--bg) 72%,transparent) 60%, color-mix(in oklab,var(--bg) 18%,transparent) 78%, transparent 94%),
+    linear-gradient(to bottom, var(--bg) 0%, transparent 16%, transparent 82%, var(--bg) 100%);
+}
+.cta .wrap p,.cta .wrap h2{max-width:44ch}
+.cta .wrap{position:relative;z-index:3;text-align:left;padding-block:var(--s9)}
+.cta .embers{z-index:2}
+
+footer{background:var(--bg);padding:var(--s8) 0 var(--s9);color:var(--ink-mute);font-size:0.8rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:var(--s5);justify-content:space-between;align-items:baseline}
+footer a{color:var(--ink-dim)}
+
+#totop{
+  position:fixed;right:var(--s5);bottom:var(--s5);z-index:55;
+  opacity:0;pointer-events:none;transition:opacity var(--d-m) var(--e-std);
+}
+#totop.show{opacity:1;pointer-events:auto}
+
+/* ───────────────────────── motion: two motifs, sway and rise ───────────────────── */
+@keyframes sway{
+  0%  {transform:rotate(calc(var(--amt,1) * var(--gain,1) * -1deg))}
+  100%{transform:rotate(calc(var(--amt,1) * var(--gain,1) *  1deg))}
+}
+@keyframes rise{
+  0%  {transform:translate3d(0,0,0) scale(.7); opacity:0}
+  12% {opacity:var(--peak,.5)}
+  55% {transform:translate3d(10px,-220px,0) scale(1)}
+  88% {opacity:calc(var(--peak,.5) * .55)}
+  100%{transform:translate3d(-6px,-430px,0) scale(1.05); opacity:0}
+}
+@keyframes breathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+/* base state is VISIBLE — reveal is progressive enhancement, never a blank page */
+.reveal{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:no-preference){
+  .sway{transform-box:fill-box;transform-origin:bottom center;
+        animation:sway var(--dur,6s) var(--e-std) infinite alternate;
+        animation-delay:var(--delay,0s)}
+  .ember{animation:rise var(--dur,9s) linear infinite;animation-delay:var(--delay,0s)}
+  .crew{animation:breathe 5.6s var(--e-std) infinite}
+  .reveal{opacity:0;transform:translateY(14px);
+          transition:opacity 1.4s var(--e-enter),transform 1.4s var(--e-enter);
+          transition-delay:var(--rd,0s)}
+  .reveal.in{opacity:1;transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none !important;transition-duration:1ms !important}
+}
+@media print{nav,#totop,#progress,.ground,.embers,.crew,.crew__workers{display:none}body{background:#fff;color:#000}}
+</style>
+</head>
+
+<body id="top">
+<div id="progress" role="presentation"></div>
+<a class="skip" href="#main">Skip to the numbers</a>
+
+<nav id="nav" aria-label="Primary">
+  <a class="lockup" href="#top">
+    <!-- the mark is the mascot's head, reused — one source, every size -->
+    <svg viewBox="0 0 200 180" aria-hidden="true"><use href="#ch-head" transform="translate(-10,-40) scale(0.58)"/></svg>
+    <span>Agent&nbsp;Fleet</span>
+  </a>
+  <div class="navlinks">
+    <a href="#coverage">Coverage</a>
+    <a href="#lanes">Lanes</a>
+    <a href="#scheduler">Scheduler</a>
+    <a href="#numbers">Numbers</a>
+    <a href="#honest">Honesty</a>
+  </div>
+  <a class="btn btn--secondary nav-cta" href="index.html">
+    <span class="long"><span class="roll"><span data-t="Read the evidence paper">Read the evidence paper</span></span></span>
+    <span class="short">Evidence</span>
+  </a>
+</nav>
+
+<!-- ══════════════════════════════ HERO ══════════════════════════════ -->
+<header class="hero">
+
+  <!-- THE GROUND. A drawn night harbour: breakwater, moored hulls, bollards,
+       and mast antennae that sway. Same structural role as inkbox's seafloor. -->
+  <!-- THE GROUND. A real generated plate — design/assets/harbour/harbour-01.png,
+       Flux schnell, seed 3191, style block locked in design/themes/PLATES.json.
+       Mirrored so the hull sits right and the open water carries the headline. -->
+  <img class="plate" src="design/assets/harbour/harbour-01.avif" alt=""
+       fetchpriority="high" decoding="async" width="1600" height="915" aria-hidden="true">
+
+  <!-- MOTIF 2 — embers rising off the water -->
+  <div class="embers" aria-hidden="true" id="embers-hero"></div>
+
+  <!-- the crew: four workers on a shallow arc, one orchestrator with the eyes -->
+  <div class="crew__workers" aria-hidden="true">
+    <svg viewBox="80 100 260 220"><use href="#ch-head"/></svg>
+    <svg viewBox="80 100 260 220"><use href="#ch-head"/></svg>
+    <svg viewBox="80 100 260 220"><use href="#ch-head"/></svg>
+    <svg viewBox="80 100 260 220"><use href="#ch-head"/></svg>
+  </div>
+
+  <!-- FLEET — generated by bin/design-character.py new Fleet --species blob --seed 3190 -->
+  <div class="crew">
+    <svg viewBox="0 0 420 520" role="img" aria-label="Fleet, the orchestrator mascot, on watch">
+      <title>Fleet</title>
+      <g id="ch-root">
+        <ellipse id="ch-shadow" cx="210.0" cy="446.5" rx="61.1" ry="8.9" fill="#EDE8DF" opacity=".16"/>
+        <g id="ch-wing-l" fill="#F2A03D" opacity=".92"><path d="M123.97,315.74 C158.47,348.05 154.84,414.10 154.84,414.10 L133.27,418.41 C133.27,418.41 104.53,358.82 123.97,315.74 Z"/></g>
+        <g id="ch-wing-r" fill="#F2A03D" opacity=".92"><path d="M296.03,315.74 C315.47,358.82 286.73,418.41 286.73,418.41 L265.16,414.10 C265.16,414.10 261.53,348.05 296.03,315.74 Z"/></g>
+        <g id="ch-body">
+          <path d="M285.95,356.00L285.77,364.80L285.53,369.50L285.22,373.34L284.86,376.70L284.44,379.74L283.95,382.53L283.42,385.14L282.82,387.58L282.17,389.89L281.47,392.08L280.71,394.17L279.90,396.16L279.04,398.05L278.13,399.87L277.17,401.61L276.17,403.27L275.11,404.87L274.01,406.40L272.86,407.87L271.66,409.27L270.42,410.62L269.13,411.91L267.79,413.15L266.40,414.34L264.95,415.47L263.46,416.55L261.91,417.58L260.31,418.57L258.64,419.51L256.91,420.40L255.12,421.24L253.25,422.04L251.31,422.79L249.28,423.49L247.15,424.15L244.92,424.76L242.57,425.33L240.08,425.84L237.43,426.32L234.58,426.74L231.47,427.11L228.02,427.44L224.07,427.71L219.19,427.93L210.00,428.10L200.77,428.22L195.82,428.28L191.76,428.29L188.19,428.24L184.94,428.14L181.92,427.97L179.10,427.74L176.43,427.46L173.89,427.11L171.46,426.69L169.14,426.21L166.91,425.67L164.77,425.06L162.71,424.38L160.72,423.64L158.82,422.82L156.98,421.94L155.22,420.98L153.53,419.96L151.91,418.86L150.36,417.69L148.88,416.45L147.46,415.14L146.12,413.75L144.84,412.29L143.63,410.76L142.50,409.15L141.43,407.46L140.44,405.70L139.51,403.86L138.66,401.94L137.87,399.93L137.16,397.85L136.52,395.67L135.95,393.39L135.45,391.01L135.02,388.52L134.66,385.90L134.37,383.13L134.15,380.19L133.99,377.02L133.91,373.54L133.89,369.61L133.94,364.84L134.05,356.00L134.23,347.22L134.47,342.57L134.78,338.79L135.14,335.51L135.56,332.56L136.05,329.87L136.58,327.38L137.18,325.05L137.83,322.86L138.53,320.81L139.29,318.86L140.10,317.02L140.96,315.27L141.87,313.60L142.83,312.02L143.83,310.51L144.89,309.07L145.99,307.70L147.14,306.39L148.34,305.15L149.58,303.96L150.87,302.82L152.21,301.74L153.60,300.71L155.05,299.72L156.54,298.79L158.09,297.89L159.69,297.05L161.36,296.24L163.09,295.48L164.88,294.76L166.75,294.08L168.69,293.44L170.72,292.84L172.85,292.28L175.08,291.76L177.43,291.28L179.92,290.83L182.57,290.43L185.42,290.07L188.53,289.74L191.98,289.46L195.93,289.22L200.81,289.02L210.00,288.86L219.23,288.75L224.18,288.68L228.24,288.66L231.81,288.69L235.06,288.76L238.08,288.89L240.90,289.06L243.57,289.29L246.11,289.57L248.54,289.90L250.86,290.29L253.09,290.74L255.23,291.25L257.29,291.81L259.28,292.44L261.18,293.12L263.02,293.87L264.78,294.69L266.47,295.57L268.09,296.51L269.64,297.52L271.12,298.60L272.54,299.75L273.88,300.97L275.16,302.26L276.37,303.63L277.50,305.07L278.57,306.58L279.56,308.18L280.49,309.85L281.34,311.60L282.13,313.45L282.84,315.38L283.48,317.40L284.05,319.53L284.55,321.77L284.98,324.13L285.34,326.62L285.63,329.28L285.85,332.12L286.01,335.20L286.09,338.59L286.11,342.46L286.06,347.19Z" fill="#EDE8DF"/>
+          <ellipse cx="210.0" cy="367.0" rx="44.7" ry="42.4" fill="#0B1017" opacity=".13"/>
+        </g>
+        <g id="ch-foot-l" fill="#F2A03D"><rect x="167.6" y="417.6" width="37.1" height="15.8" rx="7.9"/></g>
+        <g id="ch-foot-r" fill="#F2A03D"><rect x="215.3" y="417.6" width="37.1" height="15.8" rx="7.9"/></g>
+        <g id="ch-head" transform="rotate(-0.01 210.0 206.0)">
+          <path d="M302.04,206.00L301.59,223.41L301.08,230.15L300.51,235.18L299.87,239.32L299.19,242.87L298.45,246.01L297.66,248.82L296.83,251.37L295.97,253.71L295.07,255.88L294.15,257.89L293.19,259.76L292.22,261.53L291.22,263.19L290.20,264.77L289.16,266.27L288.10,267.71L287.03,269.09L285.93,270.42L284.82,271.71L283.68,272.96L282.52,274.17L281.32,275.35L280.10,276.50L278.83,277.63L277.53,278.74L276.17,279.82L274.75,280.87L273.27,281.91L271.71,282.91L270.07,283.90L268.33,284.85L266.48,285.77L264.51,286.66L262.39,287.51L260.11,288.33L257.63,289.09L254.93,289.82L251.96,290.49L248.65,291.11L244.90,291.67L240.54,292.17L235.26,292.61L228.19,292.97L210.00,293.27L191.70,293.50L184.44,293.65L178.91,293.72L174.27,293.71L170.21,293.62L166.57,293.45L163.25,293.20L160.20,292.87L157.38,292.46L154.75,291.96L152.30,291.38L150.01,290.73L147.86,290.00L145.85,289.19L143.96,288.31L142.19,287.35L140.54,286.32L138.98,285.23L137.52,284.07L136.16,282.85L134.88,281.56L133.68,280.21L132.56,278.80L131.50,277.33L130.52,275.80L129.60,274.21L128.74,272.56L127.93,270.85L127.17,269.07L126.46,267.22L125.79,265.30L125.17,263.29L124.59,261.20L124.04,259.00L123.53,256.69L123.06,254.25L122.62,251.66L122.22,248.88L121.85,245.87L121.52,242.58L121.22,238.91L120.96,234.71L120.73,229.67L120.55,223.01L120.41,206.00L120.32,188.96L120.27,182.23L120.27,177.11L120.32,172.82L120.43,169.07L120.60,165.69L120.83,162.60L121.12,159.75L121.48,157.10L121.90,154.62L122.40,152.29L122.97,150.10L123.61,148.04L124.33,146.10L125.13,144.27L126.00,142.55L126.95,140.93L127.98,139.41L129.10,137.99L130.29,136.66L131.56,135.43L132.91,134.28L134.33,133.21L135.84,132.23L137.42,131.33L139.09,130.51L140.83,129.76L142.65,129.08L144.55,128.46L146.53,127.91L148.60,127.42L150.76,126.98L153.01,126.60L155.37,126.27L157.84,125.97L160.44,125.72L163.20,125.51L166.13,125.33L169.27,125.18L172.70,125.05L176.50,124.95L180.82,124.88L185.97,124.82L192.75,124.78L210.00,124.75L227.25,124.75L234.05,124.75L239.22,124.78L243.56,124.82L247.38,124.87L250.84,124.95L254.03,125.04L257.01,125.16L259.81,125.31L262.48,125.48L265.03,125.68L267.47,125.93L269.82,126.21L272.09,126.54L274.28,126.91L276.40,127.34L278.44,127.83L280.42,128.39L282.32,129.01L284.16,129.71L285.92,130.48L287.61,131.34L289.22,132.30L290.76,133.34L292.22,134.48L293.59,135.73L294.88,137.08L296.09,138.55L297.20,140.13L298.21,141.84L299.14,143.67L299.97,145.64L300.70,147.74L301.33,150.00L301.86,152.42L302.30,155.01L302.64,157.79L302.88,160.80L303.02,164.05L303.07,167.62L303.04,171.58L302.91,176.09L302.70,181.44L302.41,188.44Z" fill="#EDE8DF"/>
+          <ellipse cx="210.0" cy="204.2" rx="69.9" ry="52.6" fill="#0B1017" opacity=".13"/>
+          <g id="ch-eye-l"><circle cx="170.8" cy="204.2" r="25.3" fill="#0B1017"/><circle id="ch-pupil-l" cx="170.8" cy="204.2" r="10.4" fill="#EDE8DF"/><circle cx="166.8" cy="199.9" r="2.9" fill="#0B1017" opacity=".95"/></g>
+          <g id="ch-eye-r"><circle cx="249.2" cy="204.2" r="25.3" fill="#0B1017"/><circle id="ch-pupil-r" cx="249.2" cy="204.2" r="10.4" fill="#EDE8DF"/><circle cx="245.3" cy="199.9" r="2.9" fill="#0B1017" opacity=".95"/></g>
+          <g id="ch-brow-l" transform="rotate(7.0 170.8 166.1)"><rect x="146.8" y="166.1" width="48.0" height="7.4" rx="3.7" fill="#F2A03D"/></g>
+          <g id="ch-brow-r" transform="rotate(-7.0 249.2 166.1)"><rect x="225.2" y="166.1" width="48.0" height="7.4" rx="3.7" fill="#F2A03D"/></g>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="wrap">
+    <div class="hero__eyebrow reveal"><span class="dot" aria-hidden="true"></span><span>Live since 2026-08-17 · 70 tests green</span></div>
+
+    <h1 class="reveal" style="--rd:.12s">
+      24/7 coding coverage<br>
+      for the price of <span class="soft">one seat</span><span class="dot">.</span>
+    </h1>
+
+    <p class="hero__sub reveal" style="--rd:.24s">
+      A pool of subscription coding agents, scheduled by arithmetic instead of hope.
+      The gap between 63% and 100% is not model quality — it is scheduling.
+    </p>
+
+    <div class="hero__cta reveal" style="--rd:.36s">
+      <a class="btn btn--primary" href="#numbers">
+        <span class="tick" aria-hidden="true"></span>
+        <span class="roll"><span data-t="See the coverage numbers">See the coverage numbers</span></span>
+      </a>
+      <a class="btn btn--secondary" href="#honest">
+        <span class="roll"><span data-t="Read what it gets wrong">Read what it gets wrong</span></span>
+      </a>
+      <span class="hero__note">$319/mo · no per-token bill</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════ TRUST STRIP ══════════════════════════ -->
+<div class="strip">
+  <div class="wrap">
+    <div><b class="num">70</b><small>contract tests green</small></div>
+    <div><b class="num">45</b><small>overnight missions logged</small></div>
+    <div><b class="num">0</b><small>rate-limit hits, all night</small></div>
+    <div><b class="num">2026-08-17</b><small>running live since</small></div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ══════════════════════════ THE CLAIM ══════════════════════════ -->
+<section id="claim">
+  <div class="wrap">
+    <p class="micro reveal">01 — The claim, up front</p>
+    <div class="callout reveal" style="--rd:.1s">
+      <p>
+        A pool of subscription coding agents, scheduled by arithmetic instead of hope, covers
+        <strong>100% of around-the-clock development demand at $319/month</strong> — where the same
+        money spent as two plain subscriptions covers <strong>63%</strong>. The gap is not model
+        quality. It is scheduling.
+      </p>
+      <p class="dim" style="font-size:var(--fs-sm);margin-top:var(--s4)">
+        Framed honestly: this is <em>proven by simulation</em> — a 70-test contract suite over a
+        discrete-event backtest of demand traces — not a mathematical theorem about all futures.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ COVERAGE AS A GRAPHIC ══════════════════════════ -->
+<section id="coverage">
+  <div class="wrap">
+    <p class="micro reveal">02 — What the extra $19 buys</p>
+    <h2 class="reveal" style="--rd:.08s">Two subscriptions lose <span class="soft">a third of the week</span><span class="dot">.</span></h2>
+
+    <div class="figure" style="margin-top:var(--s7)">
+      <figure style="margin:0" class="reveal" style="--rd:.16s">
+        <!-- isotype: 100 units of demand. 63 served by the $300 stack, 37 recovered by the fleet. -->
+        <svg class="isotype" viewBox="0 0 208 208" role="img"
+             aria-label="A grid of 100 squares: 63 pale squares are the demand a $300 two-subscription stack serves; the remaining 37 amber squares are the demand only the $319 fleet covers.">
+          <g id="iso-cells"></g>
+        </svg>
+        <figcaption>
+          Each square is one unit of arriving work at medium 24/7 demand.
+          <span style="color:var(--ink-dim)">63 pale</span> = served by $300.
+          <span style="color:var(--accent)">37 amber</span> = queued behind resets until the fleet picks them up.
+        </figcaption>
+      </figure>
+
+      <div class="reveal" style="--rd:.24s">
+        <div class="bracket">
+          <div class="was">
+            <em>Claude Max + ChatGPT Pro</em>
+            <span class="amt num">$300</span>
+          </div>
+          <div class="now">
+            <em>Claude + Kimi + GLM (+free)</em>
+            <span class="amt num">$319</span>
+          </div>
+          <div class="delta">
+            <div>
+              <em style="display:block;font-size:var(--fs-micro);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);font-style:normal">Buys</em>
+              <b class="num">+37 pts</b>
+            </div>
+          </div>
+        </div>
+        <p class="dim" style="margin-top:var(--s5);font-size:var(--fs-sm)">
+          Any single agent seat hits weekly quota ceilings, sleeps while you sleep, and burns its best
+          hours on grind. Simulated at medium 24/7 demand, Claude&nbsp;Max + ChatGPT&nbsp;Pro
+          ($300/mo) serve <span class="num" style="color:var(--ink)">63%</span> of arriving work; the
+          rest queues behind resets. The fleet keeps the same architect judgment but routes every unit
+          of work to the cheapest lane that can hold it.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ LANES ══════════════════════════ -->
+<section id="lanes">
+  <div class="wrap">
+    <p class="micro reveal">03 — The lanes</p>
+    <h2 class="reveal" style="--rd:.08s">Every unit of work to the <span class="soft">cheapest lane that can hold it</span><span class="dot">.</span></h2>
+
+    <div class="tablewrap reveal" style="--rd:.16s;margin-top:var(--s6)">
+      <table>
+        <caption>Lane roster — benchmark column is Terminal-Bench 2.1, best harness.</caption>
+        <thead>
+          <tr><th scope="col">Lane</th><th scope="col">Role</th><th scope="col">Cost</th><th scope="col">Terminal-Bench 2.1</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Claude (Opus / Fable)</td><td class="dim">Architect, judgment, conversation</td><td class="num">$200/mo sub</td><td class="num">84.6</td></tr>
+          <tr><td>Codex (GPT-5.6)</td><td class="dim">Repo grind, implementation</td><td class="num">$100/mo sub <span class="dim">(ends Sept)</span></td><td class="num">88.8</td></tr>
+          <tr><td>Kimi K3 “Allegro”</td><td class="dim">Replaces the Codex lane at renewal</td><td class="num">$99/mo</td><td><span class="num">88.3</span> claimed <span class="tag tag--open">Unverified</span></td></tr>
+          <tr><td>GLM 5.3</td><td class="dim">Final backup when subs hard-stop</td><td class="num">$20/mo credits</td><td class="num">82.7</td></tr>
+          <tr><td>Free surge (opencode)</td><td class="dim">$0 grind, appears and vanishes</td><td class="num">$0</td><td>DeepSeek V4 Pro <span class="num">87.9</span> <span class="dim">— until the pool rotates</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════ SCHEDULER ══════════════════════════ -->
+<section id="scheduler">
+  <div class="wrap">
+    <p class="micro reveal">04 — What the scheduler does</p>
+    <h2 class="reveal" style="--rd:.08s">Five rules, and why it <span class="soft">holds at 100%</span><span class="dot">.</span></h2>
+
+    <ol class="ladder reveal" style="--rd:.16s;margin-top:var(--s6)">
+      <li>
+        <h3>Meters before model calls</h3>
+        <p>Every lane's hourly, daily and weekly burn is checked <em>before</em> work starts. A refused task costs zero tokens.</p>
+      </li>
+      <li>
+        <h3>Leak stops same-day</h3>
+        <p>A runaway agent — 13%/hr with no output was the first catch — is parked automatically. 2%/hour audits, 4% and 7% soft stops, 12% and 15% hard stops.</p>
+      </li>
+      <li>
+        <h3>Overnight unattended missions</h3>
+        <p>Headless builder plus an independent critic per phase; every morning has a report of done / evidence / blocked. 45 logged episodes, measured quality 0.87–0.92 on the free lane.</p>
+      </li>
+      <li>
+        <h3>Warm sessions, bounded context</h3>
+        <p>Compaction points solved from the provider's own price ratio — <code class="num">K* = b + √(2·(f/c)·(b+R)·d)</code> — cutting a measured burn by 42%.</p>
+      </li>
+      <li>
+        <h3>Degradation by design</h3>
+        <p>Lanes fail in a ladder: Claude → Codex + free → free + GLM → Kimi. The queue never dies; routing just gets cheaper and slower.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════════════════ NUMBERS ══════════════════════════ -->
+<section id="numbers">
+  <div class="wrap">
+    <p class="micro reveal">05 — The numbers</p>
+    <h2 class="reveal" style="--rd:.08s">Four stacks, three demand levels<span class="dot">.</span></h2>
+
+    <div class="tablewrap reveal" style="--rd:.16s;margin-top:var(--s6)">
+      <table>
+        <caption>Demand coverage by stack. The winning row is the only one that holds at heavy load.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Stack</th><th scope="col">Cost</th>
+            <th scope="col">Light</th><th scope="col">Medium</th><th scope="col">Heavy</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" style="font-weight:400">Claude + Codex <span class="dim">(today's default)</span></th>
+            <td class="num">$300</td><td class="num">100%</td><td class="num">63%</td><td class="num">63.9%</td>
+            <td><span class="tag tag--sim">Simulated</span></td>
+          </tr>
+          <tr>
+            <th scope="row" style="font-weight:400">Codex + free <span class="dim">(Claude stopped)</span></th>
+            <td class="num">$100</td><td class="num">100%</td><td class="num">100%</td><td class="num">57.3%</td>
+            <td><span class="tag tag--sim">Simulated</span></td>
+          </tr>
+          <tr>
+            <th scope="row" style="font-weight:400">Free + GLM <span class="dim">(both subs stopped)</span></th>
+            <td class="num">$20</td><td class="num">100%</td><td class="num">100%</td><td class="num">67.9%</td>
+            <td><span class="tag tag--sim">Simulated</span></td>
+          </tr>
+          <tr class="is-winner">
+            <th scope="row" style="font-weight:700">Claude + Kimi + GLM (+free)</th>
+            <td class="num"><strong>$319</strong></td><td class="num"><strong>100%</strong></td>
+            <td class="num"><strong>100%</strong></td><td class="num"><strong>100%</strong></td>
+            <td><span class="tag tag--sim">Simulated</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="dim reveal" style="--rd:.24s;font-size:var(--fs-sm);margin-top:var(--s5)">
+      Sim = discrete-event backtest over demand traces (<code class="num">stack_backtest.py</code>,
+      52-test suite, suite now 70 green). The free lane counts as a surge lease — excluded from
+      durable verdicts, because it can vanish, and it rotated once already.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════ OBJECTION HANDLER ══════════════════════════ -->
+<section id="honest">
+  <div class="wrap">
+    <p class="micro reveal">06 — What it costs to be honest</p>
+    <h2 class="reveal" style="--rd:.08s">The 100% is a simulation result<span class="dot">.</span></h2>
+    <div class="callout reveal" style="--rd:.16s;margin-top:var(--s6);border-left-color:var(--ink-mute)">
+      <p>
+        The 100% figure is a simulation result under modeled demand, re-run as a contract test on
+        every change. Heavy real-world weeks can still starve a lane; the scheduler's promise is that
+        starvation, when it happens, is <em>visible and priced</em>, not silent.
+      </p>
+      <p style="margin-bottom:0"><strong>No claim on this page is dressed up as more than its evidence tag.</strong></p>
+    </div>
+
+    <div style="display:flex;gap:var(--s5);flex-wrap:wrap;margin-top:var(--s6);align-items:center" class="reveal" style="--rd:.24s">
+      <span class="tag tag--proven">Proven</span><span class="dim" style="font-size:var(--fs-sm)">exact math, CI-enforced</span>
+      <span class="tag tag--sim">Simulated</span><span class="dim" style="font-size:var(--fs-sm)">discrete-event backtest</span>
+      <span class="tag tag--open">Unverified</span><span class="dim" style="font-size:var(--fs-sm)">stated honestly, experiment pending</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════ CTA — the hero, reversed ══════════════════════════ -->
+<section class="cta">
+  <img class="plate" src="design/assets/harbour/harbour-05.avif" alt=""
+       decoding="async" width="1600" height="915" aria-hidden="true">
+  <div class="embers" aria-hidden="true" id="embers-cta"></div>
+  <div class="wrap">
+    <p class="micro reveal">07 — Next</p>
+    <h2 class="reveal" style="--rd:.08s">Read the paper the <span class="soft">numbers came from</span><span class="dot">.</span></h2>
+    <p class="dim reveal" style="--rd:.16s;margin-top:var(--s4)">
+      Every figure here regenerates from tests, not by hand. The companion evidence paper shows the
+      proofs, the tags, and the rows that are still open.
+    </p>
+    <div class="hero__cta reveal" style="--rd:.24s;margin-top:var(--s6)">
+      <a class="btn btn--primary" href="index.html">
+        <span class="tick" aria-hidden="true"></span>
+        <span class="roll"><span data-t="Open the evidence paper">Open the evidence paper</span></span>
+      </a>
+      <a class="btn btn--ghost" href="fleet-pitch.html">
+        <span class="roll"><span data-t="See the plain-text version">See the plain-text version</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      vedhith-workflow-os + langgraph-shadow · live since 2026-08-17<br>
+      <span style="color:var(--ink-mute)">Numbers regenerate from tests, not by hand.</span>
+    </div>
+    <div>
+      <a href="index.html">Evidence paper</a> ·
+      <a href="fleet-pitch.html">Plain text</a> ·
+      <a href="#top">Back to top</a>
+    </div>
+  </div>
+</footer>
+
+<a class="btn btn--secondary" id="totop" href="#top" aria-label="Back to top">↑</a>
+
+<script>
+(function(){
+  "use strict";
+  var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ── isotype grid: 100 units, 63 served, 37 recovered ── */
+  var g = document.getElementById("iso-cells");
+  if (g) {
+    var SERVED = 63, cell = 16, gap = 4, ns = "http://www.w3.org/2000/svg";
+    for (var i = 0; i < 100; i++) {
+      var r = document.createElementNS(ns, "rect");
+      r.setAttribute("x", (i % 10) * (cell + gap));
+      r.setAttribute("y", Math.floor(i / 10) * (cell + gap));
+      r.setAttribute("width", cell); r.setAttribute("height", cell);
+      if (i < SERVED) { r.setAttribute("fill", "#EDE8DF"); r.setAttribute("opacity", ".26"); }
+      else            { r.setAttribute("fill", "#F2A03D"); r.setAttribute("opacity", ".92"); }
+      g.appendChild(r);
+    }
+  }
+
+  /* ── embers: motif 2, seeded by index so it is stable across reloads ── */
+  function seedEmbers(host, n){
+    if (!host || reduced) return;
+    var f = document.createDocumentFragment();
+    for (var i = 0; i < n; i++) {
+      var s = ((i * 2654435761) % 1000) / 1000;      /* deterministic, no Math.random */
+      var e = document.createElement("span");
+      e.className = "ember";
+      e.style.left    = (4 + s * 92).toFixed(2) + "%";
+      e.style.setProperty("--dur",   (7.5 + s * 6).toFixed(2) + "s");
+      e.style.setProperty("--delay", (-s * 12).toFixed(2) + "s");
+      e.style.setProperty("--peak",  (0.22 + s * 0.4).toFixed(2));
+      e.style.width = e.style.height = (2 + Math.round(s * 3)) + "px";
+      f.appendChild(e);
+    }
+    host.appendChild(f);
+  }
+  seedEmbers(document.getElementById("embers-hero"), 26);
+  seedEmbers(document.getElementById("embers-cta"), 12);
+
+  /* ── staged reveal, with the 2.5s failsafe: the page NEVER stays blank ── */
+  var items = [].slice.call(document.querySelectorAll(".reveal"));
+  function showAll(){ items.forEach(function(el){ el.classList.add("in"); }); }
+  if (reduced || !("IntersectionObserver" in window)) {
+    showAll();
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    items.forEach(function(el){ io.observe(el); });
+    setTimeout(showAll, 2500);
+  }
+
+  /* ── nav: hide on scroll down, show on scroll up; hairline once stuck ── */
+  var nav = document.getElementById("nav"), bar = document.getElementById("progress"),
+      top = document.getElementById("totop"), last = 0;
+  function onScroll(){
+    var y = window.scrollY || 0;
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
+    nav.classList.toggle("stuck", y > 24);
+    nav.classList.toggle("hidden", y > 320 && y > last);
+    top.classList.toggle("show", y > 900);
+    last = y;
+
+    /* active section in the nav */
+    var best = null;
+    document.querySelectorAll("main section, #claim").forEach(function(s){
+      if (s.getBoundingClientRect().top <= 140) best = s.id;
+    });
+    document.querySelectorAll(".navlinks a").forEach(function(a){
+      a.setAttribute("aria-current", a.getAttribute("href") === "#" + best ? "true" : "false");
+    });
+  }
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ── Fleet watches the pointer. Pointer devices only; never on touch. ── */
+  var pl = document.getElementById("ch-pupil-l"), pr = document.getElementById("ch-pupil-r");
+  if (pl && pr && !reduced && matchMedia("(pointer:fine)").matches) {
+    var base = [[170.8, 204.2], [249.2, 204.2]];
+    addEventListener("pointermove", function(ev){
+      var dx = (ev.clientX / innerWidth  - 0.72) * 9;
+      var dy = (ev.clientY / innerHeight - 0.55) * 7;
+      pl.setAttribute("cx", base[0][0] + dx); pl.setAttribute("cy", base[0][1] + dy);
+      pr.setAttribute("cx", base[1][0] + dx); pr.setAttribute("cy", base[1][1] + dy);
+    }, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>

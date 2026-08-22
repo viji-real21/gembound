@@ -1,0 +1,94 @@
+{
+  "name": "Fleet",
+  "seed": 3190,
+  "species": "blob",
+  "palette": {
+    "bg": "#0B1017",
+    "ink": "#EDE8DF",
+    "accent": "#F2A03D"
+  },
+  "head": {
+    "n": 4.18,
+    "aspect": 0.946,
+    "rx": 89.6,
+    "harmonics": [
+      [
+        3,
+        0.0311,
+        2.687
+      ],
+      [
+        2,
+        0.0131,
+        2.421
+      ],
+      [
+        2,
+        0.0141,
+        2.787
+      ]
+    ],
+    "squash": 0.015,
+    "tilt": -0.01
+  },
+  "body": {
+    "n": 3.24,
+    "aspect": 0.919,
+    "rx": 74.5,
+    "harmonics": [
+      [
+        2,
+        0.0182,
+        2.63
+      ],
+      [
+        2,
+        0.0161,
+        2.431
+      ]
+    ],
+    "squash": 0.074
+  },
+  "eyes": {
+    "r": 0.282,
+    "spread": 0.438,
+    "rise": -0.021,
+    "pupil": 0.411,
+    "shine": true,
+    "lid": "flat"
+  },
+  "brow": {
+    "show": true,
+    "angle": -7.0,
+    "weight": 7.4,
+    "gap": 0.152
+  },
+  "beak": {
+    "kind": "none",
+    "w": 32.3,
+    "h": 23.8,
+    "droop": 0.118
+  },
+  "tuft": {
+    "kind": "none",
+    "h": 39.7,
+    "lean": -7.8
+  },
+  "wing": {
+    "kind": "stub",
+    "w": 55.0,
+    "h": 102.5,
+    "tilt": 11.3
+  },
+  "feet": {
+    "w": 37.1,
+    "h": 15.8,
+    "spread": 0.32
+  },
+  "shell": {
+    "n": 2.43,
+    "aspect": 1.252,
+    "rx": 115.8,
+    "crack": 0.367
+  }
+}
