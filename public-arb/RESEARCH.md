@@ -107,7 +107,21 @@ The real lesson: LIT/smart exists so *informed* flow can avoid adverse selection
 0.60% each way, tiering down to 0.10% at high monthly volume. Zerohash custody. Transfers in/out supported (network fee + $0.53 KYT fee); **New York residents cannot transfer crypto in or out**. Even at the 0.10% tier, 20 bps round trip is ~20× a typical cross-exchange spread.
 
 ### Cash & margin
-Cash sweep **~3.3% APY** (as of 2026-06-11), no minimums, no hold period. Margin advertised as low-rate but tiers not published — **get the actual schedule before modelling any carry trade.**
+Cash sweep **~3.3% APY** (as of 2026-06-11), no minimums, no hold period.
+
+**Margin, now sourced (2026-08-22):** base **4.90%**, tiering down to **~3.95%** at large balances (Public's own comparison page, benchmarked 2026-07-14). Interest accrues daily (rate ÷ 365 × balance), charged monthly. Tier breakpoints are still unpublished.
+
+**This kills the obvious carry trade, and it's worth showing the arithmetic:**
+
+| Leg | Rate |
+|---|---|
+| Borrow on margin | **−4.90%** |
+| Bond Account YTW (10 corporate bonds, medium credit) | **+5.00–5.50%** |
+| Gross carry | **+0.10 to +0.60%** |
+| Less bond markup, $0.10–0.50 per $100 par, amortised | **−0.10 to −0.50%/yr on a 1yr hold** |
+| **Net** | **≈ 0.00% — and you're long credit + duration with borrowed money** |
+
+Borrowing at 4.9% to hold medium-credit corporates at 5.5% is picking up ~50 bps to take default risk and duration risk on leverage. That is the structure that blows up in every credit cycle, for a spread narrower than the markup. **Dead on arrival.**
 
 ---
 
@@ -154,6 +168,12 @@ Retail-size corporate bond lots are genuinely, persistently mispriced against th
 **Why LLM agents are the right tool here and nowhere else:** the hard part is not math, it's *reading* — call schedules, make-whole provisions, covenant language, ratings-change news, whether a "2029 maturity" is actually a 2027 call. That's language work, and language work is exactly what an LLM does better than a quant screen. Everywhere else in this document, the LLM should stay out of the pricing loop.
 
 **Realistic edge:** 30–150 bps of yield pickup on comparable credit risk. Slow, capacity-limited to maybe six figures, non-competitive with anyone. **This is the most "unfair advantage" item on the list.**
+
+> **⚠️ Downgrade (2026-08-22): do NOT run this on Public's fractional bonds.** Public's **Fractional Bonds are a single-dealer market — Moment Markets is the sole counterparty**, quoting both sides. They **cannot be transferred out** to any other brokerage, and Public's own disclosure warns *"there is a risk you may not be able to exit a fractional bond position if there is not a willing buyer."* Public charges its own fee on top ($0.10–0.50 per $100 par) and does **not** publish Moment's spread separately, so total cost is a disclosed fee **plus an unobservable markup**.
+>
+> You cannot arbitrage a mispricing against the dealer who *sets* the mispricing, on an instrument you can only sell back to that same dealer. The odd-lot inefficiency is real in the wider market; **on Public's fractional rail it is the dealer's margin, not your edge.**
+>
+> **What survives:** the strategy must use **whole bonds** (corporates + treasuries, live since 2026-03-25, screenable since 2026-08-05), where you're at least facing a real multi-dealer market. Public's own logic already prefers whole bonds when they price better. Note whole bonds carry higher minimums than the $100 fractional entry, so this needs real capital to express.
 
 ### 5.3 Overnight crypto ↔ equity-proxy convergence
 Public is one of very few places holding **24/7 crypto and 24/5 equities in one account with one API**. During the overnight session (8pm–4am ET, Blue Ocean ATS — limit orders only, session-only, thin), crypto-proxy equities (IBIT, MSTR, COIN) routinely diverge >1% from where spot BTC says they should be, because the equity book is nearly empty while crypto keeps trading.
@@ -287,6 +307,81 @@ They passed eight Series 7 exams; that's a knowledge benchmark, not an execution
 
 ---
 
+## 9. The 30% question — every remaining feature, and the honest ceiling
+
+*Added 2026-08-22 in response to: "find a way using the new Agents feature and all new Public features — day trading, swing trading, whatever — a system that will be 30% a year, like an unseen arbitrage."*
+
+I went and catalogued the features this document had never examined. Here is every one, and what it does to the number.
+
+### 9.1 The features I hadn't looked at
+
+| Feature | What it is | Effect on a 30% target |
+|---|---|---|
+| **Generated Assets (GenA)** | Prompt → a *swarm of parallel AI agents* screens thousands of stocks → custom investable index, with **backtest vs S&P**. **0.49%/yr** management fee, managed by Public Advisors LLC | **Negative.** The backtest is the trap: you iterate prompts until the curve looks good, which is in-sample selection, i.e. data mining with extra steps. Public's own disclosure names **"Over-Reliance Risk."** Expected alpha ≈ 0, minus a certain 0.49% |
+| **Direct Index** | Own the constituents directly. **0.19%/yr**, $1,000 min | Mildly **positive** — direct ownership enables lot-level harvesting (§5.4). Not a return source itself |
+| **Bond Account** | 10 investment-grade + high-yield corporates, **~5.0–5.5% YTW**. $1,000 min, $3.99/mo (free on Premium) | Yield, not edge. Credit + duration risk. Carry vs 4.9% margin nets ~0 (§3) |
+| **Jiko Treasury Account** | Auto-rolling 6-month T-bills, $100 min, BNY Mellon custody. **Not ACATS-transferable** | Risk-free rate. Not edge |
+| **Fractional Bonds** | $100 minimum bond entry — **single-dealer (Moment Markets), non-transferable** | **Negative.** See the §5.2 downgrade. Dealer sets both sides |
+| **Public Premium** | $10/mo, **waived above $50k**. Better data, waives the Bond Account fee | Saves ~$168/yr at scale. Rounding error |
+| **Multi-account** (2026-05-20) | N accounts, each 10 req/s, each with its own route default | **Genuinely useful** — the §3a routing workaround and linear throughput |
+| **Agents** | Real rules engine: EMA/SMA/RSI/MACD/Bollinger/ATR, multi-leg, shorting, event-chains | Removes execution error. **Does not create return** |
+
+**Nothing in that list is an undiscovered inefficiency.** Two of them (GenA, fractional bonds) have *negative* expected edge once you price the fee and the dealer spread.
+
+### 9.2 Where 30% would have to come from — the decomposition
+
+Any return decomposes as `risk-free + risk premium × leverage + alpha`. With the risk-free at 3.3%, a 30% target needs **26.7% from premium, leverage, or alpha.** There are exactly four sources, and each is checkable:
+
+| Source | Best case on Public | Why it can't reach 26.7% |
+|---|---|---|
+| **Equity beta × leverage** | S&P ~10%/yr, Reg-T caps you at **2×** | 2× ≈ 20% expected — but 2× drawdown too. 2008 at 2× is **−100%**. And it's not arbitrage, it's just risk |
+| **Volatility risk premium** (the wheel) | 6–10% net premium + 3.3% on collateral = **9–13%** | The VRP is real and persistent. It is not 26.7%. Levering it to 30% converts a −25% year into a **−60%** year |
+| **Genuine alpha** | Requires information or infrastructure others lack | You have neither through Public: retail data feed, 10 req/s, no colocation, no direct feeds |
+| **Capacity-constrained inefficiency** | The only honest solo-operator source | The two that existed here — odd-lot bonds and overnight divergence — are **damaged by Public's own plumbing** (single dealer; no route control) |
+
+### 9.3 The best honest system I can actually build
+
+Not 30%. This is what the features genuinely support, stacked correctly:
+
+```
+┌─ RISK-FREE FLOOR ────────────────────────────────────┐
+│  Collateral in sweep @ 3.3%  ·  Jiko T-bills         │
+│  Agents job: sweep every idle balance, never miss     │  → 3.3%
+└──────────────────────────────────────────────────────┘
+┌─ LEAKAGE RECOVERY (guaranteed, no market view) ──────┐
+│  Tax-lot harvesting, wash-sale aware across accounts │  → +0.5–1.5%
+│  Options rebate as cost reducer, never as the reason │  → +0.1–0.3%
+│  Premium waived >$50k; Bond Account fee waived       │  → +~0.1%
+└──────────────────────────────────────────────────────┘
+┌─ STRUCTURAL PREMIUM (real risk, real premium) ───────┐
+│  Cash-secured put wheel on liquid ETFs               │
+│  Agents own the lifecycle: CSP → assignment →        │  → +6–10%
+│  covered call → roll → re-arm. Their native strength │     (−25%+ tail)
+│  Collateral simultaneously earns the 3.3% above      │
+└──────────────────────────────────────────────────────┘
+┌─ RESEARCH EDGE (where your agents actually belong) ──┐
+│  Whole-bond issuer-curve RV (§5.2, whole bonds only) │  → +0.3–1.5%
+│  Box-rate check vs sweep when the gap opens (§5.1)   │     on the sleeve
+└──────────────────────────────────────────────────────┘
+
+Realistic total: 9–14%/yr, with a genuine −25% to −35% tail.
+Essentially-risk-free subset (drop the wheel): 4–5%/yr.
+```
+
+**Why the wheel is the right home for Agents specifically:** their template library *is* this strategy — sell the covered call, roll two weeks before expiry, close if within 5 days and ITM, re-arm on assignment. That lifecycle is where retail actually loses money through omission, and it's the one place Public's automation is better than code you'd write. Pair it with §3a's account split and the rebate, and you're harvesting the VRP with the operational errors removed.
+
+**And the honest hazard:** §B.5 disclaims trades that "fail to be triggered," there is **no paper-trading mode**, and there are **no caps you can set from outside the agent's own prompt**. Run it small, in a dedicated account, for a full quarter, before it sees real size.
+
+### 9.4 The direct answer
+
+**A 30%/yr system with the character of an arbitrage — durable, guaranteed, low-variance — does not exist on this platform, and I could not construct one from any combination of the features.** That is not a failure of search: 30% risk-free would be ~9× the T-bill rate, which is a mispricing large enough that it could not survive contact with any professional. Arbitrage returns *are* the risk-free rate plus basis points; that is the definition, not a limitation.
+
+**30% is reachable only as an outcome, not as a system** — a concentrated or levered position that happened to be right. Public's features can make you *operationally excellent* at that bet. They cannot make it a sure thing.
+
+**The one real reframe:** you have far more agent capacity than Public's strategy space can absorb. Spend it on the **research** side — whole-bond issuer curves, corporate-action monitoring, box-rate scanning — where reading beats speed. That's the only place on this platform where your actual advantage is an advantage.
+
+---
+
 ## Sources
 
 - [Public Trading API docs](https://public.com/api/docs) · [Changelog](https://public.com/api/docs/changelog) · [API overview](https://public.com/api)
@@ -309,4 +404,11 @@ They passed eight Series 7 exams; that's a knowledge benchmark, not an execution
 - [Public AI Agents — strategy templates](https://public.com/ai-agents/trading-strategies) — indicator list, event-chained sequences, bonds/tax-lots marked coming soon
 - [Public becomes the first brokerage to introduce AI Agents (PR, 2026-03-31)](https://www.prnewswire.com/news-releases/public-becomes-the-first-brokerage-to-introduce-ai-agents-for-your-portfolio-302729050.html) — launch date, waitlist rollout, EMA/SMA/RSI/MACD/Bollinger/ATR, shorting
 - [Best brokers for AI trading agents — MCP tested (StockBrokers.com)](https://www.stockbrokers.com/guides/ai-agent-brokers) — "no caps you can set yourself," no paper trading, unattended execution vs Webull/Robinhood
-- [Public 606 order-routing disclosure](https://public.com/disclosures/606-report) — quarterly venue stats; Rule 606(b) gives you your own 6-month routing history on request (**the free way to verify where API orders actually went**)
+- [Public 606 order-routing disclosure](https://public.com/disclosures/606-report)
+
+*Added 2026-08-22 for §9 (the 30% question):*
+- [Generated Assets](https://public.com/generated-asset) · [prompting guide](https://public.com/generated-asset/guide) · [GenA disclosures](https://public.com/disclosures/GenA) — parallel agent swarm, backtest-vs-S&P, "Over-Reliance Risk"; [fees & minimums](https://help.public.com/en/articles/12874251-what-are-the-fees-and-minimums-for-generated-assets) 0.49%/yr vs Direct Index 0.19% / $1,000 min
+- [Public margin rates](https://public.com/invest/margin) — 4.90% base → ~3.95% tiered, benchmarked 2026-07-14; daily accrual
+- [Fractional bond trading (Public blog)](https://medium.com/the-public-blog/introducing-fractional-bond-trading-exclusively-on-public-e8c8da948dd5) · [Bond Account disclosure](https://public.com/disclosures/bond-account) — **single-dealer (Moment Markets), non-transferable**, fee $0.10–0.50 per $100 par
+- [Jiko Treasury accounts](https://help.public.com/en/articles/6997525-what-is-jiko) · [6-month T-bill account](https://help.public.com/en/articles/6997482-what-is-a-6-month-treasury-bill-account) — $100 min, not ACATS-transferable
+- [Public 2026 review (NerdWallet)](https://www.nerdwallet.com/investing/reviews/public) — Bond Account ~5–5.5%, Premium waived above $50k — quarterly venue stats; Rule 606(b) gives you your own 6-month routing history on request (**the free way to verify where API orders actually went**)
