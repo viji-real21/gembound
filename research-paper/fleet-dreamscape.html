@@ -50,8 +50,9 @@
   --ground-2: oklch(0.300 0.040 287);
   --veil:     oklch(0.972 0.005 292 / 0.055);  /* the card fill  */
   --edge:     oklch(0.972 0.005 292 / 0.145);  /* the card edge  */
-  --ink-dim:  oklch(0.760 0.012 292);
-  --ink-mute: oklch(0.605 0.014 292);
+  --ink-dim:  oklch(0.780 0.012 292);
+  --ink-mute: oklch(0.700 0.014 292);
+  --accent-text: oklch(0.855 0.085 32);  /* coral lifted for small text -- 4.5:1 on the plates */
 
   --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px;
   --s7:48px; --s8:64px; --s9:96px; --s10:128px;
@@ -82,9 +83,9 @@ body::after{
 
 /* ─────────────── type: six literal roles ─────────────── */
 h1,h2,h3{font-family:Outfit,ui-sans-serif,sans-serif;font-weight:700;margin:0;text-wrap:balance}
-h1{font-size:clamp(2.6rem, 1.2rem + 5.4vw, 4.75rem);line-height:1.02;letter-spacing:-.028em}
+h1{font-size:clamp(2.6rem, 1.2rem + 5.2vw, 4.75rem);line-height:1.02;letter-spacing:-.028em}
 h2{font-size:clamp(1.9rem, 1.2rem + 2.6vw, 2.85rem);line-height:1.08;letter-spacing:-.024em}
-h3{font-size:1.25rem;line-height:1.25;letter-spacing:-.012em}
+h3{font-size:1.3rem;line-height:1.25;letter-spacing:-.012em}
 p{margin:0 0 var(--s4);max-width:64ch;text-wrap:pretty}
 small,.small{font-size:0.8125rem;line-height:1.5}
 .dim{color:var(--ink-dim)}
@@ -92,18 +93,21 @@ small,.small{font-size:0.8125rem;line-height:1.5}
 /* the coral eyebrow — light, widely letterspaced, always above a headline */
 .eyebrow{
   font-family:Outfit,sans-serif;font-weight:400;font-size:11px;
-  letter-spacing:.42em;text-transform:uppercase;color:var(--accent);
+  letter-spacing:.42em;text-transform:uppercase;color:var(--accent-text);
   margin:0 0 var(--s5);
 }
 a{color:var(--ink);text-underline-offset:.22em;text-decoration-color:var(--edge)}
 a:hover{text-decoration-color:var(--accent)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
 
-/* one hover mechanism site-wide: a second copy of the label rolls in */
-.roll{display:inline-block;position:relative;overflow:hidden;height:1.25em;vertical-align:bottom}
-.roll>span{display:block;transition:transform var(--d-m) var(--e-std)}
-.roll>span::after{content:attr(data-t);display:block}
-a:hover .roll>span,a:focus-visible .roll>span{transform:translateY(-1.25em)}
+/* one hover mechanism site-wide: a second copy of the label rolls in.
+   Mechanics: the container's line-height equals its height so glyphs are never
+   clipped mid-descender, and the duplicate is absolutely positioned so the span's
+   real box stays one line tall instead of spilling out of the button. */
+.roll{display:inline-block;position:relative;overflow:hidden;height:1.3em;line-height:1.3;vertical-align:bottom}
+.roll>span{display:block;position:relative;line-height:1.3;transition:transform var(--d-m) var(--e-std)}
+.roll>span::after{content:attr(data-t);position:absolute;top:100%;left:0;line-height:1.3;white-space:nowrap}
+a:hover .roll>span,a:focus-visible .roll>span{transform:translateY(-1.3em)}
 
 /* ─────────────── shell ─────────────── */
 .wrap{max-width:var(--shell);margin:0 auto;padding:0 var(--s5)}
@@ -123,7 +127,7 @@ nav{
 }
 nav.hidden{transform:translateY(-100%)}
 nav.stuck{background:var(--bg)}
-.lockup{display:flex;align-items:center;gap:var(--s2);font-family:Outfit,sans-serif;font-weight:700;font-size:1.0625rem;letter-spacing:-.02em;text-decoration:none}
+.lockup{display:flex;align-items:center;gap:var(--s2);font-family:Outfit,sans-serif;font-weight:700;font-size:1.09375rem;letter-spacing:-.02em;text-decoration:none}
 .lockup svg{width:26px;height:26px;display:block}
 .navlinks{display:flex;gap:var(--s5);margin-left:auto;font-size:0.875rem}
 .navlinks a{text-decoration:none;color:var(--ink-dim);padding-block:var(--s1)}
@@ -173,19 +177,25 @@ nav.stuck{background:var(--bg)}
   content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
   background:
     radial-gradient(88% 62% at 50% 46%, oklch(0.16 0.03 292 / .58) 0%, oklch(0.16 0.03 292 / .30) 46%, transparent 78%),
-    linear-gradient(to bottom, oklch(0.16 0.03 292 / .55) 0%, transparent 26%, transparent 58%, var(--bg) 100%);
+    linear-gradient(to bottom, oklch(0.16 0.03 292 / .60) 0%, oklch(0.16 0.03 292 / .38) 22%, transparent 44%, transparent 58%, var(--bg) 100%);
 }
 .hero .wrap{position:relative;z-index:3}
 .hero__sub{font-size:1.1875rem;color:var(--ink-dim);max-width:54ch;margin:var(--s5) auto var(--s7)}
 .hero__cta{display:flex;flex-wrap:wrap;gap:var(--s3);align-items:center;justify-content:center}
-.hero__note{font-family:GeistMono,monospace;font-size:0.8125rem;color:var(--ink-mute)}
-h1 .soft{color:oklch(0.972 0.005 292 / .48)}
+.hero__note{font-family:GeistMono,monospace;font-size:0.8125rem;color:var(--ink-dim)}
+h1 .soft{color:oklch(0.972 0.005 292 / .62)}
 h1 .stop{color:var(--accent)}
 
 /* the mascot rides the horizon rather than standing on a quay */
 .crew{position:absolute;right:5vw;bottom:11%;z-index:3;width:min(190px,17vw);pointer-events:none}
 .crew svg{width:100%;height:auto;display:block}
 @media (max-width:920px){.crew{display:none}}
+/* narrow screens push the sub-copy up into the painting's lit clouds -- hold the scrim */
+@media (max-width:640px){
+  .hero::before{background:
+    radial-gradient(88% 62% at 50% 46%, oklch(0.16 0.03 292 / .66) 0%, oklch(0.16 0.03 292 / .40) 46%, transparent 78%),
+    linear-gradient(to bottom, oklch(0.16 0.03 292 / .68) 0%, oklch(0.16 0.03 292 / .52) 26%, transparent 50%, transparent 58%, var(--bg) 100%)}
+}
 
 /* ─────────────── trust strip: unequal, staggered, separated by tone ─────────────── */
 .strip{background:var(--ground-1);position:relative;z-index:4}
@@ -203,11 +213,17 @@ h1 .stop{color:var(--accent)}
    that is the point of the reference: honest translucency, never a glass panel */
 #layers{position:relative;overflow:hidden;isolation:isolate}
 #layers .plate{object-position:50% 30%}
+/* top seam: a long two-stop fade, so the painting condenses out of the page colour
+   instead of starting at a visible cliff where the section begins */
 #layers::before{
   content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
   background:
-    radial-gradient(96% 70% at 50% 30%, oklch(0.14 0.035 287 / .52) 0%, oklch(0.14 0.035 287 / .30) 50%, transparent 84%),
-    linear-gradient(to bottom, var(--bg) 0%, transparent 22%, transparent 70%, var(--bg) 100%);
+    radial-gradient(96% 70% at 50% 42%, oklch(0.14 0.035 287 / .66) 0%, oklch(0.14 0.035 287 / .44) 50%, transparent 84%),
+    linear-gradient(to bottom,
+      var(--bg) 0%,
+      color-mix(in oklab, var(--bg) 78%, transparent) 14%,
+      color-mix(in oklab, var(--bg) 34%, transparent) 30%,
+      transparent 46%, transparent 68%, var(--bg) 100%);
 }
 #layers .wrap,#layers .deck,#layers .deck-hint{position:relative;z-index:3}
 .deck{
@@ -220,7 +236,9 @@ h1 .stop{color:var(--accent)}
 .deck::-webkit-scrollbar{display:none}
 .card{
   scroll-snap-align:start;
-  background:var(--veil);
+  /* the veil alone lets the painting's lit clouds glow through under the copy --
+     a night-indigo base keeps the frosted look but holds 4.5:1 at every scroll x */
+  background:linear-gradient(var(--veil),var(--veil)), oklch(0.14 0.035 287 / .46);
   border:1px solid var(--edge);          /* an honest edge, not a glass panel */
   border-radius:var(--r-card);
   padding:var(--s6);
@@ -228,9 +246,10 @@ h1 .stop{color:var(--accent)}
   transition:background var(--d-m) var(--e-std);
 }
 .card:hover{background:oklch(0.972 0.005 292 / .085)}
-.card .idx{font-family:GeistMono,monospace;font-size:0.8125rem;color:var(--accent)}
+.card .idx{font-family:GeistMono,monospace;font-size:0.8125rem;color:var(--accent-text)}
+.card small{color:var(--ink-mute);line-height:1.55}
 .card p{margin:0;color:var(--ink-dim);font-size:0.9375rem}
-.deck-hint{font-family:GeistMono,monospace;font-size:0.8125rem;color:var(--ink-mute);padding:0 var(--gutter)}
+.deck-hint{font-family:GeistMono,monospace;font-size:0.8125rem;color:var(--ink-dim);padding:0 var(--gutter)}
 
 /* ─────────────── callout ─────────────── */
 .callout{
@@ -240,10 +259,10 @@ h1 .stop{color:var(--accent)}
 .callout p:last-child{margin-bottom:0}
 
 /* ─────────────── data as graphic ─────────────── */
-.figure{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:var(--s8);align-items:center}
+.figure{display:grid;grid-template-columns:minmax(0,344px) minmax(0,1fr);gap:var(--s8);align-items:center}
 @media (max-width:880px){.figure{grid-template-columns:1fr;gap:var(--s6)}}
 .isotype{width:100%;height:auto;shape-rendering:crispEdges;display:block}
-figcaption{font-size:0.8125rem;color:var(--ink-mute);margin-top:var(--s4);max-width:46ch}
+figcaption{font-size:0.8125rem;color:var(--ink-mute);margin-top:var(--s4);max-width:56ch}
 .bracket{display:flex;align-items:baseline;gap:var(--s5);font-family:GeistMono,monospace;flex-wrap:wrap}
 .bracket .amt{font-size:clamp(2.1rem,1.2rem+3.2vw,3.4rem);line-height:1;letter-spacing:-.03em}
 .bracket .was{color:var(--ink-mute)}
@@ -269,10 +288,10 @@ tbody tr.is-winner th[scope=row]{box-shadow:inset 3px 0 0 var(--accent)}
 
 .tag{
   display:inline-block;font-family:GeistMono,monospace;font-size:10px;letter-spacing:.14em;
-  text-transform:uppercase;padding:2px 7px;border:1px solid currentColor;border-radius:var(--r-xs);
+  text-transform:uppercase;padding:4px 8px;border:1px solid currentColor;border-radius:var(--r-xs);
   white-space:nowrap;line-height:1.6;
 }
-.tag--sim{color:var(--accent)}
+.tag--sim{color:var(--accent-text)}
 .tag--open{color:oklch(0.72 0.10 18)}
 .tag--proven{color:oklch(0.78 0.09 158)}
 
@@ -282,13 +301,13 @@ tbody tr.is-winner th[scope=row]{box-shadow:inset 3px 0 0 var(--accent)}
 .cta::before{
   content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
   background:
-    radial-gradient(80% 66% at 50% 50%, oklch(0.16 0.03 292 / .62) 0%, oklch(0.16 0.03 292 / .34) 48%, transparent 82%),
+    radial-gradient(94% 78% at 50% 50%, oklch(0.16 0.03 292 / .84) 0%, oklch(0.16 0.03 292 / .62) 48%, transparent 84%),
     linear-gradient(to bottom, var(--bg) 0%, transparent 20%, transparent 78%, var(--bg) 100%);
 }
 .cta .wrap{position:relative;z-index:3}
 footer{background:var(--bg);padding:var(--s8) 0 var(--s9);color:var(--ink-mute);font-size:0.8125rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:var(--s5);justify-content:space-between;align-items:baseline}
-footer a{color:var(--ink-dim)}
+footer a{color:var(--ink-dim);display:inline-block;padding-block:var(--s2)}
 #totop{position:fixed;right:var(--s5);bottom:var(--s5);z-index:55;opacity:0;pointer-events:none;transition:opacity var(--d-m) var(--e-std)}
 #totop.show{opacity:1;pointer-events:auto}
 
@@ -303,7 +322,10 @@ footer a{color:var(--ink-dim)}
 @keyframes breath{0%,100%{transform:scale(1.035) translateY(0)}50%{transform:scale(1.055) translateY(-10px)}}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-1.2deg)}50%{transform:translateY(-9px) rotate(1.2deg)}}
 .motes{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
-.mote{position:absolute;bottom:12%;width:3px;height:3px;border-radius:50%;background:var(--ink);opacity:0}
+.mote{
+  position:absolute;bottom:12%;width:3px;height:3px;border-radius:50%;
+  background:var(--ink);box-shadow:0 0 6px 1px oklch(0.972 0.005 292 / .35);opacity:0;
+}
 
 .reveal{opacity:1;transform:none}
 @media (prefers-reduced-motion:no-preference){
@@ -314,6 +336,18 @@ footer a{color:var(--ink-dim)}
           transition:opacity 1.5s var(--e-enter),transform 1.5s var(--e-enter);
           transition-delay:var(--rd,0s)}
   .reveal.in{opacity:1;transform:none}
+
+  /* scroll-driven reshape: the page reforms as you scroll, on the compositor only.
+     Plates drift against the scroll; cards and tables settle from a slight lift.
+     Where view() timelines are missing, the IO reveal above still carries entry. */
+  @supports (animation-timeline: view()) {
+    @keyframes platepan{from{transform:translateY(-3.5%) scale(1.08)}to{transform:translateY(3.5%) scale(1.08)}}
+    @keyframes platepan-flip{from{transform:scaleX(-1) translateY(-3.5%) scale(1.08)}to{transform:scaleX(-1) translateY(3.5%) scale(1.08)}}
+    @keyframes settle{from{transform:translateY(22px) scale(.985)}to{transform:none}}
+    #layers .plate{animation:platepan linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+    .cta .plate{animation:platepan-flip linear both;animation-timeline:view();animation-range:cover 0% cover 100%}
+    .card,.tablewrap,.callout{animation:settle var(--e-std) both;animation-timeline:view();animation-range:entry 0% entry 80%}
+  }
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none !important;transition-duration:1ms !important}}
 @media print{nav,#totop,#progress,.plate,.motes,.crew{display:none}body{background:#fff;color:#000}}
@@ -442,27 +476,32 @@ footer a{color:var(--ink-dim)}
     <article class="card">
       <span class="idx num">01</span>
       <h3>Meters before model calls</h3>
-      <p>Every lane's hourly, daily and weekly burn is checked <em>before</em> work starts. A refused task costs zero tokens.</p>
+      <p>Every lane's burn is checked <em>before</em> work starts.</p>
+      <small>Hourly, daily and weekly meters. A refused task costs zero tokens.</small>
     </article>
     <article class="card">
       <span class="idx num">02</span>
       <h3>Leak stops same-day</h3>
-      <p>A runaway agent — 13%/hr with no output was the first catch — is parked automatically. 2%/hour audits, 4% and 7% soft stops, 12% and 15% hard stops.</p>
+      <p>A runaway agent is parked automatically, the same day.</p>
+      <small>First catch: 13%/hr with no output. 2%/hour audits; 4% and 7% soft stops, 12% and 15% hard stops.</small>
     </article>
     <article class="card">
       <span class="idx num">03</span>
       <h3>Overnight unattended missions</h3>
-      <p>Headless builder plus an independent critic per phase; every morning has a report of done / evidence / blocked. 45 logged episodes, measured quality 0.87–0.92 on the free lane.</p>
+      <p>Headless builder plus an independent critic per phase.</p>
+      <small>Every morning: done / evidence / blocked. 45 logged episodes, measured quality 0.87–0.92 on the free lane.</small>
     </article>
     <article class="card">
       <span class="idx num">04</span>
       <h3>Warm sessions, bounded context</h3>
-      <p>Compaction points solved from the provider's own price ratio — <span class="num">K* = b + √(2·(f/c)·(b+R)·d)</span> — cutting a measured burn by 42%.</p>
+      <p>Compaction points solved from the provider's own price ratio.</p>
+      <small><span class="num">K* = b + √(2·(f/c)·(b+R)·d)</span> — cutting a measured burn by 42%.</small>
     </article>
     <article class="card">
       <span class="idx num">05</span>
       <h3>Degradation by design</h3>
-      <p>Lanes fail in a ladder: Claude → Codex + free → free + GLM → Kimi. The queue never dies; routing just gets cheaper and slower.</p>
+      <p>Lanes fail in a ladder; the queue never dies.</p>
+      <small>Claude → Codex + free → free + GLM → Kimi. Routing just gets cheaper and slower.</small>
     </article>
   </div>
   <p class="deck-hint">Scroll →</p>
@@ -640,15 +679,19 @@ footer a{color:var(--ink-dim)}
     }
   }
 
-  /* motes: deterministic, never Math.random, so the sky is stable across reloads */
+  /* motes: deterministic, never Math.random, so the sky is stable across reloads.
+     Stratified: each mote owns an equal slot of the width plus a small hashed
+     jitter, so the drift is even left-to-right instead of clumping. */
   function seed(host, n){
     if (!host || reduced) return;
     var f = document.createDocumentFragment();
     for (var i = 0; i < n; i++) {
       var s = ((i * 2654435761) % 1000) / 1000;
+      var slot = (i + 0.5) / n;
+      var left = 2 + slot * 96 + (s - 0.5) * (96 / n) * 0.9;
       var e = document.createElement("span");
       e.className = "mote";
-      e.style.left = (3 + s * 94).toFixed(2) + "%";
+      e.style.left = left.toFixed(2) + "%";
       e.style.setProperty("--dur",   (11 + s * 9).toFixed(2) + "s");
       e.style.setProperty("--delay", (-s * 18).toFixed(2) + "s");
       e.style.setProperty("--peak",  (0.16 + s * 0.3).toFixed(2));
