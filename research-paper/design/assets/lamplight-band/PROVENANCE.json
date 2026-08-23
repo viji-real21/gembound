@@ -1,0 +1,27 @@
+{
+ "stage": "S4t",
+ "tool": "bin/design-treat.py",
+ "note": "Dreamscape plates quoted into the lamplight world through the same press (same ink, paper, cell, scanline). They are band imagery on lamplight.html, not the palette basis of any theme -- lamplight's palette extracts from the harbour photography in ../harbour.",
+ "ink": "#fba503",
+ "paper": "#05060c",
+ "params": {
+  "cell": 3,
+  "scanline_period": 4,
+  "scanline_depth": 0.22,
+  "gamma": 1.55,
+  "floor": 6,
+  "ceil": 238
+ },
+ "sources": [
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/dreamscape/dreamscape-01.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/dreamscape/dreamscape-02.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/dreamscape/dreamscape-03.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/dreamscape/dreamscape-04.png"
+ ],
+ "outputs": [
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight-band/dreamscape-01--treated.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight-band/dreamscape-02--treated.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight-band/dreamscape-03--treated.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight-band/dreamscape-04--treated.png"
+ ]
+}

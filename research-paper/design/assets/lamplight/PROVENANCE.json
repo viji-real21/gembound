@@ -1,0 +1,39 @@
+{
+ "stage": "S4t",
+ "tool": "bin/design-treat.py",
+ "note": "Derived plates. Extract a palette from `sources`, never from here -- the treatment is 1-bit, so this directory contains only ink and paper by construction. The palette basis is the harbour photography; the mascot is a drawn character quoted into the same press (it contributes no palette), and the dreamscape band plates live in ../lamplight-band with their own provenance.",
+ "ink": "#fba503",
+ "paper": "#05060c",
+ "params": {
+  "cell": 3,
+  "scanline_period": 4,
+  "scanline_depth": 0.22,
+  "gamma": 1.55,
+  "floor": 6,
+  "ceil": 238
+ },
+ "sources": [
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/harbour/harbour-01.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/harbour/harbour-02.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/harbour/harbour-03.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/harbour/harbour-04.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/harbour/harbour-05.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/harbour/harbour-06.png"
+ ],
+ "character_sources": [
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/mascot/mascot-01.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/mascot/mascot-02.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/mascot/mascot-03.png"
+ ],
+ "outputs": [
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight/harbour-01--treated.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight/harbour-02--treated.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight/harbour-03--treated.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight/harbour-04--treated.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight/harbour-05--treated.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight/harbour-06--treated.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight/mascot-01--treated.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight/mascot-02--treated.png",
+  "/Users/vedhith/Developer/sandbox/.claude/worktrees/fleet-landing-redesign/research-paper/design/assets/lamplight/mascot-03--treated.png"
+ ]
+}

@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agent Fleet — 24/7 coding coverage for the price of one seat</title>
+<meta name="description" content="A pool of subscription coding agents, scheduled by arithmetic instead of hope. 100% of around-the-clock demand at $319/mo — proven by simulation.">
+<style>
+/* ============ lamplight — one ink, one paper, one lamp ============
+   palette extracted from the plates (design-palette.py, PROVENANCE.json):
+   paper #05060c · ink #bf651d (7.16:1 on paper) · accent #fba503 (the lamp) */
+@font-face{font-family:'Outfit';src:url('../../fonts/Outfit-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Outfit';src:url('../../fonts/Outfit-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Work Sans';src:url('../../fonts/WorkSans-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+
+:root{
+  --bg:#05060c;                   /* palette tokens: bg / ink / accent */
+  --accent:#fba503;
+  --paper:#05060c;
+  --ink:#bf651d;
+  --lamp:#fba503;
+  --ink-hi:#d8925c;              /* ink lifted one step for long body text, same hue */
+  --demote:.78;                   /* hierarchy is subtractive: opacity before weight (4.5:1 floor) */
+  --display:'Outfit',sans-serif;
+  --text:'Work Sans',sans-serif;
+  --mono:ui-monospace,'SF Mono',Menlo,monospace;
+  --measure:62ch;
+  --lamp-a:1; --lamp-b:1;         /* two desynced flicker vars */
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink-hi);
+  font:400 17px/1.6 var(--text);
+  overflow-x:hidden;
+}
+::selection{background:var(--lamp);color:var(--paper)}
+
+/* the paper itself is a print: faint halftone field, same cell as the plates */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;
+  background-image:radial-gradient(var(--ink) .8px, transparent .9px);
+  background-size:6px 6px;
+}
+
+a{color:inherit}
+.mono{font-family:var(--mono)}
+.micro{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;line-height:2.4}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:10;
+  display:flex;align-items:center;gap:32px;
+  padding:16px 40px;
+  background:linear-gradient(color-mix(in oklab,var(--paper) 92%,transparent), transparent);
+}
+.wordmark{display:flex;align-items:center;gap:8px;font:700 19px/1 var(--display);color:var(--lamp);text-decoration:none}
+.lampdot{width:9px;height:9px;border-radius:50%;background:var(--lamp);
+  box-shadow:0 0 10px 2px color-mix(in oklab,var(--lamp) 60%,transparent);
+  opacity:var(--lamp-a)}
+nav .links{display:flex;gap:16px;margin-left:auto}
+nav .links a{font:400 13.5px/1 var(--text);color:var(--ink-hi);opacity:var(--demote);text-decoration:none;transition:opacity .25s;padding:8px 4px}
+nav .links a:hover{opacity:1}
+.navcta{display:inline-block;font:700 13.5px/1 var(--display);color:var(--paper);background:var(--ink);border-radius:4px;
+  padding:12px 20px;text-decoration:none;transition:background .25s}
+.navcta:hover{background:var(--lamp)}
+
+/* ---------- hero / claim ---------- */
+#claim{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+.hero-plate{
+  position:absolute;inset:0;z-index:-1;
+  background:url('../assets/lamplight/harbour-04--treated.png') bottom right / cover no-repeat;
+}
+/* scrim exists to seat the type on the plate's quiet upper-left, never to bury the image */
+.hero-plate::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 90% at 22% 38%, color-mix(in oklab,var(--paper) 72%,transparent) 0 30%, transparent 70%),
+             linear-gradient(180deg, transparent 62%, var(--paper) 100%)}
+.hero-inner{position:relative;padding:120px 40px 22vh;max-width:1180px;margin:0 auto;width:100%}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid color-mix(in oklab,var(--ink) 45%,transparent);
+  border-radius:3px;padding:8px 12px;color:var(--ink-hi);background:var(--paper)}
+.chip .lampdot{opacity:var(--lamp-b)}
+#claim h1{
+  font:700 clamp(2.6rem, 6.2vw, 4.6rem)/1.04 var(--display);
+  letter-spacing:-.005em;color:var(--lamp);
+  margin-top:12px;                 /* eyebrow -> heading: 12 */
+  max-width:17ch;
+}
+#claim h1 .lowered{color:var(--ink)}    /* two-tone: emphasis by lowering (still 4.9:1) */
+#claim h1 .full{color:var(--lamp)}
+#claim .sub{
+  margin-top:8px;                  /* heading -> subtext: 8 */
+  max-width:46ch;font-size:19px;opacity:var(--demote);
+}
+.cta-row{display:flex;align-items:center;gap:16px;margin-top:32px;flex-wrap:wrap}  /* -> buttons: 32 */
+.btn{font:700 15px/1 var(--display);border-radius:4px;padding:16px 24px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:transform .22s cubic-bezier(.2,.9,.3,1.2), box-shadow .22s}
+.btn:active{transform:translateY(1px) scale(.99)}                    /* press, always */
+.btn-primary{background:var(--lamp);color:var(--paper)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px color-mix(in oklab,var(--lamp) 55%,transparent)} /* plate-lift */
+.btn-ghost{color:var(--ink-hi);position:relative;border:1px solid color-mix(in oklab,var(--ink) 40%,transparent)}
+.btn-ghost::after{content:"";position:absolute;inset:-1px;border:1px solid var(--lamp);border-radius:4px;
+  clip-path:inset(0 100% 0 0);transition:clip-path .4s ease}
+.btn-ghost:hover::after{clip-path:inset(0 0 0 0)}                    /* edge-draw */
+.price-aside{font-family:var(--mono);font-size:13px;opacity:var(--demote);
+  background:var(--paper);border-radius:3px;padding:8px 12px}
+
+/* ---------- shared section shell ---------- */
+section{position:relative;z-index:1}
+.shell{max-width:1180px;margin:0 auto;padding:96px 40px}
+h2{font:700 clamp(1.7rem,3.2vw,2.5rem)/1.12 var(--display);letter-spacing:-.005em;color:var(--lamp);max-width:24ch}
+.kicker{color:var(--ink);margin-bottom:12px}
+.prose{max-width:var(--measure)}
+.prose p{margin-top:16px}
+
+/* print-pull reveal (press-reveal motif) — armed only when JS is present */
+.js .reveal{opacity:0;transform:translateY(14px);filter:blur(3px);
+  transition:opacity 1.4s ease,transform 1.4s ease,filter 1.4s ease}
+.js .reveal.on{opacity:1;transform:none;filter:none}
+
+/* ---------- coverage ---------- */
+#coverage .grid{display:grid;grid-template-columns:minmax(280px,5fr) 7fr;gap:56px;align-items:center}
+.bignum{font:700 clamp(4.4rem,10vw,7.5rem)/1 var(--display);color:var(--lamp);letter-spacing:-.01em}
+.bignum .from{color:var(--ink);opacity:.55}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;border:1px solid;border-radius:3px;padding:4px 8px;white-space:nowrap}
+.tag-sim{color:var(--ink-hi);border-color:color-mix(in oklab,var(--ink) 55%,transparent)}
+.tag-open{color:var(--lamp);border-color:color-mix(in oklab,var(--lamp) 55%,transparent)}
+.stamp{transform-origin:60% 40%}
+.reveal.on .stamp{animation:stamp .45s cubic-bezier(.2,1.4,.4,1) both .9s}
+@keyframes stamp{0%{transform:scale(1.7);opacity:0}70%{transform:scale(.96);opacity:1}100%{transform:scale(1)}}
+
+/* ---------- lanes ---------- */
+#lanes .tablewrap{border:1px solid color-mix(in oklab,var(--ink) 30%,transparent);border-radius:6px;overflow:hidden;margin-top:40px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:left;
+  color:var(--ink);padding:16px 20px;border-bottom:1px solid color-mix(in oklab,var(--ink) 30%,transparent)}
+td{padding:16px 20px;border-bottom:1px solid color-mix(in oklab,var(--ink) 16%,transparent);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tbody tr{transition:background .25s}
+tbody tr:hover{background:color-mix(in oklab,var(--ink) 9%,transparent)}   /* cursor-region: ledger line under the lantern */
+td .m{font-family:var(--mono);font-size:13.5px}
+.rowlead{color:var(--lamp);font-weight:700;font-family:var(--display)}
+.demoted{opacity:var(--demote)}
+
+/* ---------- scheduler ---------- */
+/* one left edge (x = shell) and one right edge (the hairline rules span to the table edge) */
+#scheduler ol{list-style:none;counter-reset:rule;margin-top:40px;display:grid;gap:0}
+#scheduler li{counter-increment:rule;padding:24px 0;border-top:1px solid color-mix(in oklab,var(--ink) 18%,transparent)}
+#scheduler li::before{content:"0" counter(rule);display:inline-block;margin-right:16px;
+  font-family:var(--mono);font-size:22px;color:var(--ink);opacity:.7;vertical-align:baseline}
+#scheduler li strong{display:inline;font:700 18px/1.3 var(--display);color:var(--lamp)}
+#scheduler li p{opacity:var(--demote);font-size:15.5px;max-width:58ch;margin-top:8px}
+
+/* plates between sections: grain-swell on hover */
+.plate-band{margin:0 auto;max-width:1180px;padding:0 40px}
+.plate-band img{width:100%;border-radius:6px;display:block;
+  transition:filter .6s ease, transform .6s ease}
+.plate-band img:hover{filter:contrast(1.06) brightness(1.05)}
+.plate-cap{margin-top:8px;opacity:.78}
+
+/* ---------- numbers ---------- */
+#numbers .tablewrap{border:1px solid color-mix(in oklab,var(--ink) 30%,transparent);border-radius:6px;overflow:hidden;margin-top:40px}
+.win td{background:color-mix(in oklab,var(--lamp) 8%,transparent)}
+.win .rowlead{color:var(--lamp)}
+.arith{font-family:var(--mono);font-size:14px;margin-top:24px;opacity:var(--demote);max-width:62ch}
+
+/* ---------- honest ---------- */
+#honest .shell{padding-top:64px}
+#honest .prose{border-left:3px solid var(--ink);padding-left:24px}
+#honest .prose p{opacity:var(--demote)}
+#honest .prose p strong{color:var(--lamp);font-weight:400}
+
+/* ---------- mascot / footer ---------- */
+#footer{position:relative;overflow:hidden}
+#footer .shell{display:flex;align-items:flex-end;gap:48px;padding-bottom:64px;flex-wrap:wrap}
+.mascot{width:190px;flex:none}
+.mascot img{width:100%;border-radius:6px}
+.colophon{font-family:var(--mono);font-size:12.5px;opacity:var(--demote);line-height:2}
+.colophon a{display:inline-block;padding:8px 0;margin:-8px 0}   /* 24px+ hit target without breaking rhythm */
+.colophon .lampdot{display:inline-block;vertical-align:middle;margin-right:8px;opacity:var(--lamp-a)} /* the bookend */
+
+/* ---------- motion gates ---------- */
+@media (prefers-reduced-motion: reduce){
+  .js .reveal{opacity:1;transform:none;filter:none;transition:none}
+  .reveal.on .stamp{animation:none}
+  .btn,.btn-ghost::after,tbody tr{transition:none}
+  html{scroll-behavior:auto}
+}
+@media (max-width:820px){
+  nav{padding:16px 20px}nav .links{display:none}
+  .hero-inner{padding:112px 20px 18vh}
+  .shell{padding:72px 20px}
+  #coverage .grid{grid-template-columns:1fr;gap:24px}
+  .plate-band{padding:0 20px}
+  td,th{padding:12px;font-size:13.5px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="wordmark" href="#claim"><span class="lampdot"></span>Agent Fleet</a>
+  <div class="links">
+    <a href="#coverage">Coverage</a><a href="#lanes">Lanes</a><a href="#scheduler">Scheduler</a>
+    <a href="#numbers">Numbers</a><a href="#honest">Honesty</a>
+  </div>
+  <a class="navcta" href="../../index.html">Read the evidence paper</a>
+</nav>
+
+<section id="claim">
+  <div class="hero-plate" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <span class="chip micro"><span class="lampdot"></span>Live since 2026-08-17 · 70 tests green</span>
+    <h1><span class="full">24/7 coding coverage</span><br><span class="lowered">for a flat</span> <span class="full">$319 a month.</span></h1>
+    <p class="sub">A pool of subscription coding agents, scheduled by arithmetic instead of hope. The gap between 63% and 100% is not model quality — it is scheduling.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#coverage">See the coverage numbers</a>
+      <a class="btn btn-ghost" href="#honest">Read what it gets wrong</a>
+      <span class="price-aside">three subscriptions · no per-token bill</span>
+    </div>
+  </div>
+</section>
+
+<section id="coverage">
+  <div class="shell reveal">
+    <p class="kicker micro">Coverage</p>
+    <div class="grid">
+      <div class="bignum"><span class="from">63%</span> → 100%</div>
+      <div class="prose">
+        <h2>Two subscriptions lose a third of the week.</h2>
+        <p>Any single agent seat hits weekly quota ceilings, sleeps while you sleep, and burns its best hours on grind. Simulated at medium 24/7 demand, Claude&nbsp;Max + ChatGPT&nbsp;Pro ($300/mo) serve 63% of arriving work — the rest queues behind resets.</p>
+        <p>The fleet keeps the same architect judgment and routes every unit of work to the cheapest lane that can hold it. <span class="tag tag-sim stamp">SIMULATED — 70 tests green</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="plate-band reveal">
+  <img src="../assets/lamplight/harbour-03--treated.png" alt="Treated plate: coiled mooring rope on the quay edge under one lamp" loading="lazy">
+  <p class="plate-cap micro">The night watch — every berth metered before a hull takes a lane</p>
+</div>
+
+<section id="lanes">
+  <div class="shell reveal">
+    <p class="kicker micro">Lanes</p>
+    <h2>Five lanes, one queue.</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Lane</th><th>Role</th><th>Cost</th><th>Terminal-Bench 2.1 <span class="demoted">(best harness)</span></th></tr></thead>
+        <tbody>
+          <tr><td class="rowlead">Claude (Opus/Fable)</td><td>Architect, judgment, conversation</td><td class="m">$200/mo sub</td><td class="m">84.6</td></tr>
+          <tr><td class="rowlead">Codex (GPT-5.6)</td><td>Repo grind, implementation</td><td class="m">$100/mo <span class="demoted">(ends Sept)</span></td><td class="m">88.8</td></tr>
+          <tr><td class="rowlead">Kimi K3 “Allegro”</td><td>Replaces the Codex lane at renewal</td><td class="m">$99/mo</td><td class="m">claimed 88.3 <span class="tag tag-open">UNVERIFIED</span></td></tr>
+          <tr><td class="rowlead">GLM 5.3</td><td>Final backup when subs hard-stop</td><td class="m">$20/mo credits</td><td class="m">82.7</td></tr>
+          <tr><td class="rowlead">Free surge (opencode)</td><td>$0 grind — appears and vanishes</td><td class="m">$0</td><td class="m">87.9 <span class="demoted">until the pool rotates</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="scheduler">
+  <div class="shell reveal">
+    <p class="kicker micro">Scheduler</p>
+    <h2>What the harbourmaster does.</h2>
+    <ol>
+      <li><div><strong>Meters before model calls.</strong><p>Every lane's hourly, daily and weekly burn is checked before work starts. A refused task costs zero tokens.</p></div></li>
+      <li><div><strong>Leak stops same-day.</strong><p>A runaway agent — the first catch was burning 13% of the weekly budget per hour with no output — is parked automatically. Burn is audited every 2%; soft stops at 4% (daily) and 7% (weekly); hard stops at 12% and 15%.</p></div></li>
+      <li><div><strong>Overnight unattended missions.</strong><p>Headless builder plus an independent critic per phase. Every morning has a report of done, evidence, blocked — 45 logged episodes, measured quality 0.87–0.92 on the free lane.</p></div></li>
+      <li><div><strong>Warm sessions, bounded context.</strong><p>Compaction points are solved from the provider's own cache-price ratio (the closed form is derived in the evidence paper) — cutting one measured burn by 42%.</p></div></li>
+      <li><div><strong>Degradation by design.</strong><p>Lanes fail in a ladder: Claude → Codex+free → free+GLM → Kimi. The queue never dies; routing just gets cheaper and slower.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<div class="plate-band reveal">
+  <img src="../assets/lamplight-band/dreamscape-01--treated.png" alt="Treated plate: moonlit open water beyond the harbour" loading="lazy">
+  <p class="plate-cap micro">Open water — demand arrives whether anyone is awake or not</p>
+</div>
+
+<section id="numbers">
+  <div class="shell reveal">
+    <p class="kicker micro">Numbers</p>
+    <h2>The numbers, with their tags on.</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Stack</th><th>Cost</th><th>Light</th><th>Medium</th><th>Heavy</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="rowlead">Claude + Codex <span class="demoted">(today's default)</span></td><td class="m">$300</td><td class="m">100%</td><td class="m">63%</td><td class="m">63.9%</td><td><span class="tag tag-sim">SIMULATED</span></td></tr>
+          <tr><td class="rowlead">Codex + free <span class="demoted">(Claude stopped)</span></td><td class="m">$100</td><td class="m">100%</td><td class="m">100%</td><td class="m">57.3%</td><td><span class="tag tag-sim">SIMULATED</span></td></tr>
+          <tr><td class="rowlead">Free + GLM <span class="demoted">(both subs stopped)</span></td><td class="m">$20</td><td class="m">100%</td><td class="m">100%</td><td class="m">67.9%</td><td><span class="tag tag-sim">SIMULATED</span></td></tr>
+          <tr class="win"><td class="rowlead">Claude + Kimi + GLM (+free)</td><td class="m">$319</td><td class="m">100%</td><td class="m">100%</td><td class="m">100%</td><td><span class="tag tag-sim">SIMULATED</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="arith">$200 Claude + $99 Kimi + $20 GLM = $319/mo. Light, medium and heavy are three separately-simulated demand traces — different weeks, not supersets — so columns don't move in lockstep (medium 63% beside heavy 63.9% is the traces differing, not a typo). The $20 row survives heavy only by leaning on the free surge lane, which is excluded from durable verdicts — it rotated once already. Sim = discrete-event backtest (stack_backtest.py, 70 tests green).</p>
+  </div>
+</section>
+
+<section id="honest">
+  <div class="shell reveal">
+    <p class="kicker micro">Honesty</p>
+    <h2>What it costs to be honest.</h2>
+    <div class="prose" style="margin-top:28px">
+      <p><strong>The 100% figure is a simulation result</strong> under modeled demand, re-run as a contract test on every change — not a mathematical theorem about all futures.</p>
+      <p>Heavy real-world weeks can still starve a lane. The scheduler's promise is that starvation, when it happens, is <strong>visible and priced</strong> — never silent. No claim on this page is dressed up as more than its evidence tag.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="shell reveal">
+    <div class="mascot">
+      <img src="../assets/lamplight/mascot-02--treated.png" alt="The Fleet beacon — a lantern that stays lit">
+    </div>
+    <div class="colophon">
+      <span class="lampdot"></span>the lamp stays on<br>
+      vedhith-workflow-os + langgraph-shadow · live since 2026-08-17<br>
+      evidence paper: <a href="../../index.html">index.html</a> · numbers regenerate from tests, not by hand
+    </div>
+  </div>
+</footer>
+
+<script>
+/* press-reveal + 2.5s failsafe; lamp flicker on two desynced vars */
+document.documentElement.classList.add('js');   /* reveal states are armed only from here */
+const rm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const els = document.querySelectorAll('.reveal');
+if (rm) { els.forEach(e => e.classList.add('on')); }
+else {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+  }), { threshold: .18 });
+  els.forEach(e => io.observe(e));
+  setTimeout(() => els.forEach(e => e.classList.add('on')), 2500);   /* failsafe */
+  /* lamp-flicker: two periods, never synchronous */
+  let t = 0;
+  setInterval(() => {
+    t += 1;
+    document.documentElement.style.setProperty('--lamp-a', (0.82 + 0.18 * Math.abs(Math.sin(t / 7))).toFixed(3));
+    document.documentElement.style.setProperty('--lamp-b', (0.80 + 0.20 * Math.abs(Math.sin(t / 11 + 2))).toFixed(3));
+  }, 900);
+}
+</script>
+</body>
+</html>

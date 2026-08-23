@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WIRE — Fleet landing (layout only, zero styling)</title>
+<style>
+  /* wire only: boxes and flow. No identity. */
+  body{font:15px/1.5 system-ui;margin:0;color:#111}
+  section,nav,footer{border:1px dashed #999;margin:8px;padding:16px;position:relative}
+  section::before,nav::before,footer::before{content:attr(id);position:absolute;top:-9px;left:12px;background:#fff;font:11px monospace;color:#777;padding:0 4px}
+  .row{display:flex;gap:16px;align-items:center;justify-content:space-between}
+  .plate{background:#eee;border:1px solid #ccc;text-align:center;padding:40px;color:#888;font:12px monospace}
+  table{border-collapse:collapse;width:100%}td,th{border:1px solid #ccc;padding:6px;font-size:13px;text-align:left}
+  .demoted{color:#777}
+</style>
+</head>
+<body>
+
+<nav id="nav" class="row">
+  <div>[lamp glyph] <strong>Agent Fleet</strong></div>
+  <div class="demoted">Coverage · Lanes · Scheduler · Numbers · Honesty</div>
+  <div>[Read the evidence paper]</div>
+</nav>
+
+<section id="claim">
+  <div class="plate">FULL-BLEED PLATE — hero world behind (type sits on the quiet left region)</div>
+  <p class="demoted">[chip] LIVE SINCE 2026-08-17 · 70 TESTS GREEN</p>
+  <h1>24/7 coding coverage for the price of <span class="demoted">one seat</span>.</h1>
+  <p>A pool of subscription coding agents, scheduled by arithmetic instead of hope. The gap between 63% and 100% is not model quality — it is scheduling.</p>
+  <p class="row">[See the coverage numbers] [Read what it gets wrong] <span class="demoted">$319/mo · no per-token bill</span></p>
+</section>
+
+<section id="coverage" class="row">
+  <div><h2>63% → 100%</h2><p class="demoted">big number left</p></div>
+  <div><p>Two plain subscriptions ($300/mo) serve 63% of around-the-clock demand; the rest queues behind quota resets. The fleet holds 100% at $319 — proven by simulation, 70 tests green. [SIMULATED]</p></div>
+</section>
+
+<section id="lanes">
+  <h2>Five lanes, one queue</h2>
+  <table>
+    <tr><th>Lane</th><th>Role</th><th>Cost</th><th>Terminal-Bench 2.1</th></tr>
+    <tr><td>Claude (Opus/Fable)</td><td>Architect, judgment</td><td>$200/mo</td><td>84.6</td></tr>
+    <tr><td>Codex (GPT-5.6)</td><td>Repo grind</td><td>$100/mo (ends Sept)</td><td>88.8</td></tr>
+    <tr><td>Kimi K3 "Allegro"</td><td>Replaces Codex lane</td><td>$99/mo</td><td>claimed 88.3 [UNVERIFIED]</td></tr>
+    <tr><td>GLM 5.3</td><td>Final backup</td><td>$20/mo</td><td>82.7</td></tr>
+    <tr><td>Free surge (opencode)</td><td>$0 grind, appears/vanishes</td><td>$0</td><td>87.9 until the pool rotates</td></tr>
+  </table>
+</section>
+
+<section id="scheduler">
+  <h2>What the scheduler does</h2>
+  <ol>
+    <li>Meters before model calls — a refused task costs zero tokens.</li>
+    <li>Leak stops same-day — runaway agents parked automatically.</li>
+    <li>Overnight unattended missions — builder + critic per phase, morning report.</li>
+    <li>Warm sessions, bounded context — compaction from the provider's price ratio, −42% measured burn.</li>
+    <li>Degradation by design — lanes fail in a ladder; the queue never dies.</li>
+  </ol>
+</section>
+
+<section id="numbers">
+  <h2>The numbers</h2>
+  <table>
+    <tr><th>Stack</th><th>Cost</th><th>Light</th><th>Medium</th><th>Heavy</th><th>Status</th></tr>
+    <tr><td>Claude + Codex</td><td>$300</td><td>100%</td><td>63%</td><td>63.9%</td><td>[SIMULATED]</td></tr>
+    <tr><td>Codex + free</td><td>$100</td><td>100%</td><td>100%</td><td>57.3%</td><td>[SIMULATED]</td></tr>
+    <tr><td>Free + GLM</td><td>$20</td><td>100%</td><td>100%</td><td>67.9%</td><td>[SIMULATED]</td></tr>
+    <tr><td><strong>Claude + Kimi + GLM (+free)</strong></td><td><strong>$319</strong></td><td>100%</td><td>100%</td><td><strong>100%</strong></td><td>[SIMULATED]</td></tr>
+  </table>
+</section>
+
+<section id="honest">
+  <h2>What it costs to be honest</h2>
+  <p>The 100% figure is a simulation result under modeled demand, re-run as a contract test on every change. Heavy real-world weeks can still starve a lane; the promise is that starvation is visible and priced, not silent.</p>
+</section>
+
+<footer id="footer" class="row">
+  <div class="demoted">vedhith-workflow-os + langgraph-shadow · live since 2026-08-17</div>
+  <div class="demoted">evidence paper · numbers regenerate from tests, not by hand</div>
+</footer>
+
+</body>
+</html>
