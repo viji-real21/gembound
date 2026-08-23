@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fleet landing — theme picker (round: 5 worlds)</title>
+<!-- Deliberately neutral chrome: the picker must not wear any candidate's skin,
+     or it pre-sells that candidate. system-ui, grey on near-black, no accent. -->
+<style>
+:root{--bg:#111214;--card:#191b1e;--line:#2c2f33;--txt:#d6d7d9;--dim:#8f9296;--good:#7fbf7f}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--txt);font:15px/1.55 system-ui,-apple-system,sans-serif;padding:40px 20px 80px}
+main{max-width:1080px;margin:0 auto}
+h1{font-size:22px;font-weight:700}
+.sub{color:var(--dim);margin-top:6px;max-width:70ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:24px;margin-top:24px}
+.card h2{font-size:17px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.state{font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:3px;border:1px solid var(--line);color:var(--dim)}
+.state.built{color:var(--good);border-color:var(--good)}
+.world{color:var(--dim);margin-top:8px;max-width:78ch}
+dl{display:grid;grid-template-columns:110px 1fr;gap:4px 16px;margin-top:14px;font-size:13.5px}
+dt{color:var(--dim)}
+dd{color:var(--txt)}
+.shots{display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;align-items:flex-start}
+.shots figure{margin:0}
+.shots img{border:1px solid var(--line);border-radius:4px;display:block}
+.shots .desk img{width:560px;max-width:100%}
+.shots .ph img{width:150px}
+.shots figcaption{font-size:11px;color:var(--dim);margin-top:4px}
+.open{display:inline-block;margin-top:12px;font-size:13.5px;color:var(--txt);border:1px solid var(--line);border-radius:4px;padding:8px 14px;text-decoration:none}
+.open:hover{border-color:var(--dim)}
+.gates{margin-top:12px;font-size:12.5px;color:var(--good)}
+.pick{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;color:var(--dim);max-width:78ch}
+.pick code{background:var(--card);border:1px solid var(--line);border-radius:3px;padding:1px 6px;font-size:13px;color:var(--txt)}
+.sw{display:inline-block;width:13px;height:13px;border-radius:2px;border:1px solid var(--line);vertical-align:-2px;margin-right:4px}
+</style>
+</head>
+<body>
+<main>
+<h1>Fleet landing — pick the world</h1>
+<p class="sub">Round state: identity locked (night-watch trust, harbour metaphor, honesty-first).
+Five theme worlds, per <code>themes/BRIEFS.md</code> — two built, three briefed with locked
+image graphs (plates render on demand). They differ in layout, type, colour temperature,
+motion and subject — not five recolours.</p>
+
+<div class="card">
+  <h2>1 · lamplight <span class="state built">built · S7 machine gates pass · S8 critic pass</span></h2>
+  <p class="world">A harbourmaster's night ledger printed in one ink. Every image — photographic
+  harbour, painted sea, the lantern-beacon mascot — goes through one halftone press
+  (Bayer 8×8, scanlines), so the whole page is a single printed material under sodium light.</p>
+  <dl>
+    <dt>Palette</dt><dd><span class="sw" style="background:#050506"></span>#050506 paper ·
+      <span class="sw" style="background:#bf651d"></span>#bf651d ink (7.16:1) ·
+      <span class="sw" style="background:#fba503"></span>#fba503 lamp — extracted from the harbour plates, not invented</dd>
+    <dt>Type</dt><dd>Outfit display · Work Sans text · mono for numerals and evidence tags</dd>
+    <dt>Motion</dt><dd>lamp-flicker bookend (nav → footer), press-reveal sections, hero drift; all off under reduced-motion</dd>
+  </dl>
+  <div class="shots">
+    <figure class="desk"><img src="themes/.shots/lamplight/lamplight-desktop.png" alt="lamplight desktop render"><figcaption>1440 desktop</figcaption></figure>
+    <figure class="ph"><img src="themes/.shots/lamplight/lamplight-phone.png" alt="lamplight phone render"><figcaption>390 phone</figcaption></figure>
+  </div>
+  <a class="open" href="themes/lamplight.html">Open the live page →</a>
+  <p class="gates">Machine-proved: WCAG contrast on rendered pixels, 4px spacing grid, 24px hit
+  targets, palette == plates. Independent shot critic (fresh Sonnet, screenshots only): PASS on all 7 items.</p>
+</div>
+
+<div class="card">
+  <h2>2 · dreamscape <span class="state built">built (round 2)</span></h2>
+  <p class="world">Painterly matte-painting night: indigo starfield, cumulus catching last light,
+  near-black mountains, gouache as the medium — every element painted, mascot included.
+  This is the round-2 page you picked before the media-coherence defect was found; its
+  mascot fix now routes through the same painted treatment.</p>
+  <dl>
+    <dt>Palette</dt><dd>deep indigo family, starlit cream ink, dusty-rose accent — extracted at S5 if picked</dd>
+    <dt>Type</dt><dd>Fraunces soft display serif · Work Sans</dd>
+    <dt>Motion</dt><dd>60s cloud parallax, star twinkle on two desynced periods, 1.7s reveals</dd>
+  </dl>
+  <div class="shots">
+    <figure class="desk"><img src="themes/.shots/dreamscape/dreamscape-desktop.png" alt="dreamscape desktop render"><figcaption>1440 desktop</figcaption></figure>
+    <figure class="ph"><img src="themes/.shots/dreamscape/dreamscape-phone.png" alt="dreamscape phone render"><figcaption>390 phone</figcaption></figure>
+  </div>
+  <a class="open" href="../fleet-dreamscape.html">Open the live page →</a>
+</div>
+
+<div class="card">
+  <h2>3 · signal-flags <span class="state">briefed · plates on demand</span></h2>
+  <p class="world">International maritime signal flags in daylight: hard-edged geometric panels,
+  navy/white/signal-red on bone paper, 1px off-register screen-print edges. Sections become
+  flag-grid hoists; the headline interleaves flag glyphs. The only light-hearted world of the five.</p>
+  <dl>
+    <dt>Graph</dt><dd>locked — seeds 6201–6206, 1024², style block in BRIEFS.md; no treatment needed, the subject is flat</dd>
+    <dt>Type</dt><dd>Archivo Black · IBM Plex Mono</dd>
+    <dt>Motion</dt><dd>flag-hoist clip-path reveals, 0.9s stagger; crisp, no drift</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h2>4 · chart-room <span class="state">briefed · plates on demand</span></h2>
+  <p class="world">The navigation chart table — engraved-linework charts on cream, depth soundings
+  as data texture, compass roses, one red plotted course line. Sections sit as chart insets with
+  neat-line borders and margin annotations. The light-mode world.</p>
+  <dl>
+    <dt>Graph</dt><dd>locked — seeds 6301–6306; treatment <code>--ink #1d2a44 --paper #f4ecd9</code>, accent from the course-plot red</dd>
+    <dt>Type</dt><dd>Spectral bookish serif · mono annotations</dd>
+    <dt>Motion</dt><dd>course line draws on scroll, compass needle settles on section enter</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h2>5 · dead-reckoning <span class="state">briefed · plates on demand</span></h2>
+  <p class="world">The bridge at 3am: radar-sweep phosphor green on CRT black, engraved bezels.
+  Coverage becomes a radar plot, the five lanes become instrument dials. Same halftone press as
+  lamplight with a different ink — the two night worlds stay materially coherent siblings.</p>
+  <dl>
+    <dt>Graph</dt><dd>locked — seeds 6401–6406; treatment <code>--ink #37e08c --paper #020604 --gamma 1.6</code></dd>
+    <dt>Type</dt><dd>Space Grotesk · mono everywhere (instrument voice)</dd>
+    <dt>Motion</dt><dd>one 8s radar sweep per page, odometer number ticks on scroll enter</dd>
+  </dl>
+</div>
+
+<p class="pick">To decide: reply in chat with the world's name — e.g. <code>pick lamplight</code>,
+<code>pick dreamscape</code>, or <code>plates for chart-room</code> to see a briefed world rendered
+before choosing. A pick triggers the refinement round (3 variations of that world);
+a briefed pick renders its plates through its locked graph first. This file is opened over
+<code>file://</code> — nothing is running.</p>
+</main>
+</body>
+</html>

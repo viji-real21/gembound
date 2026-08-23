@@ -17,7 +17,7 @@ page reads as a single printed material under sodium light.
 (harbour), 5101–5105 (dreamscape sources), 4101/4204/4205 (mascot). Style blocks verbatim
 in `PLATES.json`.
 **Locked treatment (the identity lives here, not in the prompt):**
-`design-treat.py --ink #fba503 --paper #05060c --gamma 1.7 --floor 34` — cell 3 Bayer 8×8
+`design-treat.py --ink #fba503 --paper #050506 --gamma 1.55 --floor 6 --ceil 238` — cell 3 Bayer 8×8
 ordered halftone, scanline period 4 depth 0.22. PROVENANCE.json names all 13 sources.
 
 **Palette out of plates** (design-palette.py over harbour set): bg `#050506`,

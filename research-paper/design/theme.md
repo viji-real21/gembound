@@ -10,7 +10,7 @@ sources; PROVENANCE.json in `assets/lamplight/` names them):
 
 | role | value | from |
 |---|---|---|
-| bg (paper) | `#05060c` | darkest weighty cluster / the treatment's paper |
+| bg (paper) | `#050506` | darkest weighty cluster / the treatment's paper |
 | ink | `#bf651d` | lightest weighty cluster, lifted along its own hue — 7.16:1 on bg |
 | accent | `#fba503` | most saturated cluster — the sodium lamp, and the treatment's ink |
 
@@ -32,8 +32,9 @@ Hero plate drifts at 1.06 over 20s. All of it dies under `prefers-reduced-motion
 **Locked graph (S4).** madroid/flux.1-schnell-mflux-4bit · 4 steps · 1344×768 ·
 seeds 3191–3196 / 5101–5105 / 4101–4205 · style blocks verbatim in `themes/PLATES.json`.
 **Locked treatment (S4t — the identity lives here).**
-`design-treat.py --ink #fba503 --paper #05060c --gamma 1.7 --floor 34`
-(cell 3, scanline period 4 depth 0.22). Re-running this line on any future plate is what
+`design-treat.py --ink #fba503 --paper #050506 --gamma 1.55 --floor 6 --ceil 238`
+(cell 3, scanline period 4 depth 0.22; gamma 0.85 and floor 34 were tried and rejected —
+one killed the night, the other laid a dot lattice under all type). Re-running this line on any future plate is what
 keeps the world one material.
 
 **Mascot rule.** The mascot appears only as a treated plate (`mascot-0N--treated.png`)

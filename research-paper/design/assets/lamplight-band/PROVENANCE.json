@@ -3,7 +3,7 @@
  "tool": "bin/design-treat.py",
  "note": "Dreamscape plates quoted into the lamplight world through the same press (same ink, paper, cell, scanline). They are band imagery on lamplight.html, not the palette basis of any theme -- lamplight's palette extracts from the harbour photography in ../harbour.",
  "ink": "#fba503",
- "paper": "#05060c",
+ "paper": "#050506",
  "params": {
   "cell": 3,
   "scanline_period": 4,
