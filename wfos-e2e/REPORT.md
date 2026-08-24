@@ -6,7 +6,7 @@ Both machines at `a15d4bb`, identical. Every row below has a log or a command be
 
 | Check | Result |
 |---|---|
-| `workflow-health.py` | 41/41 required PASS |
+| `workflow-health.py` | 40/41 required — the one FAIL is `gh active account` (see gap 9) |
 | `bin/verify` | exit 0 — 275 passed, 2 skipped, 54 subtests (`results/hq-verify3.log`) |
 | Hooks fired as the harness fires them | 37/37 invocations, 0 crashes (`results/hook-smoke.json`) |
 | Guards fed what they exist to stop | 4/4 denied |
@@ -44,6 +44,13 @@ Both machines at `a15d4bb`, identical. Every row below has a log or a command be
 6. **200k compaction is configured but unproven on the server** — `compactions.jsonl` is empty.
 7. **quota-pacer reads sigma 111.1%, projected 352%** ("Claude reached the 98% hard stop").
 8. **Seed / "C" is not wired at all** — no third machine has ever run `./setup seed DEVICE`.
+9. **`gh` on HQ has no `vedhith` account.** `gh auth status` lists `viji-real21`,
+   `vedhithkrishnakumar-cell`, `kk-vp` — and `workflow-health.py` requires the active
+   account to be `vedhith`, because `github-publisher` polls the private `vedhith/vedhith.com`
+   repo every 15 minutes. Git pushes still work: they authenticate through a separate
+   `vedhith` token in the macOS keychain, which is why this never surfaced as a broken push.
+   So github-publisher on HQ is running against the wrong identity. `gh auth login` as
+   `vedhith` fixes it.
 
 ## Fixed this run
 
