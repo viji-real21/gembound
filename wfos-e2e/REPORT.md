@@ -68,6 +68,28 @@ Both machines at `a15d4bb`, identical. Every row below has a log or a command be
     1%, which would have looked like a working ramp forever. **Fixed** with an `flock` (gates
     run outside it) and a pid-unique temp file; the regression test is proven to fail with
     the lock stubbed out.
+12. **The allocator's busy detector trusted a footer line that rotates.** Live dispatch #7,
+    08:55: visionAnchor was 29 minutes into a turn and took a dispatch anyway, because
+    `is_idle()` keyed on "esc to interrupt" and Claude Code was showing the `/btw` tip on
+    that frame instead. **Fixed** — it reads the elapsed-time spinner (`(29m 33s ·`), which
+    is on screen for the whole turn, and also requires an empty composer. Since the fix the
+    allocator correctly holds: "all 10 windows busy — holding the turn".
+
+### The 30-minute ramp, as it ran
+
+| Time | Rung | Gates | Note |
+|---|---|---|---|
+| 08:26 | 1% | 9/9 PASS | dispatch #1 → visionAnchor |
+| 08:31 | 5% | 9/9 PASS | rung repeated once — the race in gap 11 ate a step |
+| 08:36 | 12% | 9/9 PASS | |
+| 08:42 | 25% | 9/9 PASS | #2 flintted, #3 amethyst — first `submitted: true` |
+| 08:47 | 45% | 9/9 PASS | |
+| 08:52 | 70% | 9/9 PASS | #7 exposed gap 12 |
+| 08:57 | 100% | 9/9 PASS | 11 turns placed; then all six busy, holding |
+
+Share at 11 turns is 64/18 — too few turns to mean anything, and the small projects have
+each had exactly one. Replaying the picker forward from the **live** deficit lands on
+42/30/12/9/4/3 at turn 100, i.e. **72% and 7%**, his two constraints exactly.
 
 ## Fleet allocator — his 2026-08-24 shares, running
 
