@@ -33,16 +33,21 @@ Both machines at `a15d4bb`, identical. Every row below has a log or a command be
 
 ## Gaps found — nothing here is guessed
 
-1. **anchor-core was never provisioned by `./setup server`.** No `machine.json`;
-   `workflow-portal.service` and `workflow-overseer.timer` are absent. **The weekly reboot
-   agent and the RAM pause/resume guard have never run.** The script itself works — I ran
-   `server-overseer.py` by hand and it wrote `health.json`, memory 38.5%.
+1. ~~**anchor-core was never provisioned by `./setup server`.**~~ **FIXED 08-24.** No
+   `machine.json`; `workflow-portal.service` and `workflow-overseer.timer` were absent, so
+   the weekly reboot agent and the RAM pause/resume guard had never run. `./setup server`
+   ran on his go-ahead: role=server, portal live on `100.127.100.60:4280` (HTTP 200 from
+   HQ), overseer timer writing `health.json` every minute, `fleet-hq.service` enabled so a
+   reboot no longer returns a healthy VM with a dead fleet.
 2. **`gh` not authenticated on the server.**
 3. **Server Codex session revoked** — `401 token_invalidated`, needs `codex login`.
 4. **`claude-weekly-mail` keychain password missing on the Mac** → the Friday email cannot send.
 5. **token-optimizer MCP fails on the server**; Inkbox + Linear MCP need auth on both.
 6. **200k compaction is configured but unproven on the server** — `compactions.jsonl` is empty.
 7. **quota-pacer reads sigma 111.1%, projected 352%** ("Claude reached the 98% hard stop").
+   That reading is HQ's, and HQ is on the separate $20 plan — the server reads
+   `ENRICH sigma 0.6% ramp 36.6% e -36.0 (AHEAD) projected 2%`, i.e. plenty of headroom.
+   The pacer was still telling HQ to hard-stop off the wrong meter.
 8. **Seed / "C" is not wired at all** — no third machine has ever run `./setup seed DEVICE`.
 9. **`gh` on HQ has no `vedhith` account.** `gh auth status` lists `viji-real21`,
    `vedhithkrishnakumar-cell`, `kk-vp` — and `workflow-health.py` requires the active
@@ -51,6 +56,34 @@ Both machines at `a15d4bb`, identical. Every row below has a log or a command be
    `vedhith` token in the macOS keychain, which is why this never surfaced as a broken push.
    So github-publisher on HQ is running against the wrong identity. `gh auth login` as
    `vedhith` fixes it.
+10. ~~**quota-pacer had never completed a single run on the server.**~~ **FIXED 08-24.**
+    It called `osascript` unconditionally, so on Linux it raised `FileNotFoundError` — after
+    writing its state file but *before* the `codex-fleet-backup` handoff. The machine that
+    burns the most therefore had a governor that crashed on every tier change and had never
+    once failed over to Codex. Guarded by `sys.platform == "darwin"`; the server now
+    completes a run and reports ENRICH.
+11. **The fleet allocator's two timers raced on their shared state file** — found live in
+    its first minute, at 08:26:39: the ramp read `force=1` and wrote 5; the cycle, holding a
+    pre-ramp copy, wrote 1 back over it. The journal said `RAMP -> 5%` and the fleet sat at
+    1%, which would have looked like a working ramp forever. **Fixed** with an `flock` (gates
+    run outside it) and a pid-unique temp file; the regression test is proven to fail with
+    the lock stubbed out.
+
+## Fleet allocator — his 2026-08-24 shares, running
+
+`bin/fleet-allocator.py`, deficit round-robin, two systemd timers (dispatch 1 min, ramp 5 min).
+
+| Project | Share | | Constraint | Actual |
+|---|---|---|---|---|
+| visionAnchor | 42% | | visionAnchor + flintted **> 70** | **72%** |
+| flintted | 30% | | gitpop + convair **5–10** | **7%** |
+| amethyst | 12% | | ramp reaches full within **30 min** | 7 rungs × 5 min = 30 |
+| enfermal | 9% | | | |
+| gitpop | 4% | | | |
+| convair | 3% | | | |
+
+Ramp `1 → 5 → 12 → 25 → 45 → 70 → 100`, each rung gated on: all six windows present,
+`health.json` < 300 s old, memory < 85%, pacer sigma < 0.98, not paused. 20 unit tests.
 
 ## Fixed this run
 
