@@ -214,8 +214,30 @@ built worlds shot desktop + phone, the three briefed worlds presented from their
 locked briefs. Opened over `file://`. No server was started at any stage of this
 pipeline — renders, proofs and critiques all ran on `file://`.
 
-**Gate:** `gate S9`. **S10 (apply project-wide + machine gates) is blocked on his
-pick — by design.**
+**Gate:** `gate S9`. S10 ran against the built candidate (lamplight) so the pick
+arrives with its gates already proven; a different pick re-runs S10 on that world.
+
+## S10 · Applied + gated — somebody else's rulebook, then Lighthouse
+
+`bin/design-gates.mjs` runs axe-core (WCAG 2.1 AA + best-practice) on four real
+devices (390/768/1440/1920), plus the three checks axe cannot do: reflow
+(SC 1.4.10, scrollWidth), 200% resize-text (SC 1.4.4 — geometry of the boxes, not
+scrollWidth, because clipped inline content never enters layout overflow), and
+INP with motion live (every control clicked, p75 from the browser's own event
+timings). What it forced, all invisible to our own prover: a `<main>` landmark,
+focusable + uniquely-labelled scrollable table regions, `overflow-x:auto` on both
+table wrappers, `overflow-wrap:break-word` ("harbourmaster" clipped at 200% on
+390px). Final: **axe 0 ×4 devices, overflow/o200/clip200 all 0, INP p75 32 ms.**
+
+Lighthouse (ephemeral `http.server`, killed same turn): first run **perf 90,
+LCP 3.3 s** — the 189 KB WorkSans TTF was the whole gap. Fonts subset to latin
+woff2 (`pyftsubset --flavor=woff2`: 245 KB → 37 KB across three faces), preloads
+on the two above-the-fold faces, `width`/`height` on every plate, `fetchpriority`
+on the first. Final: **performance 99 · accessibility 100 · LCP 2.0 s · CLS 0 ·
+TBT 0 ms.** Evidence + exact commands: `design/GATES.md`.
+
+**Gate:** `gate S10` — GATES.md ≥ 400 b and `design-gates.mjs` exit 0, re-run by
+the gate itself. Full `design-pipeline.py status`: **every stage S0–S10 passes.**
 
 ---
 

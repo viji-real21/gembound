@@ -53,3 +53,8 @@
 - **Palette re-verified from source**: `design-palette.py` over the six untreated harbour raws returns exactly `#050506 / #bf651d / #fba503` (7.16:1) = theme.md = page `:root`. No drift.
 - **WORKFLOW.md shipped** (`research-paper/design/WORKFLOW.md`): the /goal deliverable — the pipeline S0→S9 as executed, every gate, the S4t treatment, and the S4t gate weakness (size-only; passes untreated plates; fix = palette census against PROVENANCE ink/paper, still open).
 - **S10 remains blocked on his pick** — by design (picker is the artifact).
+
+## Fleet landing — S10 green, pipeline complete (2026-08-24)
+- **S10 run against lamplight (the built candidate) so his pick arrives pre-gated** — the picker still decides; a different pick re-runs S10 on that world. `design-gates.mjs` forced four fixes our own prover cannot see: `<main>` landmark, focusable + uniquely-labelled scrollable table regions (`tabindex=0 role=region`), `overflow-x:auto` on both table wrappers, `overflow-wrap:break-word` on h2 ("harbourmaster" clipped at 200% zoom on 390px). Final: axe 0 on all 4 devices, reflow/o200/clip200 all 0, INP p75 32ms.
+- **Lighthouse perf 90→99: the 189KB WorkSans TTF was the whole gap.** Fonts subset to latin woff2 via `pyftsubset --flavor=woff2` (245KB→37KB across three faces, files committed in `fonts/`), preloads on the two above-the-fold faces, `width`/`height` on all four plates (CLS 0), `fetchpriority=high` on the first. Final: perf 99 / a11y 100 / LCP 2.0s / CLS 0 / TBT 0. Ephemeral http.server killed same turn; evidence + exact commands in `design/GATES.md`.
+- **`design-pipeline.py status`: every stage S0–S10 PASSES — "NEXT: nothing".** WORKFLOW.md extended with the S10 section.

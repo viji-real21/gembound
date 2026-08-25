@@ -5,13 +5,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Agent Fleet — 24/7 coding coverage for the price of one seat</title>
 <meta name="description" content="A pool of subscription coding agents, scheduled by arithmetic instead of hope. 100% of around-the-clock demand at $319/mo — proven by simulation.">
+<link rel="preload" href="../../fonts/Outfit-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../fonts/WorkSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* ============ lamplight — one ink, one paper, one lamp ============
    palette extracted from the plates (design-palette.py, PROVENANCE.json):
    paper #050506 · ink #bf651d (7.16:1 on paper) · accent #fba503 (the lamp) */
-@font-face{font-family:'Outfit';src:url('../../fonts/Outfit-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
-@font-face{font-family:'Outfit';src:url('../../fonts/Outfit-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
-@font-face{font-family:'Work Sans';src:url('../../fonts/WorkSans-Regular.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Outfit';src:url('../../fonts/Outfit-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Outfit';src:url('../../fonts/Outfit-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Work Sans';src:url('../../fonts/WorkSans-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
 
 :root{
   --bg:#050506;                   /* palette tokens: bg / ink / accent */
@@ -118,7 +120,7 @@ a:hover .roll>span,a:focus-visible .roll>span{transform:translateY(-1.3em)}
 /* ---------- shared section shell ---------- */
 section{position:relative;z-index:1}
 .shell{max-width:1180px;margin:0 auto;padding:96px 40px}
-h2{font:700 clamp(1.7rem,3.2vw,2.5rem)/1.12 var(--display);letter-spacing:-.005em;color:var(--lamp);max-width:24ch}
+h2{font:700 clamp(1.7rem,3.2vw,2.5rem)/1.12 var(--display);letter-spacing:-.005em;color:var(--lamp);max-width:24ch;overflow-wrap:break-word}  /* "harbourmaster" at 200% zoom must break, not clip (SC 1.4.4) */
 .kicker{color:var(--ink);margin-bottom:12px}
 .prose{max-width:var(--measure)}
 .prose p{margin-top:16px}
@@ -140,7 +142,7 @@ h2{font:700 clamp(1.7rem,3.2vw,2.5rem)/1.12 var(--display);letter-spacing:-.005e
 @keyframes stamp{0%{transform:scale(1.7);opacity:0}70%{transform:scale(.96);opacity:1}100%{transform:scale(1)}}
 
 /* ---------- lanes ---------- */
-#lanes .tablewrap{border:1px solid color-mix(in oklab,var(--ink) 30%,transparent);border-radius:6px;overflow:hidden;margin-top:40px}
+#lanes .tablewrap{border:1px solid color-mix(in oklab,var(--ink) 30%,transparent);border-radius:6px;overflow-x:auto;overflow-y:hidden;margin-top:40px}
 table{border-collapse:collapse;width:100%;font-size:15px}
 th{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:left;
   color:var(--ink);padding:16px 20px;border-bottom:1px solid color-mix(in oklab,var(--ink) 30%,transparent)}
@@ -169,7 +171,7 @@ td .m{font-family:var(--mono);font-size:13.5px}
 .plate-cap{margin-top:8px;opacity:.78}
 
 /* ---------- numbers ---------- */
-#numbers .tablewrap{border:1px solid color-mix(in oklab,var(--ink) 30%,transparent);border-radius:6px;overflow:hidden;margin-top:40px}
+#numbers .tablewrap{border:1px solid color-mix(in oklab,var(--ink) 30%,transparent);border-radius:6px;overflow-x:auto;overflow-y:hidden;margin-top:40px}
 .win td{background:color-mix(in oklab,var(--lamp) 8%,transparent)}
 .win .rowlead{color:var(--lamp)}
 .arith{font-family:var(--mono);font-size:14px;margin-top:24px;opacity:var(--demote);max-width:62ch}
@@ -217,6 +219,7 @@ td .m{font-family:var(--mono);font-size:13.5px}
   <a class="navcta" href="../../index.html"><span class="roll"><span data-t="Read the evidence paper">Read the evidence paper</span></span></a>
 </nav>
 
+<main>
 <section id="claim">
   <div class="hero-plate" aria-hidden="true"></div>
   <div class="hero-inner">
@@ -246,7 +249,7 @@ td .m{font-family:var(--mono);font-size:13.5px}
 </section>
 
 <div class="plate-band reveal">
-  <img src="../assets/lamplight/harbour-03--treated.png" alt="Treated plate: coiled mooring rope on the quay edge under one lamp">
+  <img src="../assets/lamplight/harbour-03--treated.png" width="1344" height="768" fetchpriority="high" alt="Treated plate: coiled mooring rope on the quay edge under one lamp">
   <p class="plate-cap micro">The night watch — every berth metered before a hull takes a lane</p>
 </div>
 
@@ -254,7 +257,7 @@ td .m{font-family:var(--mono);font-size:13.5px}
   <div class="shell reveal">
     <p class="kicker micro">Lanes</p>
     <h2>Five lanes, one queue.</h2>
-    <div class="tablewrap">
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Lane table: role, cost and benchmark per lane">
       <table>
         <thead><tr><th>Lane</th><th>Role</th><th>Cost</th><th>Terminal-Bench 2.1 <span class="demoted">(best harness)</span></th></tr></thead>
         <tbody>
@@ -284,7 +287,7 @@ td .m{font-family:var(--mono);font-size:13.5px}
 </section>
 
 <div class="plate-band reveal">
-  <img src="../assets/lamplight/harbour-02--treated.png" alt="Treated plate: a row of mooring bollards along the quay under one lamp">
+  <img src="../assets/lamplight/harbour-02--treated.png" width="1344" height="768" alt="Treated plate: a row of mooring bollards along the quay under one lamp">
   <p class="plate-cap micro">The bollard row — five moorings, one queue, whatever arrives ties up somewhere</p>
 </div>
 
@@ -292,7 +295,7 @@ td .m{font-family:var(--mono);font-size:13.5px}
   <div class="shell reveal">
     <p class="kicker micro">Numbers</p>
     <h2>The numbers, with their tags on.</h2>
-    <div class="tablewrap">
+    <div class="tablewrap" tabindex="0" role="region" aria-label="Coverage table: cost against light, medium and heavy demand">
       <table>
         <thead><tr><th>Stack</th><th>Cost</th><th>Light</th><th>Medium</th><th>Heavy</th><th>Status</th></tr></thead>
         <tbody>
@@ -308,7 +311,7 @@ td .m{font-family:var(--mono);font-size:13.5px}
 </section>
 
 <div class="plate-band reveal">
-  <img src="../assets/lamplight/harbour-05--treated.png" alt="Treated plate: a single seawall lamp over dark water, one lit vessel far out">
+  <img src="../assets/lamplight/harbour-05--treated.png" width="1344" height="768" alt="Treated plate: a single seawall lamp over dark water, one lit vessel far out">
   <p class="plate-cap micro">The seawall lamp — when a lane starves, it starves under the light, never in the dark</p>
 </div>
 
@@ -323,10 +326,12 @@ td .m{font-family:var(--mono);font-size:13.5px}
   </div>
 </section>
 
+</main>
+
 <footer id="footer">
   <div class="shell reveal">
     <div class="mascot">
-      <img src="../assets/lamplight/mascot-02--treated.png" alt="The Fleet beacon — a lantern that stays lit">
+      <img src="../assets/lamplight/mascot-02--treated.png" width="768" height="768" alt="The Fleet beacon — a lantern that stays lit">
     </div>
     <div class="colophon">
       <span class="lampdot"></span>the lamp stays on<br>
