@@ -95,7 +95,7 @@ Use **one installed visual runtime**, not a collage. Cloudscape components are w
 | Component testing | [Cloudscape test utilities](https://cloudscape.design/components/app-layout/?tabId=testing) | [Angular component harness model](https://angular.dev/guide/testing/component-harnesses-testing-environments) | Tests call stable public helpers, never private DOM. Add Storybook, Playwright visual/flow checks, axe, and route coverage in CI. |
 | Governance and release | Universal-site maintainers using Cloudscape-style public package/version discipline | Primer's public [contribution and release practice](https://github.com/primer/react/blob/main/contributor-docs/CONTRIBUTING.md) | One owner approves system changes; changesets, migration notes, full-family evidence, and a template-version release are mandatory. |
 | Generated imagery | Existing Workflow OS **ComfyUI** graph | Approved manually supplied asset | Existing pipeline stays. Only registered, reviewed outputs may fill fixed asset slots. |
-| Identity selection | Existing **5 → 3 → 1** | None | The only surviving Workflow OS design method; it selects variable manifests/assets, never layout, components, motion, or states. |
+| Identity selection | Existing **5 → 3 → 1** implementation, with the wide-to-narrow method sourced from the ChaseAI design video | None | The only surviving local selection layer; its Workflow OS-specific change is selecting variable manifests/assets, never layout, components, motion, or states. |
 
 This is the smallest composite that covers the missing layers without importing multiple visual grammars: **Cloudscape is the React implementation; Fiori contributes only fixed dense-app/page-family rules; Material contributes only the fixed motion/state architecture; DTCG is the interchange format.** Everything else is a fallback or research-only.
 
@@ -182,7 +182,7 @@ packages/universal-site/
 <project>/design/
   project.variables.json      # the only project design input
   image-pipeline.json         # existing ComfyUI workflow
-  ASSETS.json                 # approved generated/provided outputs and metadata
+  MEDIA.json                  # canonical approved image/video/audio ledger
   ROUTES.json                 # real route -> fixed page-family mapping
 ```
 
@@ -196,7 +196,7 @@ Every project pins the same `templateVersion`. Updating components, layouts, pag
 | Typography | Font family only from an approved compatibility list. Type scale, line height, measure, weights, and responsive rules stay fixed. The safest first release locks typography too. |
 | Content and real data bindings | Copy, labels, records, prices, legal text, and localization. Content length fixtures still must pass. |
 | Logo and icons explicitly marked as brand assets | Versioned file, dimensions, alt/decorative status, and usage role. System action icons remain fixed. |
-| PNG, mascot, photography, illustration, and generated imagery | Must map to a named asset slot and `ASSETS.json` record. |
+| PNG, mascot, photography, illustration, generated video, and audio | Must map to a named asset slot and canonical `MEDIA.json` record. |
 | Density | At most a fixed enum such as `comfortable` or `compact`; each mode is built and tested centrally. |
 | Capabilities and routes | They decide which fixed page families exist and what data they display. They cannot change family structure. |
 
@@ -244,7 +244,7 @@ Add a fixed handoff:
 
 1. `project.variables.json` declares needed asset roles such as `hero`, `object`, `avatar`, `thumbnail`, `mascot`, and `emptyState`.
 2. The current ComfyUI graph generates candidates with the project's allowed visual variables.
-3. Review writes approved files plus model/workflow version, prompt, seed, input hash, output hash, license/rights note, crop, and alt/decorative status to `ASSETS.json`.
+3. Review writes approved files plus model/workflow version, prompt, seed, input hash, output hash, license/rights note, crop, and alt/decorative status to canonical `MEDIA.json`.
 4. Universal components accept only asset ids from that manifest and apply centrally fixed crop, aspect-ratio, loading, fallback, and responsive rules.
 5. Runtime/build-time image generation is forbidden. Production consumes approved, versioned assets.
 
@@ -260,7 +260,7 @@ Imagery may change a project's identity. It may not change page composition, com
 4. **No escape CSS:** lint rejects raw visual values, page styles, layout overrides, and animation declarations outside generated universal outputs.
 5. **Component/state coverage:** every component and page family renders default, hover, focus, pressed, disabled, loading, empty, partial, error, forbidden, and success where applicable.
 6. **Motion checksum:** every transition resolves to the universal contract and has interruption plus reduced-motion behavior.
-7. **Asset integrity:** every requested asset id exists in `ASSETS.json`; unregistered files, missing crops, and missing alt/decorative decisions fail.
+7. **Asset integrity:** every requested asset id exists in canonical `MEDIA.json`; unregistered files, missing crops, and missing alt/decorative decisions fail.
 8. **Visual matrix:** pinned screenshots cover every route/state at phone, tablet, laptop, and wide widths in light/dark and reduced motion. A reviewed contact sheet proves cross-page coherence.
 9. **Accessibility:** automated checks plus keyboard/focus and screen-reader smoke tests pass. Native controls and reviewed accessible behavior are preferred, matching Angular's public accessibility guidance ([Angular accessibility](https://angular.dev/best-practices/a11y)).
 10. **Full-stack contract:** each page family proves its fixed auth, capability, data, mutation, optimistic/pending, success, validation, conflict, permission, rate-limit, offline, and server-error adapter states. UI code cannot reach a service outside those adapters.
@@ -277,7 +277,7 @@ Use one stack across the Workflow OS fleet:
 - **Tokens:** [DTCG 2025.10](https://www.designtokens.org/TR/2025.10/format/) source files compiled to CSS custom properties and typed TypeScript. Projects edit only the closed variable manifest.
 - **Components:** Cloudscape where it covers the fixed inventory; native HTML where simpler; React Aria only for a missing accessible behavior. Every route sees only fixed universal React APIs and stable test helpers.
 - **Workbench and gates:** [Storybook](https://storybook.js.org/docs/writing-tests), TypeScript/Vitest, [Playwright](https://playwright.dev/docs/test-snapshots) screenshots and flows, [axe-core](https://github.com/dequelabs/axe-core), and [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci).
-- **Assets:** the existing ComfyUI graph, `ASSETS.json`, immutable generated files, and fixed universal asset slots.
+- **Assets:** the existing ComfyUI graph, canonical `MEDIA.json`, immutable generated files, and fixed universal asset slots.
 - **Motion:** CSS/WAAPI implementation behind one semantic contract; shared reduced-motion behavior; no project animation dependencies.
 
 ### Phased replacement
@@ -290,7 +290,7 @@ Use one stack across the Workflow OS fleet:
 
 ## Final decision
 
-**KEEP:** 5 → 3 → 1 as the only surviving design method; the existing ComfyUI pipeline by explicit user exception; and the gate runner only as neutral enforcement plumbing.
+**KEEP:** the existing 5 → 3 → 1 picker implementation as the only surviving local selection layer (the wide-to-narrow method is sourced); the existing ComfyUI pipeline by explicit user exception; and the gate runner only as neutral enforcement plumbing.
 
 **REPLACE:** the current identity/imagery-first, five-world, per-project layout and interaction methodology with one closed-manifest universal template.
 
