@@ -75,6 +75,27 @@ Both machines at `a15d4bb`, identical. Every row below has a log or a command be
     is on screen for the whole turn, and also requires an empty composer. Since the fix the
     allocator correctly holds: "all 10 windows busy — holding the turn".
 
+13. **The allocator gave 93% of the fleet to a 4% project.** At 710 dispatches gitpop had
+    659 and visionAnchor, at 42%, had 4. The picker was fine — the eligible pool was
+    restricted to *idle* windows, and gitpop was the only project that finished a turn in
+    seconds while the other five sat mid-turn for half an hour. So idleness silently
+    became the priority function, and it inverts his order: the projects doing real work
+    are the ones that stay busy. **Fixed** — a project is ineligible once it is more than
+    2 turns ahead of its own share of turns spent, and the cycle holds rather than
+    substituting a lower-priority project. Cost, per the pacer: 12.2% of the week.
+14. **No GitHub auth on anchor-core at all**, and no single account can reach his repos:
+    `VisionANCHOR/anchor` (the 42% project) is `kk-vp`-only, `vedhith/*` is `vedhith`-only,
+    `viji-real21/gembound` is `viji-real21`-only. `gh auth switch` is global, so whichever
+    account is active, something 403s — and the fleet pushes to all six unattended.
+    **Fixed** by `bin/git-credential-gh-router.py`, a credential helper that answers with
+    the token of whichever account can actually push to the repo git is asking about.
+    Also fixed under it: gh labels an account by the login it had when it was *added*, so
+    HQ says `vedhithkrishnakumar-cell` and anchor-core says `vedhith` for the same account
+    (`gh api user` returns `vedhith` on both) — three scripts hard-coded the old label and
+    swallowed the failed switch with `|| true`. And four repos carried hand-pinned
+    per-repo credential config, two of which set `helper =` empty, which RESETS the helper
+    list and silently discarded the router in exactly the repos that needed it.
+
 ### The 30-minute ramp, as it ran
 
 | Time | Rung | Gates | Note |
