@@ -1,11 +1,13 @@
-# Universal design pipeline benchmark: Google/Claude-grade, one fixed template
+# Universal design pipeline benchmark: major-company evidence, one fixed template
 
 **Research snapshot:** 2026-08-25
-**Source rule:** local evidence plus direct official docs/specs. Google/Claude benchmark claims use only their first-party sources. Neither company's internal workflow is claimed.
+**Source rule:** local evidence plus direct official company docs, source repositories, licenses, and standards specifications. No company's internal workflow is claimed from its public design-system site.
 
 ## Answer first
 
-**No. The current Workflow OS pipeline does not yet reach Google/Claude visible design quality as a repeatable system.** It has useful executable gates, a real image-generation subsystem, and a validated candidate React kit. It does not have the one complete, locked template that makes every page in every project use the same components, layouts, responsive rules, motion, and states.
+**No. The current Workflow OS pipeline does not yet reach major-company visible design quality as a repeatable system.** It has useful executable gates, a real image-generation subsystem, and a validated candidate React kit. It does not have the one complete, locked template that makes every page in every project use the same components, layouts, responsive rules, motion, and states.
+
+**No audited major company publishes its complete internal research-to-release pipeline.** Public design-system sites and component repositories expose valuable layers, but none exposes the entire research intake, design source, product-specific libraries, approval/governance, implementation, CI, release, and adoption process as one reproducible fork. Google is not an exception: Material and Angular are public; Wiz and Google's complete product pipeline are not.
 
 The replacement must be **one universal TypeScript/React site package for both new and existing projects**. A project may provide only a closed variable manifest: approved colors, optional approved fonts, content, logo, PNG/mascot/imagery, capability data, and possibly one density enum. Projects may not define components, layouts, breakpoints, motion, or state behavior.
 
@@ -51,7 +53,69 @@ There is no public Google/Alphabet pipeline repository to fork. Google publishes
 
 Therefore the replacement is a **new Workflow OS implementation of their public architecture and standards**, not a fork and not a claim of identical tooling. Any sentence stronger than that is unsupported.
 
-## 3. Keep / replace / reject
+## 3. Major-company public-system audit
+
+This matrix records what first-party sources actually expose. It does **not** upgrade a documentation site into a complete pipeline.
+
+**Legend:** **T** tokens/style · **C** components · **M** motion · **F** navigation, floorplans, dense-app patterns · **W** content guidance · **A** accessibility · **Q** testing · **G** governance/release. `✓` means a substantial public layer; `◐` means partial guidance, code, or platform-bound access; `—` means no substantial public layer found. A checkmark never means the company's internal delivery process is open.
+
+| Major-company system | Official use and code/license | T | C | M | F | W | A | Q | G | Public boundary and decision |
+|---|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|---|
+| **Google Material 3 + Angular Material/CDK/Aria** | Google publishes [Material's system layers](https://m3.material.io/) and the [Angular components repository](https://github.com/angular/components) under MIT. | ✓ | ✓ | ✓ | ◐ | ◐ | ✓ | ✓ | ✓ | Angular says Wiz is **internal** and only selected features are gradually open-sourced through Angular ([Angular + Wiz](https://blog.angular.dev/angular-and-wiz-are-better-together-91e633d8cd5a)). Material Web is in maintenance mode ([status](https://github.com/material-components/material-web/discussions/5642)). **Benchmark, not a complete fork.** |
+| **AWS Cloudscape** | Its Apache-2.0 [React repository](https://github.com/cloudscape-design/components) says Cloudscape was built for and is used by AWS products and services; the public organization also ships [test utilities and related packages](https://github.com/cloudscape-design). | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Strongest open React base for a dense universal shell. AWS's product-specific research, approvals, and release pipeline remain unpublished. **Primary runtime source.** |
+| **IBM Carbon + Carbon for IBM Products** | Carbon is IBM's Apache-2.0 [open-source design system](https://github.com/carbon-design-system/carbon). The public [IBM Products library](https://github.com/carbon-design-system/ibm-products) explicitly calls itself an open implementation of IBM Software's **closed-source** PAL. | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | Broad, credible reference; its own README proves the internal/public boundary. **Fallback/reference.** |
+| **Microsoft Fluent 2** | Microsoft's MIT [Fluent UI repository](https://github.com/microsoft/fluentui) says React v9 is used in Microsoft 365, v8 in Office, and Web Components in Edge. Public Fluent 2 covers [tokens](https://fluent2.microsoft.design/design-tokens), [motion](https://fluent2.microsoft.design/motion), [content](https://fluent2.microsoft.design/content-design), and [accessibility](https://fluent2.microsoft.design/accessibility). | ✓ | ✓ | ✓ | ◐ | ✓ | ✓ | ✓ | ✓ | Strong motion/content fallback; no public complete Microsoft app floorplan or internal delivery pipeline. **Fallback/reference.** |
+| **Adobe Spectrum 2 + React Aria** | Adobe says its Apache-2.0 [React Spectrum](https://github.com/adobe/react-spectrum) implements Spectrum across Adobe applications; [Spectrum Design Data](https://github.com/adobe/spectrum-design-data) publishes tokens and component schemas. | ✓ | ✓ | ✓ | ◐ | ✓ | ✓ | ✓ | ✓ | Best fallback for accessible custom behavior. Product-specific Adobe composition, source libraries, and approvals are not a public fork. **Behavior fallback.** |
+| **Shopify Polaris** | Shopify's current [Polaris web components](https://shopify.dev/docs/api/polaris/using-polaris-web-components) are accessible, responsive, hosted primitives for Shopify surfaces. The former React library is [deprecated and archived](https://github.com/Shopify/polaris-react-archive) under a [custom interoperability license](https://github.com/Shopify/polaris-react-archive/blob/main/LICENSE.md), not a general-purpose OSS grant. | ◐ | ◐ | — | ✓ | ✓ | ✓ | ◐ | ◐ | Useful commerce research only. **Reject as a fork/runtime source.** |
+| **Salesforce Lightning Design System** | The [SLDS repository](https://github.com/salesforce-ux/design-system) publishes CSS, tokens, blueprints, Storybook, and tests under BSD-3-Clause, with icons/images under CC BY-ND; Salesforce's [base-component docs](https://developer.salesforce.com/docs/platform/lightning-component-reference/guide/get-started.html) show the platform runtime. | ✓ | ◐ | ◐ | ✓ | ✓ | ✓ | ✓ | ◐ | The public repo is archived and the full runtime is Salesforce-controlled. **Research only; reject as a new base.** |
+| **GitHub Primer** | GitHub's [Primer organization](https://github.com/primer) publishes React, CSS, and primitives under MIT; Primer foundations are used across [GitHub interfaces](https://primer.style/product/getting-started/foundations/). | ✓ | ✓ | ◐ | ✓ | ✓ | ✓ | ✓ | ◐ | Public contributor docs refer to a private Primer repository and staff-only roadmap ([contributing](https://github.com/primer/react/blob/main/contributor-docs/CONTRIBUTING.md)). **Strong fallback, not GitHub's whole pipeline.** |
+| **Atlassian Design System** | Atlassian says ADS powers Atlassian app UIs and publishes React/TypeScript guidance ([developer start](https://atlassian.design/get-started/develop/atlassians)). | ✓ | ✓ | ◐ | ✓ | ✓ | ✓ | ◐ | ✓ | Its [license](https://atlassian.design/license) is limited to software that interoperates with Atlassian, forbids modification/derivatives of ADS, and says only identified pieces may have separate OSS rights. **Research only; reject as a fork source.** |
+| **SAP Fiori + OpenUI5** | SAP publishes role-based Fiori guidance and the Apache-2.0 [OpenUI5 runtime](https://github.com/UI5/openui5). Its public design guidance includes [floorplans](https://experience.sap.com/fiori-design-web/floorplan-overview/), [flexible column layout](https://experience.sap.com/fiori-design-web/flexible-column-layout-web-component/), [variant management](https://experience.sap.com/fiori-design-web/variant-management/), and application-wide [cozy/compact density](https://experience.sap.com/fiori-design-web/cozy-compact/). | ✓ | ✓ | ◐ | ✓ | ✓ | ✓ | ✓ | ✓ | Best public source for enterprise page-family rules and saved views; SAP's internal product process is not open. **Primary floorplan reference, not a second runtime.** |
+| **Red Hat PatternFly** | Red Hat says its MIT-licensed system is used extensively across Red Hat and supports complex enterprise products ([about](https://www.patternfly.org/get-started/about-patternfly/)); its [React repository](https://github.com/patternfly/patternfly-react) is public. | ✓ | ✓ | ◐ | ✓ | ✓ | ✓ | ✓ | ✓ | Product-specific additions live outside the core system. **Cloudscape fallback only.** |
+
+### Direct answers
+
+- **Does any audited company publish its complete internal pipeline? No.** Repositories expose implementation and sometimes public release mechanics. They do not expose the whole company workflow as a reproducible research-to-release system. Carbon's public IBM Products library names a closed internal PAL; Primer names private governance; Google names Wiz internal. These are direct counterexamples to “the design system docs are the pipeline.”
+- **Is Google fully published or forkable? No.** Angular Material/CDK/Aria is a real MIT implementation and the closest literal public Google stack. Material publishes architecture and guidance. Neither provides Wiz, Google's complete internal templates, product-specific component layers, research operation, approvals, or production release machinery. “Google-grade” can mean using the same **public architecture and standards**; it cannot mean cloning Google internally.
+- **Which systems are unsafe as fork sources?** Atlassian is purpose-restricted; Shopify's React library is deprecated/archived with a custom license; Salesforce's public design-system repository is archived and its base runtime is platform-controlled. Use their public guidance only where licensing permits; do not build the universal package on them.
+
+## 4. Smallest defensible composite
+
+Use **one installed visual runtime**, not a collage. Cloudscape components are wrapped behind the fixed `@vedhith/universal-site` API. Material and Fiori supply central rules; they are not installed as competing UI kits. Fallbacks are research/implementation references invoked only when the primary source has a real gap.
+
+| Layer | One primary owner | One fallback | Workflow OS contract |
+|---|---|---|---|
+| Token file format | [DTCG 2025.10](https://www.designtokens.org/TR/2025.10/format/) | Material 3 token taxonomy | One source compiles to typed TS and CSS; projects edit only allowed semantic aliases. Google and Amazon representatives participate in the public [DTCG community group](https://github.com/design-tokens/community-group), but that does **not** prove either company's internal adoption. |
+| React components and states | [AWS Cloudscape components](https://github.com/cloudscape-design/components) | Adobe [React Aria](https://react-spectrum.adobe.com/react-aria/) for a missing accessible behavior | Wrap, do not expose vendor APIs to routes. Native HTML first; every public component has fixed DOM/ARIA, states, and test handles. |
+| Shell, navigation, contextual panels, disclosure, onboarding, density | [Cloudscape AppLayout and patterns](https://cloudscape.design/components/app-layout/?tabId=usage) | Red Hat PatternFly | One stable shell and one behavior for each panel role; comfortable default with one app-wide compact option. |
+| Page families, multi-column transformation, saved views | [SAP Fiori floorplans](https://experience.sap.com/fiori-design-web/floorplan-overview/) | Cloudscape patterns | Encode the selected rules once in universal React page families. Do not add UI5 as a second component runtime. |
+| Motion | [Material motion](https://m3.material.io/styles/motion/overview/how-it-works) | [Fluent 2 motion](https://fluent2.microsoft.design/motion) | Keep the fixed timing contract in section 7; no project overrides. |
+| Content | [Cloudscape content guidance](https://cloudscape.design/foundation/) | [Fluent 2 content](https://fluent2.microsoft.design/content-design) | Fixed labels, error anatomy, action order, truncation, and empty/loading language patterns; projects supply factual copy only. |
+| Accessibility | Cloudscape's implemented components plus [accessibility principles](https://cloudscape.design/foundation/core-principles/accessibility/) | React Aria | WCAG gates plus keyboard, focus, screen-reader, zoom/reflow, target-size, and reduced-motion fixtures. |
+| Component testing | [Cloudscape test utilities](https://cloudscape.design/components/app-layout/?tabId=testing) | [Angular component harness model](https://angular.dev/guide/testing/component-harnesses-testing-environments) | Tests call stable public helpers, never private DOM. Add Storybook, Playwright visual/flow checks, axe, and route coverage in CI. |
+| Governance and release | Universal-site maintainers using Cloudscape-style public package/version discipline | Primer's public [contribution and release practice](https://github.com/primer/react/blob/main/contributor-docs/CONTRIBUTING.md) | One owner approves system changes; changesets, migration notes, full-family evidence, and a template-version release are mandatory. |
+| Generated imagery | Existing Workflow OS **ComfyUI** graph | Approved manually supplied asset | Existing pipeline stays. Only registered, reviewed outputs may fill fixed asset slots. |
+| Identity selection | Existing **5 → 3 → 1** | None | The only surviving Workflow OS design method; it selects variable manifests/assets, never layout, components, motion, or states. |
+
+This is the smallest composite that covers the missing layers without importing multiple visual grammars: **Cloudscape is the React implementation; Fiori contributes only fixed dense-app/page-family rules; Material contributes only the fixed motion/state architecture; DTCG is the interchange format.** Everything else is a fallback or research-only.
+
+## 5. Fixed rules that keep a feature-dense app simple
+
+These are template rules, not project options:
+
+1. **Stable shell.** Render exactly one universal app shell with fixed global navigation, content, help/tools, drawers, and split-panel regions. Cloudscape says to use one AppLayout consistently, and defines collapsible navigation, tools, drawers, and split-panel responsibilities ([AppLayout](https://cloudscape.design/components/app-layout/?tabId=usage), [layout](https://cloudscape.design/foundation/visual-foundation/layout/)).
+2. **Progressive disclosure.** Keep the primary path visible; reveal advanced or conditional fields only after a controlling choice, and preserve their values intentionally. Cloudscape's selection pattern uses progressive disclosure so users focus on the immediate task ([selection](https://cloudscape.design/patterns/general/selection/)).
+3. **Contextual tools and panels.** Help panel = explanatory guidance; drawer = supplementary task/content; split panel = details for a selected resource. Use the fixed responsive collapse behavior instead of inventing page-specific sidebars ([Cloudscape secondary panels](https://cloudscape.design/patterns/general/secondary-panels/)).
+4. **Staged onboarding.** Show only what supports the user's current task. Prefer contextual, user-triggered help and keep a path back to it; do not force tours on every visit ([Cloudscape onboarding](https://cloudscape.design/patterns/general/onboarding/)).
+5. **Role and capability visibility.** Capability data may hide inaccessible routes and actions, but it cannot create a different shell or component grammar. Every permitted task maps to a fixed page family; direct URLs still enforce authorization. Fiori's public guidance defines a role-based launchpad, a persistent shell bar, and modular floorplans ([SAP Fiori app-design basics](https://experience.sap.com/fiori-design-web/best-practices-for-designing-sap-fiori-apps/)).
+6. **Search and command access.** Global search stays in the stable shell; local search/filter stays inside browse families. A command palette may speed access to the same actions, but cannot be their only path. Primer distinguishes global jump/search from local filtering, warns that invisible shortcuts need signals, and documents a dialog-based command-palette form ([Primer search](https://primer.style/product/scenario-patterns/search/), [keybinding hint](https://www.primer.style/product/components/keybinding-hint/)).
+7. **Saved views.** Save only named filter/sort/column/density state. Never save arbitrary layout markup. SAP's variant management makes selection, creation, update, save-as, rename, and management explicit states ([variant management](https://experience.sap.com/fiori-design-web/variant-management/)).
+8. **Responsive transformation.** Do not shrink a desktop canvas. Fixed breakpoints collapse multi-column views into simpler views without losing the task, matching Primer's rule that responsive pages retain functionality and split columns into multiple views ([Primer layout](https://primer.style/product/getting-started/foundations/layout/)).
+9. **Density modes.** Comfortable is the default. Compact is an app-wide user choice for data-intensive work, never a per-page tweak; readability/target-size exceptions remain fixed. Cloudscape documents both modes and requires consistency across the application ([content density](https://cloudscape.design/foundation/visual-foundation/content-density/)).
+
+Mobbin may supply evidence from popular shipped products for **central** changes to these families. It cannot authorize a project-specific shell, page composition, interaction, or copied brand asset.
+
+## 6. Keep / replace / reject
 
 | Decision | Workflow OS item | Required treatment |
 |---|---|---|
@@ -68,7 +132,7 @@ Therefore the replacement is a **new Workflow OS implementation of their public 
 | **REJECT** | Material Web as the shared runtime | Google's repository says it is in maintenance mode and recommends Angular Material for Angular users ([Material Web](https://github.com/material-components/material-web)). |
 | **REJECT** | Claims of matching Google or Anthropic internally | Wiz is internal; Anthropic has not published its internal design-to-production pipeline. |
 
-## 4. Psychological-design and motion audit
+## 7. Psychological-design and motion audit
 
 **Yes, the current pipeline has a large psychological-design layer.** Nothing in that layer survives merely because it is already written down. [`design/CHECKLIST.md`](/Users/vedhith/Developer/vedhith-workflow-os/design/CHECKLIST.md) lines 117–139 mixes useful interaction concerns, broad memory heuristics, conversion tactics, and game-design language. The replacement keeps a rule only when it can be encoded and tested from allowed public evidence.
 
@@ -95,7 +159,7 @@ The current timing rules also do not survive. `entries/motion-language.md` defin
 
 All motion values are fixed in `motion/contract.json` after central testing. Projects cannot tune them. Every role defines interruption, focus behavior, and a reduced-motion outcome.
 
-## 5. The one universal template
+## 8. The one universal template
 
 Build and version one package, for example `@vedhith/universal-site`:
 
@@ -108,6 +172,7 @@ packages/universal-site/
   patterns/                   # fixed task flows built only from components
   layouts/                    # fixed shell, grid, measure and responsive rules
   page-families/              # fixed route archetypes and slot order
+  adapters/                   # fixed auth, capability, data, action and error contracts
   motion/contract.json        # fixed roles, durations, easing, interruption, reduced motion
   states/contract.json        # loading, empty, partial, error, forbidden, success
   assets/slots.schema.json    # fixed image roles, crops, alt/decorative rules
@@ -139,7 +204,7 @@ Every project pins the same `templateVersion`. Updating components, layouts, pag
 
 The schema must use `additionalProperties: false`. A project cannot “temporarily” escape through `customCss`, `layoutOverride`, arbitrary animation values, or a free-form component slot.
 
-## 6. The picker survives, but its meaning changes
+## 9. The picker survives, but its meaning changes
 
 The 5 → 3 → 1 flow becomes:
 
@@ -149,7 +214,7 @@ The 5 → 3 → 1 flow becomes:
 
 This preserves Vedhith's selection method while removing the current source of drift: five worlds with different layout and interaction grammars.
 
-## 7. Fixed page-family manifest
+## 10. Fixed page-family manifest
 
 The universal template owns these archetypes. A project can enable only the families its product needs, but cannot rearrange them.
 
@@ -171,7 +236,7 @@ Every applicable family includes desktop/phone, light/dark, keyboard focus, load
 
 Mobbin remains required, but at the **template-maintainer level**. For each archetype, maintainers study multiple popular shipped flows and record abstract hierarchy, task order, behavior, and states. Screenshots, brand skin, copy, logos, and copyrighted assets are not copied. A project run consumes the already-approved archetype; it does not repeat research to create a custom layout.
 
-## 8. Integrate the existing ComfyUI pipeline
+## 11. Integrate the existing ComfyUI pipeline
 
 Do not add a second image generator. Keep `<project>/design/image-pipeline.json` and the existing one-graph-per-project process.
 
@@ -185,7 +250,7 @@ Add a fixed handoff:
 
 Imagery may change a project's identity. It may not change page composition, component geometry, or motion.
 
-## 9. The gate that proves every route uses the system
+## 12. The gate that proves every route uses the system
 
 `universal-site gate <project>` passes only when all checks pass:
 
@@ -198,18 +263,19 @@ Imagery may change a project's identity. It may not change page composition, com
 7. **Asset integrity:** every requested asset id exists in `ASSETS.json`; unregistered files, missing crops, and missing alt/decorative decisions fail.
 8. **Visual matrix:** pinned screenshots cover every route/state at phone, tablet, laptop, and wide widths in light/dark and reduced motion. A reviewed contact sheet proves cross-page coherence.
 9. **Accessibility:** automated checks plus keyboard/focus and screen-reader smoke tests pass. Native controls and reviewed accessible behavior are preferred, matching Angular's public accessibility guidance ([Angular accessibility](https://angular.dev/best-practices/a11y)).
-10. **Real-app proof:** fixtures prove state coverage; critical flows separately run against the real service. Mock proof is never reported as service proof.
+10. **Full-stack contract:** each page family proves its fixed auth, capability, data, mutation, optimistic/pending, success, validation, conflict, permission, rate-limit, offline, and server-error adapter states. UI code cannot reach a service outside those adapters.
+11. **Real-app proof:** fixtures prove state coverage; critical flows separately run against the real service. Mock proof is never reported as service proof.
 
 A prose `GATES.md`, a picker screenshot, or one polished route cannot satisfy this gate. The current fixture's missing S7–S10 evidence is exactly why the present verdict is **not ready**.
 
-## 10. Exact target stack and adoption
+## 13. Exact target stack and adoption
 
 Use one stack across the Workflow OS fleet:
 
-- **Runtime:** TypeScript + React in one `@vedhith/universal-site` package. All new and old projects consume this package; no project owns a parallel design system.
-- **Architecture benchmark:** Material 3 token/component/state/motion/accessibility layers. Angular Material/CDK/Aria are the closest literal public Google implementation and test model, not the Workflow OS runtime.
+- **Runtime:** TypeScript + React in one `@vedhith/universal-site` package, wrapping the Apache-2.0 Cloudscape implementation behind Workflow OS APIs. All new and old projects consume it; no project owns a parallel design system or imports Cloudscape directly.
+- **Architecture benchmark:** Material 3 token/state/motion/accessibility layers. Angular Material/CDK/Aria remain the closest literal public Google implementation and test model, not the Workflow OS runtime and not evidence that Wiz is forkable.
 - **Tokens:** [DTCG 2025.10](https://www.designtokens.org/TR/2025.10/format/) source files compiled to CSS custom properties and typed TypeScript. Projects edit only the closed variable manifest.
-- **Components:** native HTML where possible; one reviewed accessible behavior layer behind fixed React APIs; stable test harnesses for every public component.
+- **Components:** Cloudscape where it covers the fixed inventory; native HTML where simpler; React Aria only for a missing accessible behavior. Every route sees only fixed universal React APIs and stable test helpers.
 - **Workbench and gates:** [Storybook](https://storybook.js.org/docs/writing-tests), TypeScript/Vitest, [Playwright](https://playwright.dev/docs/test-snapshots) screenshots and flows, [axe-core](https://github.com/dequelabs/axe-core), and [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci).
 - **Assets:** the existing ComfyUI graph, `ASSETS.json`, immutable generated files, and fixed universal asset slots.
 - **Motion:** CSS/WAAPI implementation behind one semantic contract; shared reduced-motion behavior; no project animation dependencies.
