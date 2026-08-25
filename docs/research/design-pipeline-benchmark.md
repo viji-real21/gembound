@@ -1,144 +1,206 @@
-# Design-pipeline benchmark: Workflow OS, Google, Amazon, and open standards
+# Replacement design-system pipeline: the closest defensible public Google-grade architecture
 
-**Date:** 2026-08-25
-**Scope:** public, first-party evidence only. Internal Google and Amazon production pipelines are not public, so this compares the practices their public systems actually expose—not undocumented internal tools and not their visual style.
+**Research snapshot:** 2026-08-25
 
-## Answer first
+## Decision first
 
-Keep Workflow OS's strongest idea: **generate five distinct design worlds, let Vedhith choose, refine three, then apply one**. Improve it by making each option a small, real system—not a themed page—and by carrying the chosen system through neutral tokens, components, backend-driven UI states, motion rules, asset provenance, and CI.
+Replace the current Workflow OS design methodology. **Keep only Vedhith's 5 → 3 → 1 selection method.** The replacement is one reusable master site system that produces five complete identity candidates, refines three, locks one, and makes every route in that project consume the chosen tokens, components, layouts, imagery, motion, and state contracts.
 
-The target is not “make products look like Material or AWS.” It is **use the same class of engineering discipline** visible in Material and Cloudscape: named token layers, documented components and patterns, accessibility built into components, stable testing surfaces, consistent motion, and automated release gates.
+For a **new TypeScript web project**, the closest literal public Google implementation is:
 
-Adopt [DTCG Format 2025.10](https://www.designtokens.org/TR/2025.10/format/) as the neutral token source, then compile it with [Style Dictionary](https://github.com/style-dictionary/style-dictionary) into CSS and TypeScript. DTCG 2025.10 is a stable JSON interchange format from the Design Tokens Community Group; it is a Community Group report, **not** a W3C Recommendation. The [official DTCG repository lists both Amazon and Google as represented organizations](https://github.com/design-tokens/community-group), which makes it a directly relevant shared standard. Representation does **not** prove that either company's internal pipeline has adopted this exact format, so the honest claim is “the current open industry standard,” not “their internal format.”
+- **Angular 22**, created with strict typing and standalone components; use Signals, route-level SSR/SSG where it improves first load, and Angular's supported APIs. Angular 22 is the active public major in the [official release schedule](https://angular.dev/reference/releases); `ng new` defaults to standalone and strict modes and offers SSR in the [official CLI](https://angular.dev/cli/new).
+- **Angular Material 3 + Angular CDK + Angular Aria.** Material supplies supported, styled components; CDK supplies behavior and test primitives; Angular Aria supplies headless, accessible directives when a project identity needs custom styling. Angular states that Aria handles keyboard behavior, ARIA, focus, and screen readers while the product supplies HTML and CSS ([Angular Aria](https://angular.dev/guide/aria/overview)).
+- **DTCG 2025.10 tokens + Style Dictionary.** DTCG is the neutral source; project-defined [Style Dictionary formats](https://styledictionary.com/reference/hooks/formats/) emit CSS custom properties, TypeScript data, Angular Material theme inputs, Storybook data, and future native outputs. [DTCG 2025.10](https://www.designtokens.org/TR/2025.10/format/) is stable but is a Community Group report, not a W3C Recommendation. Both Google and Amazon are represented in the [official DTCG group](https://github.com/design-tokens/community-group); that does not prove either uses the format internally.
+- **[Storybook](https://storybook.js.org/docs/writing-tests) + Vitest/Angular TestBed + Angular CDK component harnesses + [Playwright](https://playwright.dev/docs/test-snapshots) + [axe-core](https://github.com/dequelabs/axe-core) + Lighthouse CI.** CDK harnesses give tests a supported API rather than private DOM selectors ([Angular harness guidance](https://angular.dev/guide/testing/component-harnesses-testing-environments)); Lighthouse CI can assert regressions on every change ([official repository](https://github.com/GoogleChrome/lighthouse-ci)).
+- **[OpenAPI](https://spec.openapis.org/oas/latest.html)-backed state fixtures**, a versioned image/asset manifest, ComfyUI plus a specifically licensed model as the open image lane, and optional Imagen as a closed adapter.
 
-## 1. Current Workflow OS: what is real now
+For an **existing TypeScript/React project**, do not rewrite the application into Angular. Keep its supported React version and use the same framework-neutral tokens, manifests, page families, asset pipeline, Storybook, and gates. Use [React Aria](https://github.com/adobe/react-spectrum) or another reviewed accessible behavior layer behind the master component API. Angular + Angular Material remains the closest literal public Google implementation; React is the lower-risk adapter for existing React products.
 
-The governing source is [`design/PIPELINE.md`](/Users/vedhith/Developer/vedhith-workflow-os/design/PIPELINE.md), not Flintted. Flintted is one proof case.
+This is **not Wiz** and must never be described as Google's exact internal pipeline.
 
-| Area | Current evidence | Assessment |
+## 1. The Google public/internal boundary
+
+Google's own Angular team says Wiz is an **internal** framework used by Search, Photos, and Payments. Its public article describes Wiz as SSR-first with fine-grained code loading and event replay, and says useful ideas are being moved gradually into open Angular through public RFCs ([Angular and Wiz Are Better Together](https://blog.angular.dev/angular-and-wiz-are-better-together-91e633d8cd5a)). That makes Angular the defensible public route to Google-grade architecture. It does not make an Angular app identical to Wiz.
+
+[Material 3](https://m3.material.io/) is the public design architecture: [tokens](https://m3.material.io/foundations/design-tokens/overview), [components](https://m3.material.io/components), [states](https://m3.material.io/foundations/interaction/states/overview), [motion](https://m3.material.io/styles/motion/overview/how-it-works), and [accessible design](https://m3.material.io/foundations/accessible-design/overview). The goal here is to adopt that **system shape**, not Google's visual skin.
+
+The web component story has a hard boundary:
+
+- [`@material/web`](https://github.com/material-components/material-web) is open source but in maintenance mode. Its team says engineers were reassigned to internal Wiz and no new features are planned ([maintenance announcement](https://github.com/material-components/material-web/discussions/5642)); its current README points Angular users to Angular Material. **Do not choose Material Web for new work.**
+- Angular Material is the active open Google component implementation for Angular. Its M3 theming API supports color, typography, and density and warns that component DOM/classes are private; customizations must use supported theming APIs ([Angular Material theming](https://v18.material.angular.dev/guide/theming)).
+- Angular 22 also makes Angular Aria stable for custom-branded accessible components; its roadmap explicitly positions Aria for custom style, CDK for behavior primitives, and Material for ready-made styled controls ([Angular roadmap](https://angular.dev/roadmap)).
+
+Therefore, “same as Google” can honestly mean **the same public architecture class and standards**. It cannot mean Google's private authoring, review, monorepo, Wiz runtime, or release pipeline.
+
+## 2. Keep / replace / reject
+
+Current evidence comes from the Workflow OS source of truth, not from Flintted: [`design/PIPELINE.md`](/Users/vedhith/Developer/vedhith-workflow-os/design/PIPELINE.md) lines 1–39 define parsed stages, lines 377–396 define the picker, and lines 398–417 describe project-wide apply/gates. The candidate kit still names loose CSS as its source and Storybook as unbuilt in [`design/kit/README.md`](/Users/vedhith/Developer/vedhith-workflow-os/design/kit/README.md) lines 12–58 and 107–111. This evidence supports replacement, not preservation.
+
+| Decision | Current Workflow OS feature | Replacement |
 |---|---|---|
-| Executable sequence | `PIPELINE.md:1-39` defines parsed `input/run/output/gate` stages; a stage is complete only when its gate exits 0. | **Keep.** This is stronger than a prose checklist. |
-| Full-stack precondition | `PIPELINE.md:52-75` requires real routes, real data, and a working three-colour skeleton before design. | **Keep, then extend.** It establishes function-first work but does not yet formalize API-derived UI states. |
-| Variant generation | `PIPELINE.md:118-136` requires five worlds distinct in layout, type, colour, motion, and subject. | **Keep.** This prevents five recolours of one idea. |
-| Image system | `PIPELINE.md:139-217` requires rendered plates, a locked graph, a non-black gate, consistent treatment, and provenance. The image guide defines one executable graph per project/theme (`design/image-pipeline/README.md:6-14,71-81`). | **Strong but partial.** Reproducibility exists; rights, safety, accessibility metadata, and content credentials are not complete gates. |
-| Theme and interaction lock | `PIPELINE.md:220-236,287-304` locks palette, type, prompt/seed, motion grammar, and one named interaction per role. | **Keep.** Move the choices into typed system artifacts. |
-| Coverage | `PIPELINE.md:307-339` gates marketing, app, and docs sheets, rather than proving only the landing page. | **Good direction.** Add route-to-pattern and route-to-state coverage. |
-| Human selection | `PIPELINE.md:377-396` defines the 5 → 3 → 1 picker. | **Core advantage. Preserve it.** Move the first pick earlier so five worlds do not each require a near-production build. |
-| Accessibility and performance | `design-gates.mjs:35-195` runs axe across four device profiles, reflow, 200% text, and interaction timing; `design-pipeline.py:1021-1082` reruns the gate rather than trusting a report. | **Useful but incomplete.** It targets WCAG 2.1 tags, not current WCAG 2.2; Lighthouse is explicitly not run; no maintained visual baseline exists. The JS records `clipped200`, but the Python result parser does not currently fail on that field. |
-| Component system | `design/kit/README.md:12-58` exposes a React package and anti-drift validation over tokens, drivers, and CSS classes. | **Candidate, not finished.** CSS remains the source; there is no DTCG source or multi-platform compilation. |
-| State workbench | `design/kit/README.md:90-111` has an HTML fixture, while Storybook and the custom-effects package are explicitly not built. | **Gap.** Component states are not yet first-class review and test cases. |
-| Motion | `design/entries/motion-language.md:1-41` defines a shared duration/easing scale. | **Good seed, partial system.** It needs semantic roles, per-component state contracts, reduced-motion alternatives, and deterministic tests. |
+| **KEEP** | The human chooses 5 → 3 → 1. | Preserve this exact decision path. Each option must be a comparable system slice, not a recolored page. |
+| **REPLACE** | `PIPELINE.md` S0–S10 as the design methodology. | The master-system pipeline in §4. It starts from route/page-family and product-state contracts, then produces one locked system consumed by all routes. |
+| **REPLACE** | CSS and React constants as the design source. | DTCG primitive → semantic → component tokens; generated platform outputs are never hand-edited. |
+| **REPLACE** | Hand-authored themed HTML pages. | Master layouts, components, patterns, route manifests, and Storybook states rendered in the actual app framework. |
+| **REPLACE** | A section reference sheet chosen ad hoc. | A required Mobbin evidence matrix for every page archetype, plus direct first-party product inspection where available. |
+| **REPLACE** | Image plates as a separate pre-page phase. | A shared asset subsystem inside every candidate: image role tokens, generation graph, provenance, crops, alt/decorative status, responsive variants, and page-family usage. |
+| **REPLACE** | Duration/easing numbers without full state contracts. | Semantic motion roles tied to component and layout state machines, including reduced-motion behavior. |
+| **REPLACE** | A fresh-model screenshot opinion as the main visual gate. | Human review of the full page-family matrix plus deterministic Storybook/Playwright visual baselines. A critic may advise; it does not replace evidence. |
+| **REJECT** | Material Web as a new runtime. | It is in maintenance mode. Use Angular Material/Aria/CDK for new Angular work. |
+| **REJECT** | Copying Google's Material appearance. | Copy the architecture and discipline. Each project chooses its own identity through the picker. |
+| **REJECT** | Claiming to reproduce Wiz or Google's internal design pipeline. | State the closed boundary every time. |
+| **REJECT** | Per-page CSS, one-off components, one-off animation curves, or unregistered images. | The route fails the system-consumption gate. |
+| **REJECT** | Building five near-production sites before selection. | Build five equal system slices, then three broader refinements, then one complete site system. |
 
-### Current live proof, with the right caveat
+## 3. The reusable master site template
 
-On 2026-08-25, `design-pipeline.py doctor` resolved all **52 prior-art claims across 14 stages**. A live `status /Users/vedhith/Developer/flintted` passed S0–S6i, S8, and S9. S7 and S10 failed because Chromium exited with **SIGABRT**, leaving `design-prove` / `design-gates` with no readable result.
+The master template is framework-neutral at its contract boundary and has Angular and React adapters:
 
-That is a **current verification failure caused by the browser environment**, not proof of a Flintted design defect. The historical `GATES.md` is stale evidence and must not be treated as a current pass.
+```text
+design-system/
+  system.lock.json                 # chosen system id, version, hashes
+  tokens/
+    reference.tokens.json          # raw color, type, space, shape, duration
+    semantic.tokens.json           # surface, text, action, feedback, motion roles
+    component.tokens.json          # component-specific aliases only
+  components/                      # public UI API + harness for every component
+  patterns/                        # search, auth, forms, tables, editor, checkout...
+  layouts/                         # public, auth, app, detail, editor, settings, error
+  motion/motion-contract.json      # transition/state/reduced-motion table
+  assets/ASSETS.json               # every image, icon, animation, font and licence
+  stories/                         # every component/pattern/state/viewport
+site/
+  PAGE_FAMILY.yaml                 # every route and required evidence/state
+  mobbin-evidence.md               # abstract flow/hierarchy/behavior observations
+  api/openapi.yaml                 # or an equivalent typed API contract
+  generated/                       # token/client outputs; never hand-edited
+```
 
-## 2. What Google and Amazon publicly demonstrate
+One project locks exactly one `system.lock.json`. Different projects may lock different identities. Within one project, **every page uses the same token graph, component package, layout rules, asset treatment, motion vocabulary, and state semantics**.
 
-| Practice | Google: public evidence | Amazon: public evidence | What Workflow OS should copy |
-|---|---|---|---|
-| System structure | [Material 3](https://m3.material.io/) publishes foundations, styles, components, and patterns. Material Web documents reference → system → component token layers and CSS-variable theming in its [theming guide](https://github.com/material-components/material-web/blob/main/docs/theming/README.md). | [Cloudscape](https://cloudscape.design/) publishes foundations, components, patterns, demos, and tools; its [design-token guide](https://cloudscape.design/foundation/visual-foundation/design-tokens/) names reusable visual decisions. | Primitive/reference → semantic/system → component tokens; components sit above tokens; patterns sit above components. |
-| Platform delivery | Google's public implementations are platform-specific: [Material 3 for Jetpack Compose](https://developer.android.com/develop/ui/compose/designsystems/material3) maps colour, typography, and shape into Android APIs, while Material Web uses web components and CSS variables. | Cloudscape ships an [Apache-2.0 React component library](https://github.com/cloudscape-design/components) and CSS/token outputs for web. | Keep one neutral token source, then compile per platform. Do not make React constants or CSS the universal source. |
-| Accessibility | Android's [Compose accessibility testing guidance](https://developer.android.com/develop/ui/compose/accessibility/testing) combines automated checks with manual TalkBack and Switch Access testing. Material components expose semantics through platform APIs. | Cloudscape components and patterns publish accessibility guidance, and its testing layer gives consumers stable helpers rather than asking them to depend on internal DOM. | Accessible component contracts, automated WCAG gates, and a required manual keyboard/screen-reader pass for critical flows. |
-| Stable tests | Material's public repos include implementation tests, but Google does not publish one universal cross-product test API. | Cloudscape explicitly warns that component DOM can change and provides [stable DOM and browser test utilities](https://cloudscape.design/get-started/testing/introduction/) as the supported test surface. | Own stable test adapters such as `button.findLoadingIndicator()` or `table.findRows()`. App tests should not couple to private markup. |
-| Motion | Material publishes motion guidance and motion tokens, although [Material Web does not implement system motion tokens](https://github.com/material-components/material-web/blob/main/docs/theming/README.md). | Cloudscape publishes [curves, durations, transition patterns, reduced-motion behavior, and a test-time motion switch](https://cloudscape.design/foundation/visual-foundation/motion/). | A small semantic motion grammar, reduced-motion equivalents, and one deterministic way to disable/finish animation in tests. |
-| Theme constraints | Material exposes systematic colour generation through the Apache-2.0 [Material Color Utilities](https://github.com/material-foundation/material-color-utilities). | Cloudscape's [theming API](https://cloudscape.design/foundation/visual-foundation/theming/) supports selected visual decisions but intentionally does not let themes rewrite spacing, motion, or iconography; it prefers build-time output where possible for performance, CSP, and server rendering. | Let worlds vary enough to be distinct, then freeze structural invariants after selection. A theme is not permission to fork every component. |
+The system layers follow the public Material pattern:
 
-### Public evidence is not the internal pipeline
+1. **Reference tokens** hold raw values.
+2. **Semantic tokens** name purpose: `surface.canvas`, `text.primary`, `action.primary`, `space.section`, `motion.enter.emphasized`.
+3. **Component tokens** alias semantic roles; they do not introduce unrelated raw values.
+4. **Components** own behavior, accessibility, states, and test harnesses.
+5. **Patterns** combine components into task flows.
+6. **Layouts/page families** combine patterns into routes.
 
-- **Google:** Material guidance, utilities, Android libraries, and web code are public. However, the Material team says [Material Web is in maintenance mode because engineers moved to Google's internal Wiz framework](https://github.com/material-components/material-web/discussions/5642). Wiz's pipeline is not public. Material Web therefore remains useful evidence, but it is a poor new runtime foundation for Workflow OS.
-- **Amazon:** Cloudscape's guidance and React source are public under Apache 2.0. Amazon does not publish the complete internal AWS design review, authoring, release, or compliance pipeline. We can reproduce Cloudscape's visible practices, not claim internal equivalence.
+This lets five projects look different without letting five pages in one project drift apart.
 
-## 3. Open, closed, and partly open options
+## 4. Replacement pipeline
 
-“Best” has no objective single winner. The evidence shows that the **foundation can remain open**. Closed parts cluster around hosted authoring/review tools and frontier image models.
+1. **Product and route contract.** Enumerate real routes, API operations, auth/role rules, content types, localization, and required states before visual work.
+2. **Page-family manifest.** Map every route to one archetype in §6. Unknown routes fail. Conditional families are explicitly `not-applicable` with a reason.
+3. **Mobbin research.** For every applicable archetype, a human reviews at least three popular shipped product flows in the same product class and records only flow, hierarchy, behavior, and state lessons.
+4. **Five system slices.** Each candidate renders the exact same evidence slice: public landing, primary app workspace, one dense/list route, one detail/editor route, auth/onboarding, phone layout, loading/empty/error/permission states, image treatment, and motion/reduced-motion specimen.
+5. **Pick 5 → 3.** Record the choice and reasons. No rejected candidate becomes production code.
+6. **Three refinements.** Each refinement must include full DTCG tokens, the core component/pattern inventory, master layouts, motion contract, asset graph, and representative route matrix.
+7. **Pick 3 → 1.** Write `system.lock.json`. Its token, component, layout, asset, and motion hashes become the only approved project system.
+8. **Compile and package.** Generate platform outputs and the framework component package. Angular Material customization uses its supported theming API; never private selectors. Custom identity controls use Angular Aria/CDK or the React adapter.
+9. **Apply by family.** Build every route through a declared master layout and registered patterns. API-contract fixtures generate loading, empty, partial, error, forbidden, success, and long/localized content states.
+10. **Prove system consumption.** Run §7 against every route and state. A route cannot pass because another page looks correct.
+11. **Release and version.** Version tokens/components/patterns/system lock together. Changes require a system-level changelog and refreshed baselines, never a local page patch.
 
-| Option | Classification | Use here |
-|---|---|---|
-| [DTCG 2025.10](https://www.designtokens.org/TR/2025.10/format/) + [Style Dictionary](https://github.com/style-dictionary/style-dictionary) | **Open standard + Apache-2.0 compiler** | Recommended token source and platform build step. |
-| [Cloudscape](https://github.com/cloudscape-design/components) | **Open source, Apache-2.0** | Best public Amazon reference for components, patterns, test helpers, and motion discipline. Borrow practices, not its AWS look. |
-| [Material Color Utilities](https://github.com/material-foundation/material-color-utilities) / [Material Theme Builder](https://github.com/material-foundation/material-theme-builder) | **Open source, Apache-2.0** | Useful colour math and theme export references. Do not adopt Material Web as the main kit while it is in maintenance mode. |
-| [Carbon](https://github.com/carbon-design-system/carbon) | **Open source, Apache-2.0** | Strong reference for tokens, React/web components, icons, and a documented motion package. |
-| [Fluent UI](https://github.com/microsoft/fluentui) | **Mostly open source, MIT** | Strong component-pattern and token reference; check separate asset/font licences before reuse. |
-| [React Spectrum / React Aria](https://github.com/adobe/react-spectrum) | **Open source, Apache-2.0** | Strong accessible behavior layer; React Aria is valuable when Workflow OS wants its own visual identity. |
-| [Storybook](https://github.com/storybookjs/storybook) + [Playwright](https://github.com/microsoft/playwright) | **Open source** | Recommended state workbench, interaction tests, and self-hosted visual baselines. |
-| Chromatic | **Closed hosted service around open Storybook** | Optional convenience, not required. [Chromatic's docs](https://www.chromatic.com/docs/quickstart/) require a hosted project/token; Playwright can keep the core gate self-hosted. |
-| Figma core | **Closed product; public Plugin and REST APIs** | Optional authoring adapter, never the source of truth. Figma documents the boundary in its [API comparison](https://developers.figma.com/compare-apis/) and [Plugin API](https://developers.figma.com/docs/plugins/). |
-| Rive | **Partly open** | Runtimes are public, including the [MIT web runtime](https://github.com/rive-app/rive-wasm); the editor is a hosted authoring product. Use only behind an exported-asset contract. |
-| ComfyUI + FLUX.1-schnell | **Open graph runtime; model-specific licence** | [ComfyUI is GPL-3.0](https://github.com/comfyanonymous/ComfyUI). [FLUX.1-schnell code/weights are Apache-2.0](https://github.com/black-forest-labs/flux); other FLUX variants have different terms. Pin the exact model and licence in the asset manifest. |
-| Google Imagen / Amazon Nova Canvas | **Closed hosted models** | Optional lanes, not required for the pipeline. Google documents [Imagen with SynthID](https://deepmind.google/models/imagen/). AWS's [Nova Canvas service card](https://docs.aws.amazon.com/ai/responsible-ai/nova-canvas/overview.html) explicitly calls it proprietary and documents invisible watermarking plus C2PA Content Credentials. Their model internals and production pipelines are not open. |
+## 5. Mobbin is required evidence, with a strict use boundary
 
-Use “open source” carefully for AI. The [Open Source AI Definition](https://opensource.org/ai/open-source-ai-definition) requires more than downloadable weights. Classify each model by its exact release and licence; never label a whole vendor open.
+Mobbin's official site exposes shipped screens, UI elements, flows, video, and interactive prototypes across web and mobile products ([Mobbin](https://mobbin.com/)). Use that evidence to avoid inventing weak flows.
 
-## 4. Gap analysis
+For each page archetype, `mobbin-evidence.md` must contain:
 
-| Gap | Risk | Target change |
-|---|---|---|
-| Tokens are CSS/TS values, not neutral exchange data. | Design decisions cannot be validated or compiled consistently across web, future mobile, docs, and image tools. | DTCG 2025.10 source; Style Dictionary outputs; generated files fail CI when stale. |
-| Five worlds are proved as themed pages before the picker. | High effort is spent on four concepts that will be rejected; full-stack states can still be missed. | Make five comparable **system slices**, pick, create three deeper refinements, pick, then expand one system project-wide. |
-| Components have a package and fixture but no Storybook. | States, variants, accessibility, and motion are hard to review together. | One story per meaningful state; stories become shared design, documentation, and test fixtures. [Storybook treats stories as UI test cases](https://storybook.js.org/docs/writing-tests). |
-| “Real data” is required, but API and UI-state contracts are not explicit artifacts. | Loading, empty, partial, long-content, permission, offline, and error states drift from backend behavior. | Use [OpenAPI](https://spec.openapis.org/oas/latest.html) or the repo's typed API schema to generate fixtures; map every endpoint state to a pattern/story/route. Test mocked contracts and real-service flows separately. |
-| Current accessibility automation targets WCAG 2.1. | It misses new 2.2 success criteria and automated tools never cover every human interaction. | Target [WCAG 2.2 AA](https://www.w3.org/TR/WCAG22/), use [ARIA APG](https://www.w3.org/WAI/ARIA/apg/) patterns, keep axe, and require manual keyboard/screen-reader/reduced-motion checks on critical flows. |
-| No maintained screenshot baseline; Lighthouse is documented but not executed by S10. | Visual drift and performance regressions can merge without a reproducible comparison. | Run served Storybook/app builds in CI. Store Playwright `toHaveScreenshot()` baselines in version control and run them in a pinned environment, as [Playwright recommends](https://playwright.dev/docs/test-snapshots). Run Lighthouse against the same ephemeral server. |
-| Motion has numeric tokens but no state matrix. | Teams can reuse durations while still inventing inconsistent effects and reduced-motion behavior. | Add semantic motion roles, component transition tables, reduced-motion alternatives, and deterministic test behavior. |
-| Image manifests reproduce generation but do not fully govern the asset lifecycle. | Licence, source, consent, accessibility, and provenance can be lost after generation or editing. | Add hashes, exact model/licence, prompt/seed/input references, reviewer, alt text, use restrictions, and C2PA where supported. |
-
-## 5. Recommended target pipeline
-
-This extends the existing sequence; it does not replace the picker.
-
-1. **S0 — product contract.** Keep the real walking skeleton. Add a route inventory, OpenAPI/typed API inventory, auth/permission matrix, and required UI states: default, loading, empty, partial, error, offline/retry, long/localized content, destructive confirmation, and success.
-2. **S1–S2 — identity and references.** Keep the audience, outcome, banned cues, and section-level source sheet. Add licences/usage rights for every external visual reference.
-3. **S3–S4 — five system slices.** Each world must show the same comparable slice: one marketing surface, the hardest app route, phone layout, one dense state, one empty/error/loading set, one image plate/treatment, and one motion specimen including reduced motion. Lock model, seed, style, type, and motion intent for each world.
-4. **Pick 1 — 5 → 3.** Put the five slices in one picker. Record the decision and reasons as data. Do not build every production route for all five.
-5. **Three refinements.** Expand the selected direction into three variants of the **same system**, not three unrelated themes. Each refinement carries DTCG tokens, a small component set, representative patterns, asset manifest, and motion state table.
-6. **Pick 2 — 3 → 1 and system lock.** Freeze the chosen token set, component behavior, imagery graph, motion grammar, and route/state coverage contract. Changes after this point require an explicit system-level decision.
-7. **Compile.** Style Dictionary validates and builds DTCG tokens into CSS custom properties, typed TypeScript, Storybook theme data, and—when needed—Android/iOS formats. Primitive tokens feed semantic tokens; semantic tokens feed components. Generated outputs are never hand-edited.
-8. **Component workbench.** Publish `@vedhith/design-kit` in Storybook. Every component owns documented variants, interaction states, error/help text, keyboard model, ARIA contract, motion transitions, and reduced-motion behavior. Add project-owned stable test helpers modeled on Cloudscape.
-9. **Patterns and full-stack integration.** Compose components into named patterns such as authentication, search/results, table/filter, editor/save, billing, onboarding, and destructive confirmation. Bind stories to API-contract fixtures, then apply the chosen system to every real route. A mock pass proves state rendering; a real-service pass separately proves integration.
-10. **Release gates.** Validate token schema/aliases and generated drift; run component unit/interaction/a11y tests; build Storybook; run Playwright visual comparisons; run route-level axe, reflow, 200% text, keyboard, reduced motion, and real-flow tests; verify API contracts; run Lighthouse from a temporary served build; validate asset licence/provenance/alt metadata. Snapshot updates require review, never an automatic overwrite.
-11. **Version and learn.** Version the kit and tokens, publish a change log and migration note, track which projects consume which version, and feed verified project corrections back into Workflow OS.
-
-## 6. Image-generation governance
-
-Keep the current one-graph-per-theme rule. It is the right unit for visual consistency. Add an `ASSETS.json` entry for every accepted asset:
-
-- source type (`generated`, `licensed`, `original`, `stock`), content hash, output dimensions, and intended placements;
-- exact generator/runtime/model/version/licence, prompt, negative prompt if applicable, seed, sampler, steps, source-image hashes, and post-process graph;
-- rights/consent and restricted-use notes, safety review, human approver, alt text or explicit decorative status;
-- provenance/content credentials. The [current C2PA specifications index](https://spec.c2pa.org/specifications/) defines the versioned technical standards for recording origin and edits. C2PA can make provenance tamper-evident, but provenance does not by itself establish that content is true;
-- reproducibility gate, perceptual/duplicate check, palette/treatment check, and “no generation during production builds.” Production consumes reviewed, versioned assets only.
-
-Hosted Google/AWS generation may be optional adapters. The base workflow must work with ComfyUI plus a correctly licensed local model so the system is not locked to a closed service.
-
-## 7. Consistent UI motion
-
-Represent durations, cubic Bézier curves, and transitions as DTCG token types, then add semantic roles above the raw numbers:
-
-| Role | Contract |
+| Field | Required value |
 |---|---|
-| `feedback.instant` | Press/toggle acknowledgement; never blocks input. |
-| `state.enter` / `state.exit` | Enter is gentle; exit is shorter; focus target is stable. |
-| `surface.change` | Panel, route, disclosure, and modal transitions share direction and timing rules. |
-| `attention.brand` | Rare authored motion; cannot delay task completion or hide content. |
-| `data.update` | Preserves object identity so values do not appear to teleport. |
-| `reduced.*` | Replace travel/parallax/continuous motion with instant state, opacity, or a short non-spatial transition. |
+| Archetype | The exact `PAGE_FAMILY.yaml` id. |
+| References | At least three popular, shipped products relevant to this product class. |
+| Evidence | Product, platform, flow name/URL, capture date, and reviewer. |
+| Borrow | Abstract flow order, information hierarchy, interaction behavior, and states. |
+| Do not borrow | Brand color/type, exact copy, logos, illustrations, photos, icons, or distinctive arrangement taken as a whole. |
+| Decision | Adopt, combine, or reject, with the reason. |
 
-The browser exposes the user's reduced-motion preference through [`prefers-reduced-motion`](https://www.w3.org/TR/mediaqueries-5/#prefers-reduced-motion). Every animated component story must show start, active, end, interrupted/reversed, and reduced states. Tests should finish or disable motion through one supported adapter; screenshot tests should use the same pinned behavior. Cross-document View Transitions can be an enhancement, but [CSS View Transitions Level 2](https://www.w3.org/TR/css-view-transitions-2/) is still a Working Draft, so core meaning and navigation cannot depend on it.
+This must be a licensed, human-led research step. Mobbin's [Terms](https://mobbin.com/terms) say its materials may contain third-party copyright/trademarks, restrict copying and derivative works, and restrict using automated/AI tools on its content without permission. Therefore:
 
-## 8. Phased adoption
+- do not scrape Mobbin;
+- do not commit its screenshots or exports;
+- do not feed its screens to image/UI generators or agents unless the account and written permission allow it;
+- give the implementation agent the abstract evidence notes, not protected assets.
 
-1. **Make proof current.** Fix the Chromium SIGABRT environment, rerun Flintted S7/S10, and replace stale `GATES.md` evidence. Also connect `clipped200` to the S10 failure parser.
-2. **Standardize decisions.** Introduce DTCG 2025.10 sources, Style Dictionary outputs, schema/alias/drift checks, WCAG 2.2 tags, route/state inventory, and the richer asset manifest.
-3. **Build the workbench.** Add Storybook for the existing kit, document every component state, add stable test helpers, and turn the motion grammar into semantic/state contracts with reduced-motion stories.
-4. **Reshape the picker.** Generate five comparable full-stack slices, pick three, refine those three as systems, then lock and apply one. Preserve the user-controlled 5 → 3 → 1 decision.
-5. **Close CI gaps.** Add pinned Playwright baselines, served Lighthouse, API contract fixtures/provider checks, critical real-service flows, and image/provenance gates.
-6. **Scale across projects.** Version the kit/tokens, publish migrations, track adoption, and use the next two Workflow OS proof projects to harden the system before reducing per-project influence.
+Mobbin informs **what the page must do and how users move through it**. The selected design system controls how it looks.
 
-## Decision
+## 6. Full page-family manifest
 
-Adopt an **open core**: DTCG 2025.10, Style Dictionary, the existing Workflow OS kit, Storybook, Playwright, axe-core, OpenAPI, ComfyUI, and carefully licensed image models. Use Google Material and Amazon Cloudscape as public engineering benchmarks. Treat Figma, Chromatic, Rive authoring, Imagen, and Nova Canvas/managed AWS image generation as optional closed adapters—not foundations.
+Every route maps to one family. “Conditional” means required when the product has that capability.
 
-This gives Workflow OS the standards and operational discipline visible in Google/Amazon systems while keeping its own identity-first, imagery-first, user-picked design process.
+| Family id | Required archetypes and states | Applicability |
+|---|---|---|
+| `public` | landing/home, product/feature, pricing/plans, company/contact, docs/help, legal | Landing and legal for external sites; internal-only tools may record `not-applicable`. Others conditional. |
+| `access` | sign in, sign up/invite, SSO, recovery, verification, expired/invalid link | Required for authenticated products. |
+| `onboarding` | welcome, account/org setup, import/connect, permission request, progress, completion | Required when setup exceeds sign-in. |
+| `app-home` | app shell, dashboard/workspace, recents, primary action | Required for app products. |
+| `browse` | search, list/grid, filters, sort, pagination/infinite load, no results | Required when users find collections. |
+| `object` | detail/overview, related content, history/activity, share/export | Required for domain objects. |
+| `create-edit` | create, edit, autosave/manual save, validation, conflict, destructive confirm | Required when users mutate data. |
+| `communication` | inbox/chat, notifications, activity feed, read/unread, attachment/error | Conditional. |
+| `commerce` | plan selection, checkout, payment result, invoices, cancellation/refund | Conditional. |
+| `account-admin` | profile, preferences, team/members, roles, integrations, API/security, billing | Profile always for accounts; remainder conditional. |
+| `system` | 403, 404, 500, offline, maintenance, empty tenant, degraded/partial service | Always required. |
+
+Each route entry declares `path`, `family`, `layout`, `allowedPatterns`, `apiOperations`, `roles`, `states`, `mobbinEvidence`, `assets`, and `systemId`. Route variants such as phone/desktop and reduced motion are test dimensions, not separate systems.
+
+## 7. The gate that proves every page uses one system
+
+`design-system gate <project>` passes only when all checks pass:
+
+1. **Route coverage:** framework adapter enumerates all routes; each exists once in `PAGE_FAMILY.yaml`, and the manifest has no dead route.
+2. **Lock identity:** the app root exposes the exact `systemId@version` from `system.lock.json`; every route retains it after navigation and hydration.
+3. **Token integrity:** DTCG validates, aliases resolve, generated files match source hashes, and lint rejects raw visual constants outside approved token/asset files.
+4. **Import boundary:** pages import only public master components/patterns/layouts. Deep imports, private Angular Material selectors, per-page theme bundles, and legacy design libraries fail.
+5. **Component provenance:** every design-system component exposes an id/version and a CDK-style harness. Tests use harness APIs rather than private DOM structure.
+6. **Layout compliance:** each route renders its declared master layout and only allowed patterns. Header, navigation, content measure, grid, and responsive behavior derive from the selected system.
+7. **State completeness:** contract fixtures render required default/loading/empty/partial/error/forbidden/success states. Critical flows also pass against a real service; mock proof and service proof are reported separately.
+8. **Asset integrity:** every loaded image/font/icon/animation exists in `ASSETS.json`, matches its hash/licence/role, has responsive crops, and has alt text or explicit decorative status.
+9. **Motion integrity:** transitions use semantic motion tokens; every animated component has enter, exit, interruption, and reduced-motion behavior. Angular's current [`animate.enter` / `animate.leave`](https://angular.dev/guide/animations) APIs apply shared CSS motion classes.
+10. **Visual family matrix:** Playwright captures every route/state at phone, tablet, laptop, and wide desktop in a pinned environment. Baselines live in version control and updates require review ([Playwright screenshot guidance](https://playwright.dev/docs/test-snapshots)). A human reviews the contact sheet for visible cross-page coherence.
+11. **Accessibility:** Storybook and routes run axe; critical flows pass keyboard and screen-reader review; target [WCAG 2.2 AA](https://www.w3.org/TR/WCAG22/) and documented [ARIA APG](https://www.w3.org/WAI/ARIA/apg/) behavior.
+12. **Performance:** served production builds run Lighthouse CI and route budgets. Public pages use Angular SSR/SSG where justified by the [official hybrid-rendering model](https://angular.dev/guide/ssr).
+
+The gate reports artifacts and exit codes. A prose `GATES.md`, an agent claim, or one passing homepage cannot make the project green.
+
+## 8. Shared imagery and motion
+
+### Image system
+
+Images are part of the locked system, not page decoration. `ASSETS.json` records source type, content hash, exact model/version/licence, prompt/seed/input hashes, post-process graph, reviewer, rights/consent, alt/decorative status, responsive crops, intended page-family roles, and C2PA credentials where available. The [current C2PA specifications](https://spec.c2pa.org/specifications/) provide the provenance standard; provenance records origin/edits but does not prove truth.
+
+Use [ComfyUI](https://github.com/comfyanonymous/ComfyUI) plus a specifically licensed model as the open, reproducible adapter. Optional [Google Imagen](https://deepmind.google/models/imagen/) is closed and may be used only behind the same manifest contract. Production builds consume approved versioned assets; they never generate images at build or request time.
+
+All pages share image role tokens (`hero`, `object`, `avatar`, `thumbnail`, `empty-state`, `background`), crop rules, palette/treatment, and density budgets. A project may choose a different identity; pages within it may not choose different image languages.
+
+### Motion system
+
+Store duration, easing, spring/transition, distance, and opacity values as DTCG tokens, then expose semantic roles such as `feedback.instant`, `state.enter`, `state.exit`, `surface.change`, `data.update`, and `brand.emphasis`. Components own state-transition tables; layouts own navigation/continuity rules.
+
+Every role defines a reduced-motion substitute using [`prefers-reduced-motion`](https://www.w3.org/TR/mediaqueries-5/#prefers-reduced-motion). Continuous/parallax motion becomes static; spatial travel becomes instant state or a short opacity transition; content is never hidden until animation runs. Screenshot and component tests disable or finish motion through one supported adapter, never scattered CSS overrides.
+
+## 9. Open and closed choices
+
+| Choice | Classification | Decision |
+|---|---|---|
+| Angular 22, Angular Material/CDK/Aria | Open source, Google-led | **Adopt for new TypeScript web projects.** Closest literal public Google implementation. |
+| DTCG + Style Dictionary | Open standard/community report + Apache-2.0 compiler | **Adopt.** Framework-neutral system source and compiler. |
+| Storybook, Playwright, axe-core, Lighthouse CI | Open source | **Adopt.** State workbench and CI proof. |
+| React + React Aria | Open source | **Adopt as the existing-React adapter.** Do not rewrite working products solely for framework similarity. |
+| Amazon Cloudscape | Apache-2.0 React system | **Reference only.** Its [stable test utilities](https://cloudscape.design/get-started/testing/introduction/) reinforce the same harness principle; it is not the target visual/runtime stack. |
+| Material Web | Open source, maintenance mode | **Reject for new runtime use.** |
+| Wiz / Google internal pipeline | Closed/internal | **Unavailable. Reject imitation claims.** Borrow only features that Google actually releases in Angular. |
+| Mobbin | Closed research service | **Required human evidence input, never a system dependency or asset source.** |
+| Figma, Chromatic, Rive editor | Closed or partly open hosted tooling | **Optional adapters.** The core pipeline must work without them. |
+| Imagen | Closed model/service | **Optional image adapter.** Open image lane remains available. |
+
+## Final recommendation
+
+Build the replacement as a **framework-neutral master system with an Angular 22 reference implementation**. Use Angular Material where its supported components fit, Angular Aria/CDK where a custom identity needs headless accessible behavior, and DTCG tokens to make the identity portable. Keep React in existing React repositories through the same contracts.
+
+Preserve only 5 → 3 → 1 from Workflow OS. Require Mobbin evidence for every applicable page archetype. Lock one system per project. Make route coverage, system identity, token/component/layout usage, imagery, motion, states, accessibility, visual regression, and performance executable gates.
+
+That is the closest defensible public Google-grade pipeline. Anything stronger would be an unverifiable claim about closed Alphabet tooling.
