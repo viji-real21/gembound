@@ -33,8 +33,18 @@
 
 <header>
   <h1>The Guarded Workflow: an agent operating system with a cost proof</h1>
-  <div class="meta">Evidence paper · generated 2026-08-19 · all numbers machine-verified by tests (49/49 + 50/50 green) · full proofs: langgraph-shadow/EVIDENCE.md + MATH.md</div>
+  <div class="meta">Evidence paper · generated 2026-08-19 · updated 2026-08-20 · math-contract numbers CI-verified (67/67 green); the 2026-08-20 night-run section below is hand-entered and NOT test-wired — tags mark what is proven vs. modeled/simulated · full proofs: langgraph-shadow/EVIDENCE.md + MATH.md</div>
 </header>
+
+<h2>New research — 2026-08-20 night run (three raw numbers)</h2>
+<table>
+  <tr><th>Metric</th><th>Raw number</th><th>Status</th><th>Basis</th></tr>
+  <tr><td><strong>Speed</strong></td><td class="big">2.0×</td><td><span class="tag open">MODELED</span></td><td>Fan dispatch halves modeled makespan (2.0× on the 2-lane cap, 4 workers), measured in abstract turns, at +39% tokens — <code>dispatch_modes.py</code>, contract-tested. Real stopwatch cycle time is not yet measured (see line 73).</td></tr>
+  <tr><td><strong>Cost</strong></td><td class="big">+6.33%</td><td><span class="tag open">PROJECTED</span></td><td>Active stack today is still $300 (Claude+Codex). $319 (+6.33%) is the fleet-pitch stack (Claude+Kimi+GLM) once Kimi replaces the Codex lane at renewal — not yet billed, so this delta is projected, not measured. What <em>is</em> measured tonight: marginal per-turn cost on the free surge lane was $0 up to quota across 66 logged episodes, zero rate-limit hits all night — a lane property, not a total-cost saving.</td></tr>
+  <tr><td><strong>Performance</strong></td><td class="big">+37 pts</td><td><span class="tag open">SIMULATED</span></td><td>24/7 demand coverage 63% → 100% at medium load is a deterministic simulation (<code>stack_backtest.py</code>) using assumed demand and low/medium-confidence lane capacities, not an observation (52-test subscription backtest, now 67 tests green). Lane pass-rates (0.971 fast / 1.0 escalation) are <strong>not</strong> measured quality: of the 66 logged episodes, <code>ok</code> only means the output omitted the strings "Error"/"rejected" — a wrong answer still counts as a pass. Only 8 fast-lane and 13 escalation-lane episodes had an actual `verified` check, both below this page's own n≥30 threshold (<code>replay_bench.py</code> MIN_SAMPLE). Quality per lane is therefore still <span class="tag open">NOT YET MEASURED</span>.</td></tr>
+</table>
+<p class="qa">Caveat: the coverage number is a model output, not a measurement — it is only as good as its assumed demand and capacity inputs. Nothing on this page auto-recalibrates from episode logs today; <code>replay_bench.py</code> scores exist but no pipeline feeds them into the backtest or regenerates these numbers.</p>
+
 
 <h2>Abstract</h2>
 <p>AI coding agents burn money in predictable ways: they start work they should have refused, restart from scratch instead of staying warm, let context grow without bound, spawn copies of themselves, and work at the most expensive hour. We built a workflow — a set of ordering and scheduling rules around one agent session — where each of these waste mechanisms is either <em>prevented before any model call happens</em> or <em>bounded by arithmetic on the provider's own published prices</em>. Every claim below is one of: <span class="tag proven">PROVEN</span> (exact math, CI-enforced), <span class="tag measured">MEASURED</span> (data from this machine), or <span class="tag open">NOT YET MEASURED</span> (stated honestly, experiment pending). No number on this page is a projection dressed up as a result.</p>

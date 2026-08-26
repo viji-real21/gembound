@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Workflow Backtest — Week 1 vs Week 2</title>
+  <style>
+    :root{color-scheme:dark;--bg:#090b0e;--panel:#12161b;--line:#29313a;--text:#f4f6f8;--muted:#9ca8b5;--red:#ff6b6b;--green:#59d499;--blue:#7ab8ff;--amber:#f5c264}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}.wrap{width:min(1120px,calc(100% - 32px));margin:auto;padding:54px 0 90px}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(32px,6vw,72px);line-height:.98;letter-spacing:-.065em;max-width:900px}h2{font-size:22px;margin:0 0 18px}h3{font-size:15px;margin-bottom:8px}.eyebrow{color:var(--blue);text-transform:uppercase;letter-spacing:.14em;font-size:12px;margin-bottom:20px}.lead{font:20px/1.45 ui-sans-serif,system-ui,sans-serif;color:#dbe2e8;max-width:760px}.verdict{border-left:4px solid var(--red);padding:22px 24px;background:linear-gradient(90deg,#32181b,transparent);margin:34px 0}.verdict strong{color:var(--red);font-size:24px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 48px}.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}.metric{font-size:42px;letter-spacing:-.06em;line-height:1}.label{color:var(--muted);margin-top:9px}.good{color:var(--green)}.bad{color:var(--red)}.amber{color:var(--amber)}section{border-top:1px solid var(--line);padding-top:34px;margin-top:42px}.barrow{display:grid;grid-template-columns:190px 1fr 90px;gap:14px;align-items:center;margin:14px 0}.track{height:12px;background:#222831;border-radius:99px;overflow:hidden}.fill{height:100%;border-radius:inherit}.w1{background:var(--blue)}.w2{background:var(--amber)}.target{background:var(--green)}.math{font-size:18px;background:#0d1116;border:1px solid var(--line);padding:20px;border-radius:10px;overflow:auto}.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.project p{color:var(--muted);margin:0}.project b{color:var(--text)}.tag{display:inline-block;padding:2px 7px;border-radius:99px;background:#232a32;color:var(--muted);font-size:11px;margin-bottom:10px}.note{color:var(--muted);font-size:13px}.footer{margin-top:52px;color:var(--muted)}
+    @media(max-width:760px){.grid,.projects{grid-template-columns:1fr}.barrow{grid-template-columns:110px 1fr 65px}.wrap{padding-top:34px}h1{letter-spacing:-.045em}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <div class="eyebrow">Blind Git-evidence audit · 18 Aug 2026</div>
+  <h1>Week 2 was faster.<br>It was not cheaper.</h1>
+  <p class="lead">A stateless judge saw only the work and dates. It did not see prices, quota use, or the expected answer.</p>
+
+  <div class="verdict" data-testid="verdict">
+    <strong>2× claim rejected.</strong>
+    <div>Estimated Week 2 useful work: <b>0.72× Week 1</b>. Reasonable range: 0.55–0.95×. Verdict confidence: 90%.</div>
+  </div>
+
+  <div class="grid">
+    <div class="card"><div class="metric">100</div><div class="label">Week 1 useful-work index</div></div>
+    <div class="card"><div class="metric amber">72</div><div class="label">Week 2 useful-work index</div></div>
+    <div class="card"><div class="metric good">1.42×</div><div class="label">Week 2 work rate per hour</div></div>
+  </div>
+
+  <section>
+    <h2>The backtest</h2>
+    <div class="barrow"><span>Week 1 total</span><div class="track"><div class="fill w1" style="width:50%"></div></div><b>100</b></div>
+    <div class="barrow"><span>Week 2 total</span><div class="track"><div class="fill w2" style="width:36%"></div></div><b>72</b></div>
+    <div class="barrow"><span>Required claim</span><div class="track"><div class="fill target" style="width:100%"></div></div><b>200</b></div>
+    <p class="note">Bars use a 200-point scale. The judge normalized commit splitting, lockfiles, moves, generated work, tests, verification, and workflow-only infrastructure.</p>
+  </section>
+
+  <section>
+    <h2>What the math says</h2>
+    <div class="math">
+      Week 1: 100 work / 144 hours = 0.694 work/hour<br>
+      Week 2: 72 work / 73 hours = 0.986 work/hour<br>
+      <b class="good">Speed: 0.986 / 0.694 = 1.42×</b><br><br>
+      Both windows exhausted the Claude bucket.<br>
+      <b class="bad">Claude-bucket efficiency: 72 / 100 = 0.72×</b><br>
+      Codex usage makes 0.72× an optimistic upper bound, not a penalty included in the score.
+    </div>
+    <p class="note">To deliver 2× Week 1 in only 73 hours, Week 2 needed a 3.95× hourly work rate. It achieved about 1.42×.</p>
+  </section>
+
+  <section>
+    <h2>Why the cheaper design did not backtest cheaper</h2>
+    <div class="grid">
+      <div class="card"><h3>Design premise</h3><p class="note">Orchestrators work directly. They spawn only when avoided rework exceeds cold-start and coordination cost.</p></div>
+      <div class="card"><h3>Observed result</h3><p class="note">More work per hour, but 28% less total useful work per exhausted Claude window.</p></div>
+      <div class="card"><h3>Failure signal</h3><p class="note">The gate, compaction policy, or cache estimate did not match real provider usage. The theory was not enforced successfully.</p></div>
+    </div>
+    <div class="math">Fleet wins only if:<br><b>rework avoided &gt; orchestration + fresh-agent startup + report ingestion + lost cache</b></div>
+  </section>
+
+  <section>
+    <h2>Project evidence</h2>
+    <div class="projects">
+      <div class="card project"><span class="tag">Last week dominant</span><h3>visionAnchor</h3><p><b>Last week:</b> MCP, providers, leases, voice, Forge, Office, and a large evidence harness. <b>This week:</b> live gateway and automation hardening. <b>Why:</b> useful, but much narrower.</p></div>
+      <div class="card project"><span class="tag">This week 3–4×</span><h3>Flintted</h3><p><b>Last week:</b> early product base. <b>This week:</b> parity, storage, search, payments, export, browser isolation, and <b>909 green tests</b>. <b>Why:</b> several complete product slices landed.</p></div>
+      <div class="card project"><span class="tag">This week larger</span><h3>Convair</h3><p><b>Last week:</b> smaller foundation. <b>This week:</b> typed signals, judged-once rules, rollups, and the visible board. <b>Why:</b> more depth and user-visible integration.</p></div>
+      <div class="card project"><span class="tag">About equal</span><h3>Amethyst</h3><p><b>Last week:</b> broad initial site work. <b>This week:</b> measured geometry, Firefox, zero-FOUC, and reactive edits. <b>Why:</b> less breadth, similar useful refinement.</p></div>
+      <div class="card project"><span class="tag">New this week</span><h3>FOCAL</h3><p><b>Last week:</b> no matching build. <b>This week:</b> watcher, memory, orb shell, judge, and policy ladder. <b>Why discounted:</b> GUI proof remained open.</p></div>
+      <div class="card project"><span class="tag">Future leverage</span><h3>Workflow OS</h3><p><b>Last week:</b> simpler manual flow. <b>This week:</b> setup, rollback, phone dispatch, failover, and verification. <b>Why discounted:</b> infrastructure counts fully only after it improves product output.</p></div>
+      <div class="card project"><span class="tag">Last week larger</span><h3>Claufy + Portfolio</h3><p><b>Last week:</b> broader product and release work. <b>This week:</b> smaller useful changes. <b>Why:</b> fewer finished user-facing slices landed.</p></div>
+      <div class="card project"><span class="tag">Last week larger</span><h3>Git Pop</h3><p><b>Last week:</b> completed end-to-end builder. <b>This week:</b> plan and graph ladder. <b>Why:</b> the new ladder was marked “unwired,” so it was not finished work.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Decision</h2>
+    <p class="lead"><b>Keep orchestration.</b> Fix its economics. Use a measured cache-aware delegation gate and dynamic compaction. The current run proves faster throughput, but not lower usage.</p>
+    <p class="note">Limit: this is a Git-evidence audit. It excludes uncommitted work and cannot measure user adoption. The verdict would reverse only if most of Week 1's visionAnchor work proved unusable while Week 2 had strong deployment evidence.</p>
+  </section>
+
+  <p class="footer">Source windows: Aug 8 23:00–Aug 14 23:00 and Aug 14 23:00–Aug 18 00:00, America/Phoenix.</p>
+</main>
+<script defer src="desktop-hint.js"></script>
+</body>
+</html>

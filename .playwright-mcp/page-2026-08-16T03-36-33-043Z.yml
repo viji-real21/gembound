@@ -1,0 +1,250 @@
+- generic [ref=f3e2]:
+  - banner:
+    - navigation [ref=f3e4]:
+      - link:
+        - /url: /
+        - generic [ref=f3e5] [cursor=pointer]
+        - generic [ref=f3e17] [cursor=pointer]
+      - generic [ref=f3e29]:
+        - link "Cases Cases" [ref=f3e30] [cursor=pointer]:
+          - /url: /cases
+          - generic [ref=f3e31]:
+            - generic [ref=f3e32]: Cases
+            - generic: Cases
+        - link "Service Service" [ref=f3e33] [cursor=pointer]:
+          - /url: /services
+          - generic [ref=f3e34]:
+            - generic [ref=f3e35]: Service
+            - generic: Service
+        - link "Blog Blog" [ref=f3e36] [cursor=pointer]:
+          - /url: /blog
+          - generic [ref=f3e37]:
+            - generic [ref=f3e38]: Blog
+            - generic: Blog
+        - link "About us About us" [ref=f3e39] [cursor=pointer]:
+          - /url: /about-us
+          - generic [ref=f3e40]:
+            - generic [ref=f3e41]: About us
+            - generic: About us
+      - generic [ref=f3e42]:
+        - generic [ref=f3e43]:
+          - generic: Book a call
+          - link [ref=f3e45] [cursor=pointer]:
+            - /url: ""
+        - link "Contact" [ref=f3e46] [cursor=pointer]:
+          - /url: /contact-us
+  - generic [ref=f3e49]:
+    - generic [ref=f3e50]:
+      - heading "Where Creativity Meets Results" [level=1] [ref=f3e51]: Where CreativityMeets Results
+      - generic [ref=f3e52]: Explore the impactful projects that turn creativity into business growth
+    - generic [ref=f3e53]:
+      - generic [ref=f3e60]:
+        - generic [ref=f3e61]:
+          - generic [ref=f3e62]: Fitonist
+          - generic [ref=f3e63]: Fitonist's user acquisition soared 150% after our brand and UX overhaul
+          - generic [ref=f3e64]: Our team assisted Fitonist, a gym workout mobile app, with a cohesive brand identity and an intuitive design across their website and mobile application. Our strategic approach enhanced user engagement and significant growth in new sign-ups.
+        - generic [ref=f3e65]:
+          - generic [ref=f3e66]: Branding
+          - generic [ref=f3e69]: UX/UI Design
+          - generic [ref=f3e72]: Web Development
+          - generic [ref=f3e75]: Art Direction
+          - generic [ref=f3e78]: Services
+        - link "View details" [ref=f3e79] [cursor=pointer]:
+          - /url: /fitonist
+      - generic [ref=f3e87]:
+        - generic [ref=f3e88]:
+          - generic [ref=f3e89]: Cybervergent
+          - generic [ref=f3e90]: Website redesign simplified complex offerings and increased user engagement by 50%
+          - generic [ref=f3e91]: Cybervergent's strategic website redesign simplified offerings, showcased their full range of products, and positioned them as a leading cybersecurity solutions provider, resulting in increased digital trust and market expansion.
+        - generic [ref=f3e92]:
+          - generic [ref=f3e93]: Services
+          - generic [ref=f3e94]: UX/UI Design
+          - generic [ref=f3e97]: Web Development
+          - generic [ref=f3e100]: Design system
+          - generic [ref=f3e103]: Art Direction
+        - link "View details" [ref=f3e106] [cursor=pointer]:
+          - /url: /cybervergent
+      - generic [ref=f3e114]:
+        - generic [ref=f3e115]:
+          - generic [ref=f3e116]: Stable0x
+          - generic [ref=f3e117]: Our design accelerated Stable0x's time-to-market by 40%
+          - generic [ref=f3e118]: Outcrowd has partnered with Stable0x, a cross-chain stablecoin startup. Our branding and website design helped them quickly establish credibility in competitive DeFi, attracting early adopters and setting the stage for rapid growth.
+        - generic [ref=f3e119]:
+          - generic [ref=f3e120]: Branding
+          - generic [ref=f3e123]: UX/UI Design
+          - generic [ref=f3e126]: Marketing Assets
+          - generic [ref=f3e129]: Art direction
+          - generic [ref=f3e132]: Services
+        - link "View details" [ref=f3e133] [cursor=pointer]:
+          - /url: /stable0x
+      - generic [ref=f3e141]:
+        - generic [ref=f3e142]:
+          - generic [ref=f3e143]: Brainforest
+          - generic [ref=f3e144]: Brainforest's user acquisition doubled after our UX/UI overhaul
+          - generic [ref=f3e145]: Outcrowd partnered with Brainforest, an AI-powered productivity platform for students. Our comprehensive brand identity work and intuitive UX/UI design transformed the platform, significantly improving user retention and attracting new investments.
+        - generic [ref=f3e146]:
+          - generic [ref=f3e147]: Branding
+          - generic [ref=f3e150]: UX/UI Design
+          - generic [ref=f3e153]: Development
+          - generic [ref=f3e156]: Art Direction
+          - generic [ref=f3e159]: Services
+        - link "Coming soon":
+          - /url: https://www.brainforest.io/
+      - generic [ref=f3e167]:
+        - generic [ref=f3e168]:
+          - generic [ref=f3e169]: Finance Able
+          - generic [ref=f3e170]: Finance|able's fresh look boosted course enrollments by [percentage]
+          - generic [ref=f3e171]: Outcrowd transformed Finance|able into a user-centric learning platform, driving significant growth in student enrollment through intuitive design and engaging content.
+        - generic [ref=f3e172]:
+          - generic [ref=f3e173]: UX/UI Design
+          - generic [ref=f3e176]: Motion Design
+          - generic [ref=f3e179]: Development
+          - generic [ref=f3e182]: Art Direction
+          - generic [ref=f3e185]: Services
+        - link "View details" [ref=f3e186] [cursor=pointer]:
+          - /url: https://finance-able.com/
+      - generic [ref=f3e194]:
+        - generic [ref=f3e195]:
+          - generic [ref=f3e196]: Nopan
+          - generic [ref=f3e197]: Nopan’s A2A Payment Solution Upgraded by Comprehensive Branding and UI/UX Design
+          - generic [ref=f3e198]: We created a full branding package for Nopan, including a logo, brand guide, and an investor-focused pitch deck, along with a dynamic landing page to highlight their innovative account-to-account payment offer.
+        - generic [ref=f3e199]:
+          - generic [ref=f3e200]: Branding
+          - generic [ref=f3e203]: UX/UI Design
+          - generic [ref=f3e206]: Development
+          - generic [ref=f3e209]: Art Direction
+          - generic [ref=f3e212]: Services
+        - link "View details" [ref=f3e213] [cursor=pointer]:
+          - /url: /nopan
+      - generic [ref=f3e221]:
+        - generic [ref=f3e222]:
+          - generic [ref=f3e223]: Ramos
+          - generic [ref=f3e224]: Ramos secured $1M seed funding within 3 months of our brand launch
+          - generic [ref=f3e225]: Our strategic design approach across branding, platform UI/UX, and website design enabled Ramos to launch quickly, attract early investors, and secure the first user base in a competitive market.
+        - generic [ref=f3e226]:
+          - generic [ref=f3e227]: Branding
+          - generic [ref=f3e230]: UX/UI Design
+          - generic [ref=f3e233]: Development
+          - generic [ref=f3e236]: Art Direction
+          - generic [ref=f3e239]: Services
+        - link "View details" [ref=f3e240] [cursor=pointer]:
+          - /url: /ramos
+  - generic [ref=f3e247]:
+    - heading "Innovate with us" [level=2] [ref=f3e248]
+    - generic [ref=f3e249]: Our creative solutions have helped clients raise $100+ mln and expand their reach.
+    - generic [ref=f3e250]:
+      - link "Write us" [ref=f3e251] [cursor=pointer]:
+        - /url: /contact-us
+      - generic [ref=f3e253]:
+        - generic: Book a call
+        - link [ref=f3e255] [cursor=pointer]:
+          - /url: ""
+  - contentinfo [ref=f3e258]:
+    - generic [ref=f3e259]:
+      - generic [ref=f3e260]:
+        - generic [ref=f3e261]:
+          - generic [ref=f3e263]:
+            - link "Cases Cases" [ref=f3e264] [cursor=pointer]:
+              - /url: /cases
+              - generic [ref=f3e265]:
+                - generic [ref=f3e266]: Cases
+                - generic: Cases
+            - link "Fitonist Fitonist" [ref=f3e267] [cursor=pointer]:
+              - /url: https://fitonist-app.webflow.io/
+              - generic [ref=f3e268]:
+                - generic [ref=f3e269]: Fitonist
+                - generic: Fitonist
+            - link "Brainforest Brainforest" [ref=f3e270] [cursor=pointer]:
+              - /url: https://www.brainforest.io/
+              - generic [ref=f3e271]:
+                - generic [ref=f3e272]: Brainforest
+                - generic: Brainforest
+            - link "Cybervergent Cybervergent" [ref=f3e273] [cursor=pointer]:
+              - /url: https://www.cybervergent.com/
+              - generic [ref=f3e274]:
+                - generic [ref=f3e275]: Cybervergent
+                - generic: Cybervergent
+            - link "Nopan Nopan" [ref=f3e276] [cursor=pointer]:
+              - /url: https://nopan.webflow.io/
+              - generic [ref=f3e277]:
+                - generic [ref=f3e278]: Nopan
+                - generic: Nopan
+            - link "Ramos Ramos" [ref=f3e279] [cursor=pointer]:
+              - /url: https://ramos-app.webflow.io/
+              - generic [ref=f3e280]:
+                - generic [ref=f3e281]: Ramos
+                - generic: Ramos
+          - generic [ref=f3e283]:
+            - link "Services Services" [ref=f3e284] [cursor=pointer]:
+              - /url: /services
+              - generic [ref=f3e285]:
+                - generic [ref=f3e286]: Services
+                - generic: Services
+            - link "Complex solution Complex solution" [ref=f3e287] [cursor=pointer]:
+              - /url: "#"
+              - generic [ref=f3e288]:
+                - generic [ref=f3e289]: Complex solution
+                - generic: Complex solution
+            - link "Branding Branding" [ref=f3e290] [cursor=pointer]:
+              - /url: /branding-page
+              - generic [ref=f3e291]:
+                - generic [ref=f3e292]: Branding
+                - generic: Branding
+            - link "Design Design" [ref=f3e293] [cursor=pointer]:
+              - /url: /design-page
+              - generic [ref=f3e294]:
+                - generic [ref=f3e295]: Design
+                - generic: Design
+            - link "Development Development" [ref=f3e296] [cursor=pointer]:
+              - /url: /development-page
+              - generic [ref=f3e297]:
+                - generic [ref=f3e298]: Development
+                - generic: Development
+          - generic [ref=f3e300]:
+            - link "About us About us" [ref=f3e301] [cursor=pointer]:
+              - /url: /about-us
+              - generic [ref=f3e302]:
+                - generic [ref=f3e303]: About us
+                - generic: About us
+            - link "Numbers Numbers" [ref=f3e304] [cursor=pointer]:
+              - /url: /about-us#numbers
+              - generic [ref=f3e305]:
+                - generic [ref=f3e306]: Numbers
+                - generic: Numbers
+            - link "Mission Mission" [ref=f3e307] [cursor=pointer]:
+              - /url: /about-us#mission
+              - generic [ref=f3e308]:
+                - generic [ref=f3e309]: Mission
+                - generic: Mission
+            - link "Values Values" [ref=f3e310] [cursor=pointer]:
+              - /url: /about-us#values
+              - generic [ref=f3e311]:
+                - generic [ref=f3e312]: Values
+                - generic: Values
+            - link "Clients Clients" [ref=f3e313] [cursor=pointer]:
+              - /url: /about-us#clients
+              - generic [ref=f3e314]:
+                - generic [ref=f3e315]: Clients
+                - generic: Clients
+        - generic [ref=f3e316]:
+          - link "hello@outcrowd.io" [ref=f3e317] [cursor=pointer]:
+            - /url: mailto:hello@outcrowd.io
+          - generic [ref=f3e318]:
+            - link [ref=f3e319] [cursor=pointer]:
+              - /url: https://dribbble.com/outcrowd
+            - link [ref=f3e321] [cursor=pointer]:
+              - /url: https://www.behance.net/outcrowd
+            - link [ref=f3e323] [cursor=pointer]:
+              - /url: https://www.instagram.com/outcrowdstudio/
+            - link [ref=f3e325] [cursor=pointer]:
+              - /url: https://x.com/outcrowdstudio
+            - link [ref=f3e327] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/outcrowd-network/?originalSubdomain=ua
+      - generic [ref=f3e329]:
+        - generic [ref=f3e330]: Copyright © 2025 Outcrowd Inc. All rights reserved.
+        - generic [ref=f3e331]: Lewes - USA
+  - generic [ref=f3e334]:
+    - generic [ref=f3e335]: By clicking “Accept All Cookies”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts.
+    - generic [ref=f3e336]:
+      - button "Deny all" [ref=f3e337] [cursor=pointer]
+      - button "Accept" [ref=f3e338] [cursor=pointer]

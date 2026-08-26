@@ -1,0 +1,780 @@
+- generic [active] [ref=f4e1]:
+  - generic [ref=f4e20]:
+    - generic:
+      - banner:
+        - navigation [ref=f4e22]:
+          - link [ref=f4e23] [cursor=pointer]:
+            - /url: /
+          - generic [ref=f4e48]:
+            - link "Cases Cases" [ref=f4e49] [cursor=pointer]:
+              - /url: /cases
+              - generic [ref=f4e50]:
+                - generic [ref=f4e51]: Cases
+                - generic [ref=f4e1694]: Cases
+            - link "Service Service" [ref=f4e52] [cursor=pointer]:
+              - /url: /services
+              - generic [ref=f4e53]:
+                - generic [ref=f4e54]: Service
+                - generic: Service
+            - link "Blog Blog" [ref=f4e55] [cursor=pointer]:
+              - /url: /blog
+              - generic [ref=f4e56]:
+                - generic [ref=f4e57]: Blog
+                - generic: Blog
+            - link "About us About us" [ref=f4e58] [cursor=pointer]:
+              - /url: /about-us
+              - generic [ref=f4e59]:
+                - generic [ref=f4e60]: About us
+                - generic: About us
+          - generic [ref=f4e61]:
+            - generic [ref=f4e62]:
+              - generic: Book a call
+              - link [ref=f4e64] [cursor=pointer]:
+                - /url: ""
+            - link "Contact" [ref=f4e65] [cursor=pointer]:
+              - /url: /contact-us
+    - main [ref=f4e66]:
+      - generic [ref=f4e69]:
+        - generic [ref=f4e70]:
+          - generic [ref=f4e71]: Digital brand design agency
+          - heading "Design & Brand Acceleration for SaaS Startups" [level=1] [ref=f4e76]
+        - generic:
+          - img [ref=f4e85]:
+            - generic "346+" [ref=f4e94]
+          - img [ref=f4e138]:
+            - generic [ref=f4e139]:
+              - generic "562" [ref=f4e546]
+              - generic "286" [ref=f4e563]
+      - generic [ref=f4e773]:
+        - heading "W e p r o v e , d e s i g n , i m p l e m e n t , a n d m a r k e t y o u r i d e a w i t h a b s o l u t e t r a n s p a r e n c y a n d e f f i c i e n c y i n i t ' s c o r e" [level=2] [ref=f4e774]:
+          - generic [ref=f4e775]:
+            - generic [ref=f4e776]:
+              - generic [ref=f4e777]: W
+              - generic [ref=f4e778]: e
+            - generic [ref=f4e779]:
+              - generic [ref=f4e780]: p
+              - generic [ref=f4e781]: r
+              - generic [ref=f4e782]: o
+              - generic [ref=f4e783]: v
+              - generic [ref=f4e784]: e
+              - generic [ref=f4e785]: ","
+            - generic [ref=f4e786]:
+              - generic [ref=f4e787]: d
+              - generic [ref=f4e788]: e
+              - generic [ref=f4e789]: s
+              - generic [ref=f4e790]: i
+              - generic [ref=f4e791]: g
+              - generic [ref=f4e792]: "n"
+              - generic [ref=f4e793]: ","
+          - generic [ref=f4e794]:
+            - generic [ref=f4e795]:
+              - generic [ref=f4e796]: i
+              - generic [ref=f4e797]: m
+              - generic [ref=f4e798]: p
+              - generic [ref=f4e799]: l
+              - generic [ref=f4e800]: e
+              - generic [ref=f4e801]: m
+              - generic [ref=f4e802]: e
+              - generic [ref=f4e803]: "n"
+              - generic [ref=f4e804]: t
+              - generic [ref=f4e805]: ","
+            - generic [ref=f4e806]:
+              - generic [ref=f4e807]: a
+              - generic [ref=f4e808]: "n"
+              - generic [ref=f4e809]: d
+            - generic [ref=f4e810]:
+              - generic [ref=f4e811]: m
+              - generic [ref=f4e812]: a
+              - generic [ref=f4e813]: r
+              - generic [ref=f4e814]: k
+              - generic [ref=f4e815]: e
+              - generic [ref=f4e816]: t
+          - generic [ref=f4e817]:
+            - generic [ref=f4e818]:
+              - generic [ref=f4e819]: "y"
+              - generic [ref=f4e820]: o
+              - generic [ref=f4e821]: u
+              - generic [ref=f4e822]: r
+            - generic [ref=f4e823]:
+              - generic [ref=f4e824]: i
+              - generic [ref=f4e825]: d
+              - generic [ref=f4e826]: e
+              - generic [ref=f4e827]: a
+            - generic [ref=f4e828]:
+              - generic [ref=f4e829]: w
+              - generic [ref=f4e830]: i
+              - generic [ref=f4e831]: t
+              - generic [ref=f4e832]: h
+            - generic [ref=f4e833]:
+              - generic [ref=f4e834]: a
+              - generic [ref=f4e835]: b
+              - generic [ref=f4e836]: s
+              - generic [ref=f4e837]: o
+              - generic [ref=f4e838]: l
+              - generic [ref=f4e839]: u
+              - generic [ref=f4e840]: t
+              - generic [ref=f4e841]: e
+          - generic [ref=f4e842]:
+            - generic [ref=f4e843]:
+              - generic [ref=f4e844]: t
+              - generic [ref=f4e845]: r
+              - generic [ref=f4e846]: a
+              - generic [ref=f4e847]: "n"
+              - generic [ref=f4e848]: s
+              - generic [ref=f4e849]: p
+              - generic [ref=f4e850]: a
+              - generic [ref=f4e851]: r
+              - generic [ref=f4e852]: e
+              - generic [ref=f4e853]: "n"
+              - generic [ref=f4e854]: c
+              - generic [ref=f4e855]: "y"
+            - generic [ref=f4e856]:
+              - generic [ref=f4e857]: a
+              - generic [ref=f4e858]: "n"
+              - generic [ref=f4e859]: d
+          - generic [ref=f4e860]:
+            - generic [ref=f4e861]:
+              - generic [ref=f4e862]: e
+              - generic [ref=f4e863]: f
+              - generic [ref=f4e864]: f
+              - generic [ref=f4e865]: i
+              - generic [ref=f4e866]: c
+              - generic [ref=f4e867]: i
+              - generic [ref=f4e868]: e
+              - generic [ref=f4e869]: "n"
+              - generic [ref=f4e870]: c
+              - generic [ref=f4e871]: "y"
+            - generic [ref=f4e872]:
+              - generic [ref=f4e873]: i
+              - generic [ref=f4e874]: "n"
+            - generic [ref=f4e875]:
+              - generic [ref=f4e876]: i
+              - generic [ref=f4e877]: t
+              - generic [ref=f4e878]: "'"
+              - generic [ref=f4e879]: s
+            - generic [ref=f4e880]:
+              - generic [ref=f4e881]: c
+              - generic [ref=f4e882]: o
+              - generic [ref=f4e883]: r
+              - generic [ref=f4e884]: e
+        - generic [ref=f4e885]:
+          - generic [ref=f4e887]:
+            - heading "$300m" [level=2] [ref=f4e888]
+            - generic [ref=f4e889]: In funding clients raised owing to our design work
+          - generic [ref=f4e892]:
+            - heading "60+" [level=2] [ref=f4e894]
+            - generic [ref=f4e902]: World’s biggest international design awards won
+          - generic [ref=f4e905]:
+            - heading "100M" [level=2] [ref=f4e926]
+            - generic [ref=f4e927]: Active users experiencing our design every day via products we made
+          - generic [ref=f4e930]:
+            - generic [ref=f4e931]:
+              - img [ref=f4e933]:
+                - generic [ref=f4e940]:
+                  - generic "4" [ref=f4e1734]
+                  - generic "%" [ref=f4e946]
+              - heading "24%" [level=2] [ref=f4e951]
+            - generic [ref=f4e952]: Of total marketing budgets converted into sales with our branding & materials
+      - generic:
+        - generic:
+          - heading "Stages of startup development" [level=2]
+          - generic: Examples of our most common engagement models into early-stage start-ups on different stages of the lifecycle.
+      - generic [ref=f4e957]:
+        - generic [ref=f4e959]:
+          - generic [ref=f4e960]:
+            - heading "Pre-seed Bootstrapped" [level=3] [ref=f4e961]
+            - generic [ref=f4e962]:
+              - generic [ref=f4e963]: This is POC stage. You have a hypothetical product idea, you want it done & tested properly to know whether it’s worth the time and resources.
+              - generic [ref=f4e964]: More than 40% of our clients on this stage get initial investment for MVPs
+          - generic [ref=f4e965]:
+            - heading "Seed" [level=3] [ref=f4e966]
+            - generic [ref=f4e967]:
+              - generic [ref=f4e968]: This is an MVP stage. You approved a product-market fit and want to start working with real users, and start initial marketing efforts.
+              - generic [ref=f4e969]: More than 25% of our clients get Series A investments to build full-scale product and start marketing
+          - generic [ref=f4e970]:
+            - heading "Series A" [level=3] [ref=f4e971]
+            - generic [ref=f4e972]:
+              - generic [ref=f4e973]: This is a product optimisation stage. You raised the investment and faced burn-rates while expanding further.
+              - generic [ref=f4e974]: We’ve helped every start-up we worked with at this stage to cut costs and improve user experience
+        - generic [ref=f4e982]:
+          - generic [ref=f4e985]:
+            - generic [ref=f4e986]: Pre-seed Bootstrapped
+            - generic [ref=f4e987]: This is POC stage. You got hypothetical product idea, you want it done & tested properly to know whether it’s worth time and resources.More than 40% of our clients on this stage get initial investment for MVPs
+            - link "View detais" [ref=f4e988] [cursor=pointer]:
+              - /url: "#"
+          - generic [ref=f4e991]:
+            - generic [ref=f4e992]: Seed
+            - generic [ref=f4e993]: This is an MVP stage. You approved a product-market fit and want to start working with real users, and start initial marketing efforts.More than 25% of our clients get Series A investment to build full-scale product and start marketing
+            - link "View detais" [ref=f4e994] [cursor=pointer]:
+              - /url: "#"
+          - generic [ref=f4e997]:
+            - generic [ref=f4e998]: Series A
+            - generic [ref=f4e999]: This is a product optimisation stage. You raised the investment and faced burn-rates while expanding further.We’ve helped each and every start-up we worked with at this stage to cut costs and improve user experience
+            - link "View detais" [ref=f4e1000] [cursor=pointer]:
+              - /url: "#"
+      - generic [ref=f4e1002]:
+        - generic [ref=f4e1003]:
+          - heading "Services" [level=2] [ref=f4e1004]
+          - paragraph [ref=f4e1005]: Whether you need a full-scale IT partner to define the roadmap or a vendor for particular tasks, we got you
+          - generic [ref=f4e1006]: Complex solution
+        - generic [ref=f4e1010]: Instead of a request which sounds like “I need a website”, we embrace - “I want to market my product to get first organic users”, where we can suggest what to do, and execute the approved plan from A to Z.
+        - generic [ref=f4e1013]:
+          - generic [ref=f4e1015]:
+            - heading "Brand Strategy" [level=4] [ref=f4e1016]
+            - generic [ref=f4e1017]: We establish comprehensive product-market fit hypotheses, validate them, and visualise in the most creative ways.
+          - generic [ref=f4e1021]:
+            - heading "Brand Visual" [level=4] [ref=f4e1022]
+            - generic [ref=f4e1023]: We create brand materials that speak of your values non-verbally and complement your offering to the market.
+          - generic [ref=f4e1037]:
+            - heading "Platforms" [level=4] [ref=f4e1038]
+            - generic [ref=f4e1039]: We think about the big picture and focus primarily on your app's business success. We research deeply, validate thoroughly, and launch confidently.
+          - generic [ref=f4e1042]:
+            - heading "Website" [level=4] [ref=f4e1043]
+            - generic [ref=f4e1044]: We don’t just design websites. We build reliable sales & marketing tools that drive predictably good metrics.
+          - generic [ref=f4e1058]:
+            - heading "Mobile Apps" [level=4] [ref=f4e1059]
+            - generic [ref=f4e1060]: We're masters of UX gamification and user engagement. In a world where any app competes with Instagram we make usable products that attract and retain.
+          - generic [ref=f4e1064]:
+            - heading "Development" [level=4] [ref=f4e1065]
+            - generic [ref=f4e1066]: We can take care of your product’s implementation, assuring the most efficient usage of time & resources in every decision & each line of code while maintaining seamless operation.
+      - generic [ref=f4e1068]:
+        - heading "Our design thinking is recognised by enterprises we cooperated with" [level=3] [ref=f4e1071]
+        - generic [ref=f4e1080]:
+          - heading "W e t h i n k a b o u t t h e b i g p i c t u r e a n d f o c u s p r i m a r i l y o n y o u r p r o d u c t ’ s f u n d i n g & b u s i n e s s s u c c e s s . ‍ W e r e s e a r c h d e e p l y , v a l i d a t e t h o r o u g h l y , a n d l a u n c h c o n f i d e n t l y ." [level=3] [ref=f4e1081]:
+            - generic [ref=f4e1082]:
+              - generic [ref=f4e1083]:
+                - generic [ref=f4e1084]: W
+                - generic [ref=f4e1085]: e
+              - generic [ref=f4e1086]:
+                - generic [ref=f4e1087]: t
+                - generic [ref=f4e1088]: h
+                - generic [ref=f4e1089]: i
+                - generic [ref=f4e1090]: "n"
+                - generic [ref=f4e1091]: k
+              - generic [ref=f4e1092]:
+                - generic [ref=f4e1093]: a
+                - generic [ref=f4e1094]: b
+                - generic [ref=f4e1095]: o
+                - generic [ref=f4e1096]: u
+                - generic [ref=f4e1097]: t
+              - generic [ref=f4e1098]:
+                - generic [ref=f4e1099]: t
+                - generic [ref=f4e1100]: h
+                - generic [ref=f4e1101]: e
+              - generic [ref=f4e1102]:
+                - generic [ref=f4e1103]: b
+                - generic [ref=f4e1104]: i
+                - generic [ref=f4e1105]: g
+              - generic [ref=f4e1106]:
+                - generic [ref=f4e1107]: p
+                - generic [ref=f4e1108]: i
+                - generic [ref=f4e1109]: c
+                - generic [ref=f4e1110]: t
+                - generic [ref=f4e1111]: u
+                - generic [ref=f4e1112]: r
+                - generic [ref=f4e1113]: e
+              - generic [ref=f4e1114]:
+                - generic [ref=f4e1115]: a
+                - generic [ref=f4e1116]: "n"
+                - generic [ref=f4e1117]: d
+            - generic [ref=f4e1118]:
+              - generic [ref=f4e1119]:
+                - generic [ref=f4e1120]: f
+                - generic [ref=f4e1121]: o
+                - generic [ref=f4e1122]: c
+                - generic [ref=f4e1123]: u
+                - generic [ref=f4e1124]: s
+              - generic [ref=f4e1125]:
+                - generic [ref=f4e1126]: p
+                - generic [ref=f4e1127]: r
+                - generic [ref=f4e1128]: i
+                - generic [ref=f4e1129]: m
+                - generic [ref=f4e1130]: a
+                - generic [ref=f4e1131]: r
+                - generic [ref=f4e1132]: i
+                - generic [ref=f4e1133]: l
+                - generic [ref=f4e1134]: "y"
+              - generic [ref=f4e1135]:
+                - generic [ref=f4e1136]: o
+                - generic [ref=f4e1137]: "n"
+              - generic [ref=f4e1138]:
+                - generic [ref=f4e1139]: "y"
+                - generic [ref=f4e1140]: o
+                - generic [ref=f4e1141]: u
+                - generic [ref=f4e1142]: r
+              - generic [ref=f4e1143]:
+                - generic [ref=f4e1144]: p
+                - generic [ref=f4e1145]: r
+                - generic [ref=f4e1146]: o
+                - generic [ref=f4e1147]: d
+                - generic [ref=f4e1148]: u
+                - generic [ref=f4e1149]: c
+                - generic [ref=f4e1150]: t
+                - generic [ref=f4e1151]: ’
+                - generic [ref=f4e1152]: s
+            - generic [ref=f4e1153]:
+              - generic [ref=f4e1154]:
+                - generic [ref=f4e1155]: f
+                - generic [ref=f4e1156]: u
+                - generic [ref=f4e1157]: "n"
+                - generic [ref=f4e1158]: d
+                - generic [ref=f4e1159]: i
+                - generic [ref=f4e1160]: "n"
+                - generic [ref=f4e1161]: g
+              - generic [ref=f4e1162]: "&"
+              - generic [ref=f4e1164]:
+                - generic [ref=f4e1165]: b
+                - generic [ref=f4e1166]: u
+                - generic [ref=f4e1167]: s
+                - generic [ref=f4e1168]: i
+                - generic [ref=f4e1169]: "n"
+                - generic [ref=f4e1170]: e
+                - generic [ref=f4e1171]: s
+                - generic [ref=f4e1172]: s
+              - generic [ref=f4e1173]:
+                - generic [ref=f4e1174]: s
+                - generic [ref=f4e1175]: u
+                - generic [ref=f4e1176]: c
+                - generic [ref=f4e1177]: c
+                - generic [ref=f4e1178]: e
+                - generic [ref=f4e1179]: s
+                - generic [ref=f4e1180]: s
+                - generic [ref=f4e1181]: .
+            - generic [ref=f4e1182]: ‍
+            - generic [ref=f4e1184]:
+              - generic [ref=f4e1185]:
+                - generic [ref=f4e1186]: W
+                - generic [ref=f4e1187]: e
+              - generic [ref=f4e1188]:
+                - generic [ref=f4e1189]: r
+                - generic [ref=f4e1190]: e
+                - generic [ref=f4e1191]: s
+                - generic [ref=f4e1192]: e
+                - generic [ref=f4e1193]: a
+                - generic [ref=f4e1194]: r
+                - generic [ref=f4e1195]: c
+                - generic [ref=f4e1196]: h
+              - generic [ref=f4e1197]:
+                - generic [ref=f4e1198]: d
+                - generic [ref=f4e1199]: e
+                - generic [ref=f4e1200]: e
+                - generic [ref=f4e1201]: p
+                - generic [ref=f4e1202]: l
+                - generic [ref=f4e1203]: "y"
+                - generic [ref=f4e1204]: ","
+              - generic [ref=f4e1205]:
+                - generic [ref=f4e1206]: v
+                - generic [ref=f4e1207]: a
+                - generic [ref=f4e1208]: l
+                - generic [ref=f4e1209]: i
+                - generic [ref=f4e1210]: d
+                - generic [ref=f4e1211]: a
+                - generic [ref=f4e1212]: t
+                - generic [ref=f4e1213]: e
+              - generic [ref=f4e1214]:
+                - generic [ref=f4e1215]: t
+                - generic [ref=f4e1216]: h
+                - generic [ref=f4e1217]: o
+                - generic [ref=f4e1218]: r
+                - generic [ref=f4e1219]: o
+                - generic [ref=f4e1220]: u
+                - generic [ref=f4e1221]: g
+                - generic [ref=f4e1222]: h
+                - generic [ref=f4e1223]: l
+                - generic [ref=f4e1224]: "y"
+                - generic [ref=f4e1225]: ","
+              - generic [ref=f4e1226]:
+                - generic [ref=f4e1227]: a
+                - generic [ref=f4e1228]: "n"
+                - generic [ref=f4e1229]: d
+              - generic [ref=f4e1230]:
+                - generic [ref=f4e1231]: l
+                - generic [ref=f4e1232]: a
+                - generic [ref=f4e1233]: u
+                - generic [ref=f4e1234]: "n"
+                - generic [ref=f4e1235]: c
+                - generic [ref=f4e1236]: h
+              - generic [ref=f4e1237]:
+                - generic [ref=f4e1238]: c
+                - generic [ref=f4e1239]: o
+                - generic [ref=f4e1240]: "n"
+                - generic [ref=f4e1241]: f
+                - generic [ref=f4e1242]: i
+                - generic [ref=f4e1243]: d
+                - generic [ref=f4e1244]: e
+                - generic [ref=f4e1245]: "n"
+                - generic [ref=f4e1246]: t
+                - generic [ref=f4e1247]: l
+                - generic [ref=f4e1248]: "y"
+                - generic [ref=f4e1249]: .
+          - generic [ref=f4e1250]:
+            - generic [ref=f4e1251]:
+              - generic [ref=f4e1252]: Brainforest
+              - generic [ref=f4e1254]: Outcrowd partnered with Brainforest, an AI-powered productivity platform for students. Our comprehensive brand identity work and intuitive UX/UI design transformed the platform, significantly improving user retention and attracting new investments.
+              - link "Case study Case study" [ref=f4e1255] [cursor=pointer]:
+                - /url: https://www.brainforest.io/
+                - generic [ref=f4e1256]:
+                  - generic [ref=f4e1257]: Case study
+                  - generic [ref=f4e1258]: Case study
+            - generic [ref=f4e1260]:
+              - generic [ref=f4e1261]: Fitonist
+              - generic [ref=f4e1263]: Our team assisted Fitonist, a gym workout mobile app, with a cohesive brand identity and an intuitive design across their website and mobile application. Our strategic approach enhanced user engagement and significant growth in new sign-ups.
+              - link "Case study Case study" [ref=f4e1264] [cursor=pointer]:
+                - /url: https://fitonist-app.webflow.io/
+                - generic [ref=f4e1265]:
+                  - generic [ref=f4e1266]: Case study
+                  - generic [ref=f4e1267]: Case study
+            - generic [ref=f4e1269]:
+              - generic [ref=f4e1270]: Cybervergent
+              - generic [ref=f4e1272]: Cybervergent's strategic website redesign simplified offerings, showcased their full range of products, and positioned them as a leading cybersecurity solutions provider, resulting in increased digital trust and market expansion.
+              - link "Case study Case study" [ref=f4e1273] [cursor=pointer]:
+                - /url: https://www.cybervergent.com/
+                - generic [ref=f4e1274]:
+                  - generic [ref=f4e1275]: Case study
+                  - generic [ref=f4e1276]: Case study
+            - generic [ref=f4e1278]:
+              - generic [ref=f4e1279]: Nopan
+              - generic [ref=f4e1281]: We created a full branding package for Nopan, including a logo, brand guide, and an investor-focused pitch deck, along with a dynamic landing page to highlight their innovative account-to-account payment offer.
+              - link "Case study Case study" [ref=f4e1282] [cursor=pointer]:
+                - /url: https://nopan.webflow.io/
+                - generic [ref=f4e1283]:
+                  - generic [ref=f4e1284]: Case study
+                  - generic [ref=f4e1285]: Case study
+            - generic [ref=f4e1287]:
+              - generic [ref=f4e1288]: Financeable
+              - generic [ref=f4e1290]: Outcrowd transformed Finance|able into a user-centric learning platform, driving significant growth in student enrollment through intuitive design and engaging content.
+              - link "Case study Case study" [ref=f4e1291] [cursor=pointer]:
+                - /url: https://finance-able.com/
+                - generic [ref=f4e1292]:
+                  - generic [ref=f4e1293]: Case study
+                  - generic [ref=f4e1294]: Case study
+            - generic [ref=f4e1296]:
+              - generic [ref=f4e1297]: Stable0x
+              - generic [ref=f4e1299]: Outcrowd has partnered with Stable0x, a cross-chain stablecoin startup. Our branding and website design helped them quickly establish credibility in competitive DeFi, attracting early adopters and setting the stage for rapid growth.
+              - link "Case study Case study" [ref=f4e1300] [cursor=pointer]:
+                - /url: https://stable0x.com/
+                - generic [ref=f4e1301]:
+                  - generic [ref=f4e1302]: Case study
+                  - generic [ref=f4e1303]: Case study
+      - generic [ref=f4e1306]:
+        - generic [ref=f4e1307]:
+          - heading "70+ reviews" [level=5] [ref=f4e1308]
+          - generic [ref=f4e1309]:
+            - heading "Clients speak out" [level=2] [ref=f4e1311]
+            - generic [ref=f4e1312]:
+              - heading "about us" [level=2] [ref=f4e1313]
+              - heading "on" [level=2] [ref=f4e1314]
+        - generic [ref=f4e1317]:
+          - group "4 / 6" [ref=f4e1318] [cursor=pointer]:
+            - generic [ref=f4e1319]:
+              - generic [ref=f4e1320]: Magnus Sigurbjornsson
+              - generic [ref=f4e1321]: COO
+            - generic [ref=f4e1322]: "5.0"
+            - heading "\"The company was very professional.\"" [level=5] [ref=f4e1325]
+          - group "5 / 6" [ref=f4e1326] [cursor=pointer]:
+            - generic [ref=f4e1327]:
+              - generic [ref=f4e1328]: Perry Skoutelas
+              - generic [ref=f4e1329]: CEO & Co-Founder
+            - generic [ref=f4e1330]: "5.0"
+            - heading "\"We enjoyed working with the team, liked their approach and designs.\"" [level=5] [ref=f4e1333]
+          - group "6 / 6" [ref=f4e1334] [cursor=pointer]:
+            - generic [ref=f4e1335]:
+              - generic [ref=f4e1336]: Andrew Gross
+              - generic [ref=f4e1337]: CEO & Co-Founder
+            - generic [ref=f4e1338]: "5.0"
+            - heading "\"I was really impressed with their speed and how quickly things moved.\"" [level=5] [ref=f4e1341]
+          - group "1 / 6" [ref=f4e1342] [cursor=pointer]:
+            - generic [ref=f4e1343]:
+              - generic [ref=f4e1344]: Artem Khardin
+              - generic [ref=f4e1345]: CEO
+            - generic [ref=f4e1346]: "5.0"
+            - heading "“We are really happy that our paths crossed with Outcrowd.”" [level=5] [ref=f4e1349]
+          - group "2 / 6" [ref=f4e1350] [cursor=pointer]:
+            - generic [ref=f4e1351]:
+              - generic [ref=f4e1352]: Jonathan Hughes
+              - generic [ref=f4e1353]: CEO
+            - generic [ref=f4e1354]: "5.0"
+            - heading "“They became a valuable team member.”" [level=5] [ref=f4e1357]
+          - group "3 / 6" [ref=f4e1358] [cursor=pointer]:
+            - generic [ref=f4e1359]:
+              - generic [ref=f4e1360]: Angel Marinov
+              - generic [ref=f4e1361]: CEO
+            - generic [ref=f4e1362]: "5.0"
+            - heading "\"We were pleased with their attention to detail.\"" [level=5] [ref=f4e1365]
+          - group "4 / 6" [ref=f4e1366] [cursor=pointer]:
+            - generic [ref=f4e1367]:
+              - generic [ref=f4e1368]: Magnus Sigurbjornsson
+              - generic [ref=f4e1369]: COO
+            - generic [ref=f4e1370]: "5.0"
+            - heading "\"The company was very professional.\"" [level=5] [ref=f4e1373]
+          - group "5 / 6" [ref=f4e1374] [cursor=pointer]:
+            - generic [ref=f4e1375]:
+              - generic [ref=f4e1376]: Perry Skoutelas
+              - generic [ref=f4e1377]: CEO & Co-Founder
+            - generic [ref=f4e1378]: "5.0"
+            - heading "\"We enjoyed working with the team, liked their approach and designs.\"" [level=5] [ref=f4e1381]
+          - group "6 / 6" [ref=f4e1382] [cursor=pointer]:
+            - generic [ref=f4e1383]:
+              - generic [ref=f4e1384]: Andrew Gross
+              - generic [ref=f4e1385]: CEO & Co-Founder
+            - generic [ref=f4e1386]: "5.0"
+            - heading "\"I was really impressed with their speed and how quickly things moved.\"" [level=5] [ref=f4e1389]
+          - group "1 / 6" [ref=f4e1390] [cursor=pointer]:
+            - generic [ref=f4e1391]:
+              - generic [ref=f4e1392]: Artem Khardin
+              - generic [ref=f4e1393]: CEO
+            - generic [ref=f4e1394]: "5.0"
+            - heading "“We are really happy that our paths crossed with Outcrowd.”" [level=5] [ref=f4e1397]
+          - group "2 / 6" [ref=f4e1398] [cursor=pointer]:
+            - generic [ref=f4e1399]:
+              - generic [ref=f4e1400]: Jonathan Hughes
+              - generic [ref=f4e1401]: CEO
+            - generic [ref=f4e1402]: "5.0"
+            - heading "“They became a valuable team member.”" [level=5] [ref=f4e1405]
+          - group "3 / 6" [ref=f4e1406] [cursor=pointer]:
+            - generic [ref=f4e1407]:
+              - generic [ref=f4e1408]: Angel Marinov
+              - generic [ref=f4e1409]: CEO
+            - generic [ref=f4e1410]: "5.0"
+            - heading "\"We were pleased with their attention to detail.\"" [level=5] [ref=f4e1413]
+        - link "View more on Clutch View more on Clutch" [ref=f4e1414] [cursor=pointer]:
+          - /url: https://clutch.co/profile/outcrowd#highlights
+          - generic [ref=f4e1415]:
+            - generic [ref=f4e1416]: View more on Clutch
+            - generic [ref=f4e1417]: View more on Clutch
+      - generic [ref=f4e1419]:
+        - generic [ref=f4e1422]:
+          - heading "Awards for digital innovation" [level=2] [ref=f4e1424]
+          - generic [ref=f4e1425]:
+            - generic [ref=f4e1427] [cursor=pointer]:
+              - heading "Awwwards" [level=5] [ref=f4e1428]
+              - generic [ref=f4e1429]: Fitonist
+              - generic [ref=f4e1430]: Site of the Day
+              - generic [ref=f4e1431]: Aug 25, 2024
+            - generic [ref=f4e1433] [cursor=pointer]:
+              - heading "Awwwards" [level=5] [ref=f4e1434]
+              - generic [ref=f4e1435]: FinanceAble
+              - generic [ref=f4e1436]: Honorable Mention
+              - generic [ref=f4e1437]: Mar 06, 2024
+            - generic [ref=f4e1439] [cursor=pointer]:
+              - heading "TheFWA" [level=5] [ref=f4e1440]
+              - generic [ref=f4e1441]: Deed Delivery
+              - generic [ref=f4e1442]: FWA of the Day
+              - generic [ref=f4e1443]: Dec 30, 2023
+            - generic [ref=f4e1445] [cursor=pointer]:
+              - heading "CssDA" [level=5] [ref=f4e1446]
+              - generic [ref=f4e1447]: EventBeds
+              - generic [ref=f4e1448]: Website of the Day
+              - generic [ref=f4e1449]: Dec 29, 2023
+            - generic [ref=f4e1451] [cursor=pointer]:
+              - heading "Awwwards" [level=5] [ref=f4e1452]
+              - generic [ref=f4e1453]: Mota
+              - generic [ref=f4e1454]: Honorable Mention
+              - generic [ref=f4e1455]: Nov 30, 2023
+            - generic [ref=f4e1457] [cursor=pointer]:
+              - heading "CssDA" [level=5] [ref=f4e1458]
+              - generic [ref=f4e1459]: Dstafin
+              - generic [ref=f4e1460]: Website of the Day
+              - generic [ref=f4e1461]: Aug 18, 2023
+            - generic [ref=f4e1463] [cursor=pointer]:
+              - heading "CssDA" [level=5] [ref=f4e1464]
+              - generic [ref=f4e1465]: KMBCH
+              - generic [ref=f4e1466]: Website of the Day
+              - generic [ref=f4e1467]: Feb 25, 2023
+        - generic [ref=f4e1469]:
+          - generic [ref=f4e1470]:
+            - heading "Our News" [level=2] [ref=f4e1472]
+            - generic [ref=f4e1473]:
+              - list [ref=f4e1475]:
+                - listitem [ref=f4e1476]:
+                  - 'link "Crypto product design in the AI era: How to build trust before users connect a wallet" [ref=f4e1477] [cursor=pointer]':
+                    - /url: /blog/crypto-product-design-in-the-ai-era-how-to-build-trust-before-users-connect-a-wallet
+              - list [ref=f4e1482]:
+                - listitem [ref=f4e1483]:
+                  - 'link "AI UX Guide: How to Design AI Features Users Can Trust" [ref=f4e1484] [cursor=pointer]':
+                    - /url: /blog/ai-ux-guide-how-to-design-ai-features-users-can-trust
+                - listitem [ref=f4e1487]:
+                  - 'link "Pitch Deck Design in 2026: How to Make Investors Understand Your Business Faster" [ref=f4e1488] [cursor=pointer]':
+                    - /url: /blog/pitch-deck-design-in-2026-how-to-make-investors-understand-your-business-faster
+          - link "View more View more" [ref=f4e1491] [cursor=pointer]:
+            - /url: /blog
+            - generic [ref=f4e1492]:
+              - generic [ref=f4e1493]: View more
+              - generic [ref=f4e1494]: View more
+      - generic [ref=f4e1497]:
+        - heading "Questions and Answers" [level=3] [ref=f4e1499]
+        - generic [ref=f4e1501]:
+          - generic [ref=f4e1502]:
+            - button "How long does it take to get started?" [ref=f4e1503] [cursor=pointer]
+            - navigation "How long does it take to get started?":
+              - paragraph [ref=f4e1509]: Our turnaround is lightning-fast. Just one week from signing off and we’re there with the kick-off meeting to get it rolling.
+          - generic [ref=f4e1510]:
+            - button "What is your typical working process?" [ref=f4e1511] [cursor=pointer]
+            - navigation "What is your typical working process?":
+              - paragraph [ref=f4e1517]: It all starts with grabbing a cup of coffee, chilling with mates, and some quality time at the PlayStation (just kidding!). We always start a project with analysis, learning the requirements, and making estimates that will be shared in the price proposal. Then it’s off to signing off, kicking off, and getting your business to the next level with a pinch of our design magic.
+          - generic [ref=f4e1518]:
+            - button "Do you work on a fixed-price basis or time and material?" [ref=f4e1519] [cursor=pointer]
+            - navigation "Do you work on a fixed-price basis or time and material?":
+              - paragraph [ref=f4e1525]: Flexibility is the key of success in this crazy world, so we try to suggest an appropriate solution for each specific case we deal with. The more clear and detailed the requirements are, the more accurate will our estimates be. This is the closest we get to the fixed-price model.
+          - generic [ref=f4e1526]:
+            - button "How do you usually start new collaborations?" [ref=f4e1527] [cursor=pointer]
+            - navigation "How do you usually start new collaborations?":
+              - paragraph [ref=f4e1533]:
+                - text: Each new engagement starts with an introduction call and filling out the design/branding brief. If you have a cool project in mind, feel free to get in touch at
+                - link "hello@outcrowd.io" [ref=f4e1534] [cursor=pointer]:
+                  - /url: mailto:hello@outcrowd.io
+          - generic [ref=f4e1535]:
+            - button "Do you guys work with big companies only? We’re an early-stage startup." [ref=f4e1536] [cursor=pointer]
+            - navigation "Do you guys work with big companies only? We’re an early-stage startup.":
+              - paragraph [ref=f4e1542]:
+                - text: We’re all for building a borderless world, so we are open to working with any project we come across. By the way, we do believe in startups, and one of those we helped develop from scratch has been sold to
+                - link "businesswire.com" [ref=f4e1543] [cursor=pointer]:
+                  - /url: https://www.businesswire.com/news/home/20210310005166/en/%C2%A0Entercom-Acquires-Podcast-Influencers-Marketplace-Podcorn
+          - generic [ref=f4e1544]:
+            - button "How long it will take to get an estimate from you?" [ref=f4e1545] [cursor=pointer]
+            - navigation "How long it will take to get an estimate from you?":
+              - paragraph [ref=f4e1551]: We hate to keep you waiting. Setting up a team, making preliminary research and analysis, and getting back to you with the contract will take up to 24 hours from the moment we learn what’s needed. Efficiency is one of Outcrowd’s key values.
+          - generic [ref=f4e1552]:
+            - button "Do you have a minimum engagement?" [ref=f4e1553] [cursor=pointer]
+            - navigation "Do you have a minimum engagement?":
+              - paragraph [ref=f4e1559]: We set no entry thresholds for people who want to work with us. But we still believe that a product that needs to be designed can’t be made within a couple of days. After all, we need some time to research, analyze and come up with a strategy. So we’ve set a minimum project duration as 30 hours and we’re waiting for you!
+          - generic [ref=f4e1560]:
+            - button "What’s the average project duration?" [ref=f4e1561] [cursor=pointer]
+            - navigation "What’s the average project duration?":
+              - paragraph [ref=f4e1567]: Our team works full-time on every project, so the overall duration will highly depend on the initial estimate. On average, our projects last from 2 weeks to 5 months.
+          - generic [ref=f4e1568]:
+            - button "Can we start the design without wireframes?" [ref=f4e1569] [cursor=pointer]
+            - navigation "Can we start the design without wireframes?":
+              - paragraph [ref=f4e1575]: Wireframes help to build UX without distractions. The wireframe is an essential part of the design process and we would not recommend eliminating it. Having everything polished at the wireframing stage, we can avoid many amendments and revisions at the design stage, which saves both time and money.
+          - generic [ref=f4e1576]:
+            - button "What templates does Outcrowd use to create design?" [ref=f4e1577] [cursor=pointer]
+            - navigation "What templates does Outcrowd use to create design?":
+              - paragraph [ref=f4e1583]: We don’t use pre-built templates or kits because there’s just no soul in them. We’re committed to building fully customized and product-based solutions that will meet the expectations of the target users. Each pixel and line is designed with love and passion by our creative minds.
+          - generic [ref=f4e1584]:
+            - button "Where should I start with my business if I have an idea?" [ref=f4e1585] [cursor=pointer]
+            - navigation "Where should I start with my business if I have an idea?":
+              - paragraph [ref=f4e1591]: Hey, you’ve come to the right place! Please get in touch and we’ll help you with the ideation, design, and development. Full cycle on us, no hassle for you. Easy, right?
+      - generic [ref=f4e1597]:
+        - heading "Innovate with us" [level=2] [ref=f4e1598]
+        - generic [ref=f4e1599]: Our creative solutions have helped clients raise $100+ mln and expand their reach.
+        - generic [ref=f4e1600]:
+          - link "Write us" [ref=f4e1601] [cursor=pointer]:
+            - /url: /contact-us
+          - generic [ref=f4e1603]:
+            - generic: Book a call
+            - link [ref=f4e1605] [cursor=pointer]:
+              - /url: ""
+      - generic [ref=f4e1608] [cursor=pointer]:
+        - link [ref=f4e1610]:
+          - /url: ""
+        - generic [ref=f4e1611]: Book a call
+    - contentinfo [ref=f4e1613]:
+      - generic [ref=f4e1614]:
+        - generic [ref=f4e1615]:
+          - generic [ref=f4e1616]:
+            - generic [ref=f4e1618]:
+              - link "Cases Cases" [ref=f4e1619] [cursor=pointer]:
+                - /url: /cases
+                - generic [ref=f4e1620]:
+                  - generic [ref=f4e1621]: Cases
+                  - generic: Cases
+              - link "Fitonist Fitonist" [ref=f4e1622] [cursor=pointer]:
+                - /url: https://fitonist-app.webflow.io/
+                - generic [ref=f4e1623]:
+                  - generic [ref=f4e1624]: Fitonist
+                  - generic: Fitonist
+              - link "Brainforest Brainforest" [ref=f4e1625] [cursor=pointer]:
+                - /url: https://www.brainforest.io/
+                - generic [ref=f4e1626]:
+                  - generic [ref=f4e1627]: Brainforest
+                  - generic: Brainforest
+              - link "Cybervergent Cybervergent" [ref=f4e1628] [cursor=pointer]:
+                - /url: https://www.cybervergent.com/
+                - generic [ref=f4e1629]:
+                  - generic [ref=f4e1630]: Cybervergent
+                  - generic: Cybervergent
+              - link "Nopan Nopan" [ref=f4e1631] [cursor=pointer]:
+                - /url: https://nopan.webflow.io/
+                - generic [ref=f4e1632]:
+                  - generic [ref=f4e1633]: Nopan
+                  - generic: Nopan
+              - link "Ramos Ramos" [ref=f4e1634] [cursor=pointer]:
+                - /url: https://ramos-app.webflow.io/
+                - generic [ref=f4e1635]:
+                  - generic [ref=f4e1636]: Ramos
+                  - generic: Ramos
+            - generic [ref=f4e1638]:
+              - link "Services Services" [ref=f4e1639] [cursor=pointer]:
+                - /url: /services
+                - generic [ref=f4e1640]:
+                  - generic [ref=f4e1641]: Services
+                  - generic: Services
+              - link "Complex solution Complex solution" [ref=f4e1642] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=f4e1643]:
+                  - generic [ref=f4e1644]: Complex solution
+                  - generic: Complex solution
+              - link "Branding Branding" [ref=f4e1645] [cursor=pointer]:
+                - /url: /branding-page
+                - generic [ref=f4e1646]:
+                  - generic [ref=f4e1647]: Branding
+                  - generic: Branding
+              - link "Design Design" [ref=f4e1648] [cursor=pointer]:
+                - /url: /design-page
+                - generic [ref=f4e1649]:
+                  - generic [ref=f4e1650]: Design
+                  - generic: Design
+              - link "Development Development" [ref=f4e1651] [cursor=pointer]:
+                - /url: /development-page
+                - generic [ref=f4e1652]:
+                  - generic [ref=f4e1653]: Development
+                  - generic: Development
+            - generic [ref=f4e1655]:
+              - link "About us About us" [ref=f4e1656] [cursor=pointer]:
+                - /url: /about-us
+                - generic [ref=f4e1657]:
+                  - generic [ref=f4e1658]: About us
+                  - generic: About us
+              - link "Numbers Numbers" [ref=f4e1659] [cursor=pointer]:
+                - /url: /about-us#numbers
+                - generic [ref=f4e1660]:
+                  - generic [ref=f4e1661]: Numbers
+                  - generic: Numbers
+              - link "Mission Mission" [ref=f4e1662] [cursor=pointer]:
+                - /url: /about-us#mission
+                - generic [ref=f4e1663]:
+                  - generic [ref=f4e1664]: Mission
+                  - generic: Mission
+              - link "Values Values" [ref=f4e1665] [cursor=pointer]:
+                - /url: /about-us#values
+                - generic [ref=f4e1666]:
+                  - generic [ref=f4e1667]: Values
+                  - generic: Values
+              - link "Clients Clients" [ref=f4e1668] [cursor=pointer]:
+                - /url: /about-us#clients
+                - generic [ref=f4e1669]:
+                  - generic [ref=f4e1670]: Clients
+                  - generic: Clients
+          - generic [ref=f4e1671]:
+            - link "hello@outcrowd.io" [ref=f4e1672] [cursor=pointer]:
+              - /url: mailto:hello@outcrowd.io
+            - generic [ref=f4e1673]:
+              - link [ref=f4e1674] [cursor=pointer]:
+                - /url: https://dribbble.com/outcrowd
+              - link [ref=f4e1676] [cursor=pointer]:
+                - /url: https://www.behance.net/outcrowd
+              - link [ref=f4e1678] [cursor=pointer]:
+                - /url: https://www.instagram.com/outcrowdstudio/
+              - link [ref=f4e1680] [cursor=pointer]:
+                - /url: https://x.com/outcrowdstudio
+              - link [ref=f4e1682] [cursor=pointer]:
+                - /url: https://www.linkedin.com/company/outcrowd-network/?originalSubdomain=ua
+        - generic [ref=f4e1684]:
+          - generic [ref=f4e1685]: Copyright © 2025 Outcrowd Inc. All rights reserved.
+          - generic [ref=f4e1686]: Lewes - USA
+    - generic [ref=f4e1689]:
+      - generic [ref=f4e1690]: By clicking “Accept All Cookies”, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts.
+      - generic [ref=f4e1691]:
+        - button "Deny all" [ref=f4e1692] [cursor=pointer]
+        - button "Accept" [ref=f4e1693] [cursor=pointer]
+  - text:  

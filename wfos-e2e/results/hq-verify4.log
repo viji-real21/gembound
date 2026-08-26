@@ -1,0 +1,15 @@
+............ [  4%]
+........................................................................ [ 28%]
+........................................................................ [ 53%]
+..................................................s..................... [ 78%]
+..................s.............................................         [100%]
+=============================== warnings summary ===============================
+tests/test_design_pipeline.py::test_not_black_catches_the_mflux_failure
+tests/test_design_pipeline.py::test_not_black_catches_the_mflux_failure
+  /Users/vedhith/Developer/vedhith-workflow-os/bin/design-pipeline.py:424: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+    return len(set(im.getdata())), "PIL"
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+290 passed, 2 skipped, 2 warnings, 60 subtests passed in 28.83s
+PASS  [CORE] review gate: enabled
+SUMMARY required 1/1; optional 0/0
