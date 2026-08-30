@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch"
+    ],
+    "deny": [],
+    "additionalDirectories": [
+      "/Users/vedhith/Developer/vedhith-workflow-os"
+    ]
+  },
+  "_comment": "2026-08-26, on Vedhith's instruction: the 2026-08-25 lockdown (every tool except WebSearch denied) was lifted at his explicit request, reaffirmed after he was shown the original note. He removed the bare 'Bash' deny via /permissions; Claude rewrote the rest. Prior file: settings.local.json.bak-20260826-210041 | 2026-08-29, on Vedhith's instruction: removed the default sandbox denials that blocked writes to ~/Developer/vedhith-workflow-os and blocked ps/pgrep/launchctl, so the workflow runtime can be fixed and inspected in-session.",
+  "sandbox": {
+    "filesystem": {
+      "allowWrite": [
+        "/Users/vedhith/Developer/vedhith-workflow-os",
+        "/Users/vedhith/.local/state/vedhith-workflow"
+      ]
+    },
+    "excludedCommands": [
+      "ps",
+      "pgrep",
+      "launchctl"
+    ]
+  }
+}

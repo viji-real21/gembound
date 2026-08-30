@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch"
+    ],
+    "deny": [
+      "Read",
+      "Edit",
+      "Write",
+      "NotebookEdit",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "Task",
+      "Agent",
+      "TodoWrite",
+      "Skill",
+      "Workflow",
+      "ToolSearch",
+      "AskUserQuestion",
+      "EnterPlanMode",
+      "ExitPlanMode",
+      "EnterWorktree",
+      "ExitWorktree",
+      "CronCreate",
+      "CronDelete",
+      "CronList",
+      "ScheduleWakeup",
+      "SendMessage",
+      "TaskOutput",
+      "TaskStop",
+      "ReportFindings",
+      "ListMcpResourcesTool",
+      "ReadMcpResourceTool",
+      "ReadMcpResourceDirTool",
+      "mcp__*"
+    ]
+  },
+  "_comment": "2026-08-25, on Vedhith's instruction: every tool except WebSearch is denied for this project. Deny rules beat allow rules, beat permission modes, and beat PreToolUse hooks -- so this is not advisory. TO RESTORE: delete the 'deny' array below. Claude cannot do that itself once this is active, which is the point."
+}

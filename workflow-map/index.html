@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workflow Map</title>
+<style>
+  :root{
+    --bg:#000; --card:#0b0b0b; --card2:#080808;
+    --edge:#232323; --edge2:#2e2e2e; --line:#2b2b2b;
+    --tx:#f2f2f2; --dim:#8a8a8a; --dim2:#606060;
+    --you:#5b9cff; --plan:#d6a832; --split:#b38ce8;
+    --guard:#e8743c; --meter:#3fb98a; --run:#7d8ff5; --done:#3fb98a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg); color:var(--tx);
+    font:500 15px/1.5 ui-sans-serif,-apple-system,"SF Pro Text",Inter,system-ui,sans-serif;
+    padding:40px 20px 80px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:660px;margin:0 auto}
+
+  header{text-align:center;margin-bottom:34px}
+  header h1{font-size:22px;font-weight:650;letter-spacing:-.01em}
+  header p{font-size:14px;color:var(--dim);margin-top:7px}
+
+  /* ================= day band ================= */
+  .day{border:1px solid var(--edge);border-radius:16px;background:var(--card);padding:20px;margin-bottom:38px}
+  .day .zones{display:flex;gap:10px;margin-bottom:14px}
+  .zone{flex:1;border:1px solid var(--edge);border-radius:11px;padding:13px 14px;background:var(--card2);text-align:center}
+  .zone .zi{font-size:26px;line-height:1}
+  .zone .zt{font-size:13.5px;font-weight:650;margin-top:7px}
+  .zone .zs{font-size:12px;color:var(--dim);margin-top:3px}
+  .zone.here{border-color:#2b3f5e}
+  .zone.away{border-color:#3a3320}
+
+  .bar{display:flex;height:22px;border:1px solid var(--edge);border-radius:6px;overflow:hidden;background:#050505}
+  .bar i{flex:1;border-right:1px solid #131313}
+  .bar i:last-child{border-right:0}
+  .bar i.night{background:#1d1a12}
+  .bar i.day{background:#111823}
+  .bar i.now{background:var(--guard)}
+  .scale{display:flex;margin-top:6px;font-size:10.5px;color:var(--dim2);letter-spacing:.03em}
+  .scale div{flex:1;text-align:center}
+  .rule{margin-top:14px;padding-top:14px;border-top:1px solid var(--edge);
+        font-size:13px;color:var(--dim);text-align:center;line-height:1.6}
+  .rule b{color:var(--tx);font-weight:650}
+
+  /* ================= flow ================= */
+  .flow{display:flex;flex-direction:column;align-items:stretch}
+  .pipe{width:1px;height:18px;background:var(--line);margin:0 auto}
+  .pipe.dot::after{content:"";display:block;width:5px;height:5px;border-radius:50%;
+    background:var(--line);margin:16px 0 0 -2px}
+
+  .step{border:1px solid var(--edge);border-radius:14px;background:var(--card);overflow:hidden}
+  .head{display:flex;align-items:center;gap:14px;padding:15px 16px;cursor:pointer;
+        transition:background .12s}
+  .head:hover{background:#101010}
+  .chip{width:44px;height:44px;flex:0 0 44px;border-radius:11px;display:grid;place-items:center;
+        font-size:22px;border:1px solid var(--edge2);background:var(--card2)}
+  .txt{flex:1;min-width:0}
+  .txt .t{font-size:15px;font-weight:650;letter-spacing:-.005em}
+  .txt .s{font-size:12.5px;color:var(--dim);margin-top:2px}
+  .num{font-size:11px;color:var(--dim2);font-variant-numeric:tabular-nums;font-weight:600}
+  .caret{color:var(--dim2);font-size:12px;transition:transform .16s}
+  .step[open-state="1"] .caret{transform:rotate(90deg)}
+
+  .body{max-height:0;overflow:hidden;transition:max-height .22s ease}
+  .step[open-state="1"] .body{max-height:340px}
+  .body ul{list-style:none;padding:2px 18px 18px 74px}
+  .body li{font-size:13.5px;color:var(--dim);line-height:1.62;padding-left:15px;position:relative;margin-top:8px}
+  .body li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;
+    border-radius:50%;background:var(--edge2)}
+  .body li b{color:var(--tx);font-weight:600}
+
+  .step[data-c=you][open-state="1"]{border-color:var(--you)}
+  .step[data-c=plan][open-state="1"]{border-color:var(--plan)}
+  .step[data-c=split][open-state="1"]{border-color:var(--split)}
+  .step[data-c=guard][open-state="1"]{border-color:var(--guard)}
+  .step[data-c=meter][open-state="1"]{border-color:var(--meter)}
+  .step[data-c=run][open-state="1"]{border-color:var(--run)}
+  .step[data-c=done][open-state="1"]{border-color:var(--done)}
+
+  .step[data-c=you][open-state="1"] .chip{border-color:var(--you)}
+  .step[data-c=plan][open-state="1"] .chip{border-color:var(--plan)}
+  .step[data-c=split][open-state="1"] .chip{border-color:var(--split)}
+  .step[data-c=guard][open-state="1"] .chip{border-color:var(--guard)}
+  .step[data-c=meter][open-state="1"] .chip{border-color:var(--meter)}
+  .step[data-c=run][open-state="1"] .chip{border-color:var(--run)}
+  .step[data-c=done][open-state="1"] .chip{border-color:var(--done)}
+
+  .split2{display:flex;gap:12px}
+  .split2 .step{flex:1}
+  .split2 .head{padding:14px 13px;gap:11px}
+  .split2 .chip{width:38px;height:38px;flex:0 0 38px;font-size:19px}
+  .split2 .txt .t{font-size:14px}
+  .split2 .body ul{padding:2px 14px 16px 14px}
+  .split2 .caret,.split2 .num{display:none}
+
+  .tip{text-align:center;font-size:12.5px;color:var(--dim2);margin-top:30px}
+  @media(max-width:560px){ .split2{flex-direction:column} .body ul{padding-left:20px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>How your work gets done</h1>
+    <p>Your time comes first. Everything else waits its turn.</p>
+  </header>
+
+  <!-- ============ THE DAY ============ -->
+  <div class="day">
+    <div class="zones">
+      <div class="zone here">
+        <div class="zi">🧑</div>
+        <div class="zt">You're here</div>
+        <div class="zs">robots stay quiet</div>
+      </div>
+      <div class="zone away">
+        <div class="zi">🌙</div>
+        <div class="zt">You're away</div>
+        <div class="zs">robots do the boring work</div>
+      </div>
+    </div>
+    <div class="bar" id="bar"></div>
+    <div class="scale"><div>6am</div><div>12pm</div><div>6pm</div><div>12am</div><div>6am</div></div>
+    <div class="rule">
+      The rule is simple:<br>
+      <b>busywork never runs while you're working.</b>
+    </div>
+  </div>
+
+  <!-- ============ THE FLOW ============ -->
+  <div class="flow">
+
+    <div class="step" data-c="you">
+      <div class="head">
+        <div class="chip">🧑</div>
+        <div class="txt"><div class="t">You ask</div><div class="s">say what you want, in your words</div></div>
+        <div class="num">1</div><div class="caret">▶</div>
+      </div>
+      <div class="body"><ul>
+        <li>You don't write tickets or fill in forms. You just say the thing.</li>
+        <li>Messy is fine. The next step cleans it up <b>with</b> you.</li>
+      </ul></div>
+    </div>
+    <div class="pipe dot"></div>
+
+    <div class="step" data-c="plan">
+      <div class="head">
+        <div class="chip">🧠</div>
+        <div class="txt"><div class="t">Architect makes a list</div><div class="s">one line per job</div></div>
+        <div class="num">2</div><div class="caret">▶</div>
+      </div>
+      <div class="body"><ul>
+        <li>It breaks your idea into small jobs that <b>don't overlap</b>.</li>
+        <li>Jobs that need the same background info get grouped. Jobs that don't get split apart.</li>
+        <li>You read the list and say yes before anything runs. That's the checkpoint that catches both your mistakes and its mistakes.</li>
+      </ul></div>
+    </div>
+    <div class="pipe dot"></div>
+
+    <div class="step" data-c="split">
+      <div class="head">
+        <div class="chip">📄</div>
+        <div class="txt"><div class="t">Each job gets a fresh head</div><div class="s">nothing carried over</div></div>
+        <div class="num">3</div><div class="caret">▶</div>
+      </div>
+      <div class="body"><ul>
+        <li>Every job starts clean, knowing only what it needs.</li>
+        <li>No job is slowed down by another job's leftovers.</li>
+        <li>Smaller head = cheaper, faster, fewer mistakes.</li>
+      </ul></div>
+    </div>
+    <div class="pipe dot"></div>
+
+    <div class="split2">
+      <div class="step" data-c="you">
+        <div class="head">
+          <div class="chip">🎨</div>
+          <div class="txt"><div class="t">Needs you</div><div class="s">design, taste, choices</div></div>
+        </div>
+        <div class="body"><ul>
+          <li>You walk through it live, together.</li>
+          <li>Happens in <b>your</b> hours, on purpose.</li>
+        </ul></div>
+      </div>
+      <div class="step" data-c="split">
+        <div class="head">
+          <div class="chip">🤖</div>
+          <div class="txt"><div class="t">Doesn't need you</div><div class="s">plain, boring work</div></div>
+        </div>
+        <div class="body"><ul>
+          <li>Goes in the queue to run later.</li>
+          <li>This is the pile that fills your nights.</li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="pipe dot"></div>
+
+    <div class="step" data-c="guard">
+      <div class="head">
+        <div class="chip">👀</div>
+        <div class="txt"><div class="t">Are you here?</div><div class="s">the doorman</div></div>
+        <div class="num">4</div><div class="caret">▶</div>
+      </div>
+      <div class="body"><ul>
+        <li>If you're typing, the queue <b>holds</b>. Your work gets the whole machine.</li>
+        <li>When you stop for a while, the door opens and the pile starts moving.</li>
+        <li>You come back, it steps aside again. Mid-job work pauses; it never gets thrown away.</li>
+      </ul></div>
+    </div>
+    <div class="pipe dot"></div>
+
+    <div class="step" data-c="meter">
+      <div class="head">
+        <div class="chip">📊</div>
+        <div class="txt"><div class="t">Check the real number</div><div class="s">read it, don't guess it</div></div>
+        <div class="num">5</div><div class="caret">▶</div>
+      </div>
+      <div class="body"><ul>
+        <li>A browser opens your usage page and reads <b>the actual percentage</b> and the real reset time.</li>
+        <li>Guessing from local logs misses plan changes and promos. Reading never does.</li>
+        <li>If the number is missing or older than 15 minutes, the queue <b>stops</b>. It refuses to run blind.</li>
+      </ul></div>
+    </div>
+    <div class="pipe dot"></div>
+
+    <div class="step" data-c="run">
+      <div class="head">
+        <div class="chip">🖥️</div>
+        <div class="txt"><div class="t">HQ does the work</div><div class="s">one machine, one counter</div></div>
+        <div class="num">6</div><div class="caret">▶</div>
+      </div>
+      <div class="body"><ul>
+        <li>All jobs run on one machine so there's a single honest count.</li>
+        <li>One project at a time per lane, so nothing hogs everything.</li>
+        <li>If a job goes weird, it gets stopped, retried once, then handed to you.</li>
+      </ul></div>
+    </div>
+    <div class="pipe dot"></div>
+
+    <div class="step" data-c="done">
+      <div class="head">
+        <div class="chip">☀️</div>
+        <div class="txt"><div class="t">Waiting when you wake up</div><div class="s">morning pile</div></div>
+        <div class="num">7</div><div class="caret">▶</div>
+      </div>
+      <div class="body"><ul>
+        <li>Finished work is sitting there when you sit down.</li>
+        <li>Anything that got stuck is listed with the reason, not silently dropped.</li>
+      </ul></div>
+    </div>
+
+  </div>
+
+  <div class="tip">tap any row</div>
+</div>
+
+<script>
+(function(){
+  // ---- day bar: 24 cells starting at 6am, night = 10pm..7am ----
+  var bar=document.getElementById('bar');
+  for(var i=0;i<24;i++){
+    var h=(6+i)%24, cell=document.createElement('i');
+    cell.className=(h>=22||h<7)?'night':'day';
+    bar.appendChild(cell);
+  }
+  var now=new Date().getHours();
+  bar.children[(now-6+24)%24].classList.add('now');
+
+  // ---- accordion ----
+  document.querySelectorAll('.step').forEach(function(step){
+    step.querySelector('.head').addEventListener('click',function(){
+      var open=step.getAttribute('open-state')==='1';
+      var group=step.closest('.split2')?step.closest('.split2'):document;
+      if(group===document){
+        document.querySelectorAll('.flow > .step').forEach(function(o){o.removeAttribute('open-state')});
+      }
+      if(!open) step.setAttribute('open-state','1'); else step.removeAttribute('open-state');
+    });
+  });
+})();
+</script>
+</body>
+</html>
